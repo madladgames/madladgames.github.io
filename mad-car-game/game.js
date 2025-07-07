@@ -24,20 +24,22 @@ const car = {
 };
 
 // Game physics
-const gravity = 0.684;  // Reduced by 15% total to make jumps last longer
-const jumpPower = -15;
+const gravity = 0.5;  // Further reduced for more kid-friendly "floaty" jumps
+const jumpPower = -17;  // Increased jump power for higher, longer jumps
 const groundY = 300;
 
 // Visual feedback
 let jumpAttempted = false;
 let jumpAttemptTimer = 0;
+let successMessage = '';
+let successMessageTimer = 0;
 
 // Obstacles
 let obstacles = [];
-const obstacleSpeed = 5;
+const obstacleSpeed = 5;  // Reduced from 5 to 3 for slower, more manageable obstacles
 let obstacleTimer = 0;
-const obstacleInterval = 150;  // Increased interval between obstacles
-const obstacleStartDelay = 100;  // Delay before first obstacle
+const obstacleInterval = 220;  // Increased from 150 to 220 for more time between obstacles
+const obstacleStartDelay = 180;  // Increased from 100 to 180 for longer grace period
 
 // Background elements
 let clouds = [];
@@ -354,8 +356,31 @@ function gameLoop() {
             score += 10;
             scoreElement.textContent = score;
             obstacle.passed = true;
+            
+            // Show encouraging message for kids
+            const messages = ['Great Jump! 🌟', 'Awesome! 🚗', 'Super! 🎉', 'Amazing! ⭐', 'Well Done! 🏆'];
+            successMessage = messages[Math.floor(Math.random() * messages.length)];
+            successMessageTimer = 90; // Show for 1.5 seconds at 60fps
         }
     });
+    
+    // Update success message timer
+    if (successMessageTimer > 0) {
+        successMessageTimer--;
+    }
+    
+    // Draw success message
+    if (successMessageTimer > 0) {
+        ctx.save();
+        ctx.fillStyle = '#00FF00';
+        ctx.font = 'bold 32px Arial';
+        ctx.textAlign = 'center';
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 3;
+        ctx.strokeText(successMessage, canvas.width / 2, 100);
+        ctx.fillText(successMessage, canvas.width / 2, 100);
+        ctx.restore();
+    }
     
     requestAnimationFrame(gameLoop);
 }
@@ -372,6 +397,8 @@ function startGame() {
     car.jumping = false;
     jumpAttempted = false;
     jumpAttemptTimer = 0;
+    successMessage = '';
+    successMessageTimer = 0;
     
     console.log('Game started! Car position:', car.y, 'Ground position:', groundY);
     
