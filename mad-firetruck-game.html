@@ -1,15 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mad Fire Truck Game - Mad Lad Studios</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Drive the fire truck and save the day in Mad Fire Truck Game! Navigate through the city with your emergency vehicle and help put out fires in this heroic adventure for kids.">
+    <meta name="keywords" content="fire truck game, emergency vehicle game, kids fire truck, firefighter game, rescue game, children games, fun games for kids, mad fire truck game">
+    <meta name="author" content="Mad Lad Studios">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://madladstudios.com/mad-firetruck-game.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://madladstudios.com/mad-firetruck-game.html">
+    <meta property="og:title" content="Mad Fire Truck Game - Emergency Rescue Adventure | Mad Lad Studios">
+    <meta property="og:description" content="Drive the fire truck and save the day in Mad Fire Truck Game! Navigate through the city with your emergency vehicle and help put out fires in this heroic adventure for kids.">
+    <meta property="og:site_name" content="Mad Lad Studios">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://madladstudios.com/mad-firetruck-game.html">
+    <meta property="twitter:title" content="Mad Fire Truck Game - Emergency Rescue Adventure | Mad Lad Studios">
+    <meta property="twitter:description" content="Drive the fire truck and save the day in Mad Fire Truck Game! Navigate through the city with your emergency vehicle and help put out fires in this heroic adventure for kids.">
+
+    
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#EF4444">
+    <meta name="msapplication-TileColor" content="#EF4444">
+    <meta name="application-name" content="Mad Fire Truck Game">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR-PUBLISHER-ID"
-         crossorigin="anonymous"></script>
-    
+        crossorigin="anonymous"></script>
+
     <style>
         /* Game-specific styles to override the original CSS */
         .game-container {
@@ -17,11 +46,11 @@
             padding: 0 !important;
             position: relative !important;
         }
-        
+
         .game-container h1 {
             display: none !important;
         }
-        
+
         #gameCanvas {
             border: 3px solid #EF4444;
             border-radius: 0.5rem;
@@ -29,30 +58,30 @@
             display: block;
             margin: 0 auto;
         }
-        
+
         .game-info {
             background: transparent !important;
             text-align: center !important;
             margin-top: 1rem !important;
         }
-        
+
         .game-info p {
             color: #374151 !important;
             font-size: 1.125rem !important;
             margin: 0.5rem 0 !important;
         }
-        
+
         #score {
             color: #EF4444 !important;
             font-weight: bold !important;
             font-size: 1.25rem !important;
         }
-        
+
         .controls {
             background: transparent !important;
             margin-top: 1rem !important;
         }
-        
+
         .key {
             background: #EF4444 !important;
             color: white !important;
@@ -60,7 +89,7 @@
             border-radius: 0.25rem !important;
             font-weight: bold !important;
         }
-        
+
         #startButton {
             background: linear-gradient(to right, #EF4444, #DC2626) !important;
             color: white !important;
@@ -71,29 +100,33 @@
             cursor: pointer !important;
             transition: all 0.3s !important;
         }
-        
+
         #startButton:hover {
             transform: scale(1.05) !important;
             box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4) !important;
         }
-        
+
         .score-display {
             background: transparent !important;
             margin-top: 1rem !important;
         }
     </style>
 </head>
+
 <body class="bg-gradient-to-br from-purple-600 via-pink-500 to-red-500 min-h-screen">
     <!-- Navigation -->
     <nav class="bg-white/90 backdrop-blur-sm shadow-lg sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
-                <a href="index.html" class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+                <a href="index.html"
+                    class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
                     Mad Lad Studios
                 </a>
                 <div class="flex space-x-6">
-                    <a href="index.html#games" class="text-gray-700 hover:text-purple-600 font-medium transition">All Games</a>
-                    <a href="index.html#about" class="text-gray-700 hover:text-purple-600 font-medium transition">About</a>
+                    <a href="index.html#games" class="text-gray-700 hover:text-purple-600 font-medium transition">All
+                        Games</a>
+                    <a href="index.html#about"
+                        class="text-gray-700 hover:text-purple-600 font-medium transition">About</a>
                 </div>
             </div>
         </div>
@@ -114,14 +147,10 @@
         <div class="mb-8">
             <div class="rounded-lg p-4 text-center max-w-4xl mx-auto">
                 <!-- Google AdSense Ad Unit -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
-                     data-ad-slot="YOUR-AD-SLOT-ID-7"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
+                    data-ad-slot="YOUR-AD-SLOT-ID-7" data-ad-format="auto" data-full-width-responsive="true"></ins>
                 <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
+                    (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             </div>
         </div>
@@ -131,7 +160,8 @@
             <div class="game-container">
                 <canvas id="gameCanvas"></canvas>
                 <div class="controls text-center mt-6">
-                    <p class="text-lg mb-2">Use <span class="key">WASD</span> or <span class="key">ARROW KEYS</span> to drive!</p>
+                    <p class="text-lg mb-2">Use <span class="key">WASD</span> or <span class="key">ARROW KEYS</span> to
+                        drive!</p>
                     <p class="text-gray-600 mb-4">Navigate through traffic and avoid obstacles</p>
                     <button id="startButton" class="mb-4">Start Fire Truck</button>
                     <p class="text-red-500 font-medium">🚒 Emergency! Drive carefully through the city!</p>
@@ -139,7 +169,8 @@
                 <div class="score-display text-center mt-6">
                     <div class="flex justify-center gap-8">
                         <p class="text-xl font-bold">Score: <span id="score" class="text-red-600">0</span></p>
-                        <p class="text-xl font-bold">High Score: <span id="highScore" class="text-green-600">0</span></p>
+                        <p class="text-xl font-bold">High Score: <span id="highScore" class="text-green-600">0</span>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -176,14 +207,10 @@
         <div class="mt-8">
             <div class="rounded-lg p-4 text-center max-w-4xl mx-auto">
                 <!-- Google AdSense Ad Unit -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
-                     data-ad-slot="YOUR-AD-SLOT-ID-8"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
+                    data-ad-slot="YOUR-AD-SLOT-ID-8" data-ad-format="auto" data-full-width-responsive="true"></ins>
                 <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
+                    (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             </div>
         </div>
@@ -192,17 +219,21 @@
         <div class="mt-12 text-center">
             <h3 class="text-2xl font-bold text-white mb-6">Try Our Other Games!</h3>
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="mad-car-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-blue-600 hover:bg-white transition">
-                    🚗 Mad Car Game
-                </a>
-                <a href="mad-crab-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-orange-600 hover:bg-white transition">
-                    🦀 Mad Crab Game
+                <a href="mad-carwash-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-cyan-600 hover:bg-white transition">
+                    🧽 Mad Car Wash Game
                 </a>
                 <a href="mad-racetrack-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-green-600 hover:bg-white transition">
                     🏁 Mad Racetrack Game
                 </a>
+                <a href="mad-crab-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-orange-600 hover:bg-white transition">
+                    🦀 Mad Crab Game
+                </a>
+                <a href="index.html#games" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-purple-600 hover:bg-white transition border-2 border-purple-600">
+                    🎮 See All Games
+                </a>
             </div>
         </div>
+        <!-- End of Other Games -->
     </div>
 
     <!-- Footer -->
@@ -216,4 +247,5 @@
     <!-- Load the original game files -->
     <script src="mad-firetruck-game/game.js"></script>
 </body>
+
 </html>

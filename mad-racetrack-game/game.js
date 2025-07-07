@@ -2,6 +2,7 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const speedDisplay = document.getElementById('speed');
+const distanceDisplay = document.getElementById('distance');
 
 // Canvas dimensions
 canvas.width = 800;
@@ -12,23 +13,27 @@ let gameRunning = true;
 let gameOver = false;
 let roadOffset = 0;
 let roadSpeed = 5;
+let distance = 0; // Track distance traveled
+let displaySpeed = 0; // Smoothed speed for display
+let displayDistance = 0; // Smoothed distance for display
 
 // Obstacles array
 let obstacles = [];
-let obstacleSpawnTimer = 60; // Start with a delay
-let obstacleSpawnInterval = 120; // Spawn every 2 seconds at 60fps
+let obstacleSpawnTimer = 180; // Start with a longer delay for kids
+let obstacleSpawnInterval = 300; // Spawn every 5 seconds at 60fps - much more time for kids
 
 // Car properties
 const car = {
     x: canvas.width / 2,
     y: canvas.height - 150,
+    baseY: canvas.height - 150, // Store the base Y position
     width: 40,
     height: 60,
     speed: 0,
-    maxSpeed: 96, // Reduced by 20% from 120
-    acceleration: 0.5,
+    maxSpeed: 30, // Much slower for kids
+    acceleration: 0.2,
     deceleration: 0.3,
-    lateralSpeed: 5,
+    lateralSpeed: 3, // Slower steering for better control
     color: '#808080' // Gray color
 };
 
@@ -65,11 +70,50 @@ const keys = {};
 
 document.addEventListener('keydown', (e) => {
     keys[e.key] = true;
+    
+    // Handle spacebar restart when game is over
+    if (gameOver && e.key === ' ') {
+        restartGame();
+        e.preventDefault();
+        return;
+    }
+    
+    // Prevent default behavior for game control keys to stop page scrolling
+    const key = e.key.toLowerCase();
+    if (key === 'arrowup' || key === 'arrowdown' || key === 'arrowleft' || key === 'arrowright' ||
+        key === 'w' || key === 'a' || key === 's' || key === 'd' || key === ' ') {
+        e.preventDefault();
+    }
 });
 
 document.addEventListener('keyup', (e) => {
     keys[e.key] = false;
+    
+    // Prevent default behavior for game control keys
+    const key = e.key.toLowerCase();
+    if (key === 'arrowup' || key === 'arrowdown' || key === 'arrowleft' || key === 'arrowright' ||
+        key === 'w' || key === 'a' || key === 's' || key === 'd' || key === ' ') {
+        e.preventDefault();
+    }
 });
+
+// Restart game function
+function restartGame() {
+    gameOver = false;
+    gameRunning = true;
+    distance = 0;
+    displayDistance = 0;
+    displaySpeed = 0;
+    car.speed = 0;
+    car.x = canvas.width / 2;
+    car.y = car.baseY;
+    obstacles = [];
+    obstacleSpawnTimer = 180;
+    obstacleSpawnInterval = 300;
+    roadOffset = 0;
+    trackCurve = 0;
+    // Don't call gameLoop() here - the existing loop will continue
+}
 
 // Draw road with perspective
 function drawRoad() {
@@ -84,34 +128,35 @@ function drawRoad() {
     ctx.fillStyle = '#228B22';
     ctx.fillRect(0, canvas.height / 2, canvas.width, canvas.height / 2);
     
-    // Draw road segments with perspective
-    const segments = 20;
+    // Draw road segments with perspective - fewer, larger segments for stability
+    const segments = 10; // Reduced from 20 for less flashing
     for (let i = segments; i >= 0; i--) {
         const y = canvas.height / 2 + (canvas.height / 2) * (i / segments);
         const perspective = i / segments;
         const segmentWidth = road.width * (0.3 + 0.7 * perspective);
-        const centerX = road.centerX + Math.sin(trackCurve + i * 0.1) * 100 * perspective;
+        const centerX = road.centerX + Math.sin(trackCurve + i * 0.2) * 80 * perspective; // Gentler curves
+        const segmentHeight = 15; // Larger segments for more solid appearance
         
-        // Road surface
+        // Road surface - larger, more solid segments
         ctx.fillStyle = '#333333';
-        ctx.fillRect(centerX - segmentWidth / 2, y, segmentWidth, 5);
+        ctx.fillRect(centerX - segmentWidth / 2, y, segmentWidth, segmentHeight);
         
-        // Road stripes
-        if (Math.floor((roadOffset + i * 10) / 40) % 2 === 0) {
-            // White edge lines
+        // Road stripes - less frequent changes for stability
+        if (Math.floor((roadOffset + i * 20) / 80) % 2 === 0) {
+            // White edge lines - thicker and more stable
             ctx.fillStyle = '#FFFFFF';
-            ctx.fillRect(centerX - segmentWidth / 2, y, 10, 3);
-            ctx.fillRect(centerX + segmentWidth / 2 - 10, y, 10, 3);
+            ctx.fillRect(centerX - segmentWidth / 2, y, 15, segmentHeight - 2);
+            ctx.fillRect(centerX + segmentWidth / 2 - 15, y, 15, segmentHeight - 2);
             
-            // Center dashed line
-            ctx.fillRect(centerX - 5, y, 10, 3);
+            // Center dashed line - thicker
+            ctx.fillRect(centerX - 8, y, 16, segmentHeight - 2);
         }
         
-        // Red and white curbs
-        const curbWidth = 20;
-        ctx.fillStyle = Math.floor((roadOffset + i * 10) / 20) % 2 === 0 ? '#FF0000' : '#FFFFFF';
-        ctx.fillRect(centerX - segmentWidth / 2 - curbWidth, y, curbWidth, 5);
-        ctx.fillRect(centerX + segmentWidth / 2, y, curbWidth, 5);
+        // Red and white curbs - less frequent changes
+        const curbWidth = 25;
+        ctx.fillStyle = Math.floor((roadOffset + i * 20) / 60) % 2 === 0 ? '#FF0000' : '#FFFFFF';
+        ctx.fillRect(centerX - segmentWidth / 2 - curbWidth, y, curbWidth, segmentHeight);
+        ctx.fillRect(centerX + segmentWidth / 2, y, curbWidth, segmentHeight);
     }
 }
 
@@ -216,9 +261,9 @@ function spawnObstacle() {
     
     obstacles.push({
         x: road.centerX + lane,
-        y: canvas.height / 2 - 50, // Spawn further up the road
+        y: canvas.height / 2 - 150, // Spawn much further up the road for kids to see
         type: type,
-        speed: 2
+        speed: 1 // Slower obstacle movement for kids
     });
 }
 
@@ -255,14 +300,22 @@ function drawGameOver() {
     ctx.fillStyle = '#FF0000';
     ctx.font = 'bold 60px Arial';
     ctx.textAlign = 'center';
-    ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2 - 50);
+    ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2 - 80);
     
+    // Congratulations message
+    ctx.fillStyle = '#FFD700';
+    ctx.font = 'bold 32px Arial';
+    ctx.fillText('Great Job!', canvas.width / 2, canvas.height / 2 - 30);
+    
+    // Distance traveled
     ctx.fillStyle = '#FFFFFF';
-    ctx.font = '30px Arial';
-    ctx.fillText('You crashed!', canvas.width / 2, canvas.height / 2 + 20);
+    ctx.font = '28px Arial';
+    ctx.fillText(`You traveled ${distance.toFixed(1)} miles!`, canvas.width / 2, canvas.height / 2 + 10);
     
-    ctx.font = '20px Arial';
-    ctx.fillText('Press F5 to restart', canvas.width / 2, canvas.height / 2 + 60);
+    // Restart instruction
+    ctx.font = '22px Arial';
+    ctx.fillStyle = '#87CEEB';
+    ctx.fillText('Press SPACEBAR to play again', canvas.width / 2, canvas.height / 2 + 60);
 }
 
 // Update game logic
@@ -275,37 +328,58 @@ function update() {
         curveDirection *= -1;
     }
     
-    // Handle input - WASD controls
-    if (keys['a'] || keys['A']) {
+    // Handle input - Arrow keys and WASD controls
+    if (keys['ArrowLeft'] || keys['a'] || keys['A']) {
         car.x -= car.lateralSpeed;
     }
-    if (keys['d'] || keys['D']) {
+    if (keys['ArrowRight'] || keys['d'] || keys['D']) {
         car.x += car.lateralSpeed;
     }
     
-    // Speed control with W and S - only change speed when keys are pressed
-    if (keys['w'] || keys['W']) {
-        if (car.speed < car.maxSpeed) {
-            car.speed += car.acceleration;
-        }
-    } else if (keys['s'] || keys['S']) {
-        if (car.speed > 0) {
-            car.speed -= car.deceleration * 2; // Brake harder than acceleration
-            if (car.speed < 0) car.speed = 0;
-        }
+    // Check if car is on road for speed calculation
+    const roadLeft = road.centerX - road.width / 2 + Math.sin(trackCurve) * 80;
+    const roadRight = road.centerX + road.width / 2 + Math.sin(trackCurve) * 80;
+    const isOnRoad = car.x >= roadLeft && car.x <= roadRight;
+    
+    // Speed control with up/down arrows and W/S keys
+    let targetSpeed = 15; // Base speed for kids
+    
+    if (keys['ArrowUp'] || keys['w'] || keys['W']) {
+        targetSpeed = car.maxSpeed; // Full speed when pressing up/W
+        // Move car forward slightly for visual feedback
+        car.y = car.baseY - 10;
+    } else if (keys['ArrowDown'] || keys['s'] || keys['S']) {
+        targetSpeed = 5; // Slow speed when pressing down/S
+        // Move car back slightly for visual feedback
+        car.y = car.baseY + 10;
+    } else {
+        // Return car to normal position
+        car.y = car.baseY;
     }
-    // No automatic deceleration - car maintains speed when no key is pressed
     
-    // Keep car on road - adjusted for wider road
-    const roadLeft = road.centerX - road.width / 2 + 65;
-    const roadRight = road.centerX + road.width / 2 - 65;
-    car.x = Math.max(roadLeft, Math.min(roadRight, car.x));
+    // Reduce speed when off-road
+    if (!isOnRoad) {
+        targetSpeed = Math.min(targetSpeed, 8); // Much slower off-road
+    }
     
-    // Removed auto-acceleration - now controlled by W key
+    // Gradually adjust speed toward target
+    if (car.speed < targetSpeed) {
+        car.speed += car.acceleration;
+    } else if (car.speed > targetSpeed) {
+        car.speed -= car.deceleration;
+    }
+    
+    // Ensure speed doesn't go below minimum or above maximum
+    car.speed = Math.max(2, Math.min(car.maxSpeed, car.speed));
+    
+    // Keep car within canvas bounds (can go off-road but not off-screen)
+    car.x = Math.max(50, Math.min(canvas.width - 50, car.x));
     
     // Update road offset for movement effect only when car is moving
     if (car.speed > 0) {
         roadOffset += roadSpeed + car.speed / 20;
+        // Update distance traveled (convert speed to miles)
+        distance += car.speed / 500; // Convert to miles (much smaller increments)
     }
     
     // Spawn obstacles
@@ -334,8 +408,13 @@ function update() {
         car.speed = 0;
     }
     
-    // Update speed display
-    speedDisplay.textContent = Math.floor(car.speed);
+    // Smooth number changes for display
+    displaySpeed += (car.speed - displaySpeed) * 0.1;
+    displayDistance += (distance - displayDistance) * 0.05;
+    
+    // Update speed and distance displays with smoothed values
+    speedDisplay.textContent = Math.floor(displaySpeed);
+    distanceDisplay.textContent = displayDistance.toFixed(1);
 }
 
 // Main game loop

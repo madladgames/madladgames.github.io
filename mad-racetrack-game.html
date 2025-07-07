@@ -1,15 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mad Racetrack Game - Mad Lad Studios</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Race at high speeds and stay on track in Mad Racetrack Game! Use your steering skills to navigate curves and avoid obstacles in this exciting racing game for kids.">
+    <meta name="keywords" content="racing game, kids racing game, car racing, track racing, steering game, children games, fun games for kids, mad racetrack game">
+    <meta name="author" content="Mad Lad Studios">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://madladstudios.com/mad-racetrack-game.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://madladstudios.com/mad-racetrack-game.html">
+    <meta property="og:title" content="Mad Racetrack Game - High Speed Racing | Mad Lad Studios">
+    <meta property="og:description" content="Race at high speeds and stay on track in Mad Racetrack Game! Use your steering skills to navigate curves and avoid obstacles in this exciting racing game for kids.">
+    <meta property="og:site_name" content="Mad Lad Studios">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://madladstudios.com/mad-racetrack-game.html">
+    <meta property="twitter:title" content="Mad Racetrack Game - High Speed Racing | Mad Lad Studios">
+    <meta property="twitter:description" content="Race at high speeds and stay on track in Mad Racetrack Game! Use your steering skills to navigate curves and avoid obstacles in this exciting racing game for kids.">
+
+    
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#10B981">
+    <meta name="msapplication-TileColor" content="#10B981">
+    <meta name="application-name" content="Mad Racetrack Game">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR-PUBLISHER-ID"
-         crossorigin="anonymous"></script>
-    
+        crossorigin="anonymous"></script>
+
     <style>
         /* Game-specific styles to override the original CSS */
         body {
@@ -17,7 +46,7 @@
             padding: 0 !important;
             overflow-x: hidden !important;
         }
-        
+
         .game-container {
             background: transparent !important;
             padding: 0 !important;
@@ -27,18 +56,18 @@
             justify-content: center !important;
             min-height: auto !important;
         }
-        
+
         .game-info {
             background: transparent !important;
             padding: 0 !important;
             margin-bottom: 1rem !important;
             text-align: center !important;
         }
-        
+
         .game-info h1 {
             display: none !important;
         }
-        
+
         .game-info p {
             background: linear-gradient(to right, #10B981, #059669) !important;
             color: white !important;
@@ -47,8 +76,11 @@
             font-weight: bold !important;
             display: inline-block !important;
             margin: 0.25rem !important;
+            min-width: 160px !important;
+            text-align: center !important;
+            font-family: 'Courier New', monospace !important;
         }
-        
+
         #gameCanvas {
             border: 3px solid #10B981;
             border-radius: 0.5rem;
@@ -58,17 +90,21 @@
         }
     </style>
 </head>
+
 <body class="bg-gradient-to-br from-purple-600 via-pink-500 to-red-500 min-h-screen">
     <!-- Navigation -->
     <nav class="bg-white/90 backdrop-blur-sm shadow-lg sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
-                <a href="index.html" class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+                <a href="index.html"
+                    class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
                     Mad Lad Studios
                 </a>
                 <div class="flex space-x-6">
-                    <a href="index.html#games" class="text-gray-700 hover:text-purple-600 font-medium transition">All Games</a>
-                    <a href="index.html#about" class="text-gray-700 hover:text-purple-600 font-medium transition">About</a>
+                    <a href="index.html#games" class="text-gray-700 hover:text-purple-600 font-medium transition">All
+                        Games</a>
+                    <a href="index.html#about"
+                        class="text-gray-700 hover:text-purple-600 font-medium transition">About</a>
                 </div>
             </div>
         </div>
@@ -89,14 +125,10 @@
         <div class="mb-8">
             <div class="rounded-lg p-4 text-center max-w-4xl mx-auto">
                 <!-- Google AdSense Ad Unit -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
-                     data-ad-slot="YOUR-AD-SLOT-ID-7"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
+                    data-ad-slot="YOUR-AD-SLOT-ID-7" data-ad-format="auto" data-full-width-responsive="true"></ins>
                 <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
+                    (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             </div>
         </div>
@@ -108,10 +140,11 @@
                     <h1>Mad Racetrack</h1>
                     <p>Use ← → arrow keys to steer</p>
                     <p>Speed: <span id="speed">0</span> mph</p>
+                    <p>Distance: <span id="distance">0</span> miles</p>
                 </div>
                 <canvas id="gameCanvas"></canvas>
             </div>
-            
+
             <!-- Game Controls Info -->
             <div class="text-center mt-6">
                 <p class="text-lg font-bold text-gray-700 mb-2">🏎️ Ready to Race? 🏎️</p>
@@ -133,10 +166,6 @@
                 </li>
                 <li class="flex items-start">
                     <span class="text-green-500 mr-2">•</span>
-                    Your speed increases automatically as you race
-                </li>
-                <li class="flex items-start">
-                    <span class="text-green-500 mr-2">•</span>
                     Navigate the curves carefully at high speeds
                 </li>
                 <li class="flex items-start">
@@ -150,14 +179,10 @@
         <div class="mt-8">
             <div class="rounded-lg p-4 text-center max-w-4xl mx-auto">
                 <!-- Google AdSense Ad Unit -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
-                     data-ad-slot="YOUR-AD-SLOT-ID-8"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
+                    data-ad-slot="YOUR-AD-SLOT-ID-8" data-ad-format="auto" data-full-width-responsive="true"></ins>
                 <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
+                    (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             </div>
         </div>
@@ -166,17 +191,21 @@
         <div class="mt-12 text-center">
             <h3 class="text-2xl font-bold text-white mb-6">Try Our Other Games!</h3>
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="mad-car-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-blue-600 hover:bg-white transition">
-                    🚗 Mad Car Game
-                </a>
-                <a href="mad-crab-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-orange-600 hover:bg-white transition">
-                    🦀 Mad Crab Game
+                <a href="mad-carwash-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-cyan-600 hover:bg-white transition">
+                    🧽 Mad Car Wash Game
                 </a>
                 <a href="mad-firetruck-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-red-600 hover:bg-white transition">
                     🚒 Mad Fire Truck Game
                 </a>
+                <a href="mad-crab-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-orange-600 hover:bg-white transition">
+                    🦀 Mad Crab Game
+                </a>
+                <a href="index.html#games" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-purple-600 hover:bg-white transition border-2 border-purple-600">
+                    🎮 See All Games
+                </a>
             </div>
         </div>
+        <!-- End of Other Games -->
     </div>
 
     <!-- Footer -->
@@ -190,4 +219,5 @@
     <!-- Load the original game files -->
     <script src="mad-racetrack-game/game.js"></script>
 </body>
+
 </html>

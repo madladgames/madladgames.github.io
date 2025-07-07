@@ -37,10 +37,24 @@ let seaweed = [];
 // Input handling
 const keys = {};
 document.addEventListener('keydown', (e) => {
-    keys[e.key.toLowerCase()] = true;
+    const key = e.key.toLowerCase();
+    keys[key] = true;
+    
+    // Prevent default behavior for game control keys to stop page scrolling
+    if (key === 'arrowup' || key === 'arrowdown' || key === 'arrowleft' || key === 'arrowright' ||
+        key === 'w' || key === 'a' || key === 's' || key === 'd') {
+        e.preventDefault();
+    }
 });
 document.addEventListener('keyup', (e) => {
-    keys[e.key.toLowerCase()] = false;
+    const key = e.key.toLowerCase();
+    keys[key] = false;
+    
+    // Prevent default behavior for game control keys
+    if (key === 'arrowup' || key === 'arrowdown' || key === 'arrowleft' || key === 'arrowright' ||
+        key === 'w' || key === 'a' || key === 's' || key === 'd') {
+        e.preventDefault();
+    }
 });
 
 // Initialize game objects
