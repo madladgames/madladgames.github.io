@@ -1,0 +1,206 @@
+/* Car Wash Game Styles */
+
+/* Game container styling */
+.game-container {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Canvas styling */
+#gameCanvas {
+    background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 100%);
+    border: 4px solid #06B6D4;
+    border-radius: 10px;
+    box-shadow: 
+        0 0 20px rgba(6, 182, 212, 0.3),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
+    display: block;
+    margin: 0 auto;
+}
+
+/* Button styling */
+#startButton {
+    background: linear-gradient(45deg, #06B6D4, #0891B2, #0E7490);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#startButton:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(6, 182, 212, 0.6);
+    background: linear-gradient(45deg, #0891B2, #0E7490, #155E75);
+}
+
+#startButton:active {
+    transform: translateY(0) scale(1.02);
+    box-shadow: 0 2px 10px rgba(6, 182, 212, 0.4);
+}
+
+/* Controls styling */
+.controls {
+    text-align: center;
+    margin-top: 20px;
+    color: #2D3748;
+}
+
+.controls p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.key {
+    background: linear-gradient(45deg, #06B6D4, #0891B2);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    box-shadow: 0 2px 5px rgba(6, 182, 212, 0.3);
+    display: inline-block;
+    margin: 0 2px;
+}
+
+/* Score display styling */
+.score-display {
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.score-display p {
+    margin: 5px 0;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#score {
+    color: #06B6D4;
+    text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+}
+
+#highScore {
+    color: #10B981;
+    text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    #gameCanvas {
+        width: 100%;
+        height: auto;
+        max-width: 800px;
+    }
+    
+    .controls p {
+        font-size: 14px;
+    }
+    
+    #startButton {
+        padding: 12px 24px;
+        font-size: 16px;
+    }
+    
+    .score-display p {
+        font-size: 18px;
+    }
+}
+
+/* Animation for game elements */
+@keyframes bubble-float {
+    0% { transform: translateY(0) scale(1); opacity: 0.8; }
+    50% { transform: translateY(-10px) scale(1.1); opacity: 1; }
+    100% { transform: translateY(0) scale(1); opacity: 0.8; }
+}
+
+@keyframes water-splash {
+    0% { transform: scale(0) rotate(0deg); opacity: 1; }
+    50% { transform: scale(1.2) rotate(180deg); opacity: 0.7; }
+    100% { transform: scale(1.5) rotate(360deg); opacity: 0; }
+}
+
+/* Car wash theme colors */
+:root {
+    --car-wash-blue: #06B6D4;
+    --car-wash-light-blue: #67E8F9;
+    --car-wash-dark-blue: #0E7490;
+    --soap-bubble: rgba(255, 255, 255, 0.7);
+    --water-drop: rgba(100, 200, 255, 0.8);
+}
+
+/* Loading animation for when game starts */
+.loading {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* Game instructions styling */
+.game-instructions {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.game-instructions h3 {
+    color: #06B6D4;
+    margin-bottom: 15px;
+    font-size: 24px;
+    text-align: center;
+}
+
+.game-instructions ul {
+    list-style: none;
+    padding: 0;
+}
+
+.game-instructions li {
+    margin: 10px 0;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(6, 182, 212, 0.2);
+    color: #2D3748;
+}
+
+.game-instructions li:last-child {
+    border-bottom: none;
+}
+
+/* Special effects for toddler appeal */
+.sparkle {
+    position: relative;
+    overflow: hidden;
+}
+
+.sparkle::before {
+    content: '✨';
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 12px;
+    animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+    0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1) rotate(180deg); }
+}

@@ -1,15 +1,23 @@
 // Game canvas setup
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
+const startButton = document.getElementById('startButton');
+const scoreElement = document.getElementById('score');
+const highScoreElement = document.getElementById('highScore');
 canvas.width = 800;
 canvas.height = 600;
 
 // Game variables
+let gameRunning = false;
 let score = 0;
+let highScore = localStorage.getItem('firetruckHighScore') || 0;
 let gameSpeed = 2;
 let roadOffset = 0;
 let frameCount = 0;
 let gameOver = false;
+
+// Initialize high score display
+highScoreElement.textContent = highScore;
 
 // Obstacles array
 const obstacles = [];
@@ -251,23 +259,28 @@ function updateFireTruck() {
 
 // Handle keyboard input
 document.addEventListener('keydown', (e) => {
+    if (!gameRunning) return;
+    
     switch(e.key.toLowerCase()) {
         case 'a':
+        case 'arrowleft':
+            e.preventDefault();
             fireTruck.moving.left = true;
             break;
         case 'd':
+        case 'arrowright':
+            e.preventDefault();
             fireTruck.moving.right = true;
             break;
         case 'w':
+        case 'arrowup':
+            e.preventDefault();
             fireTruck.moving.up = true;
             break;
         case 's':
+        case 'arrowdown':
+            e.preventDefault();
             fireTruck.moving.down = true;
-            break;
-        case 'r':
-            if (gameOver) {
-                resetGame();
-            }
             break;
     }
 });
@@ -275,15 +288,23 @@ document.addEventListener('keydown', (e) => {
 document.addEventListener('keyup', (e) => {
     switch(e.key.toLowerCase()) {
         case 'a':
+        case 'arrowleft':
+            e.preventDefault();
             fireTruck.moving.left = false;
             break;
         case 'd':
+        case 'arrowright':
+            e.preventDefault();
             fireTruck.moving.right = false;
             break;
         case 'w':
+        case 'arrowup':
+            e.preventDefault();
             fireTruck.moving.up = false;
             break;
         case 's':
+        case 'arrowdown':
+            e.preventDefault();
             fireTruck.moving.down = false;
             break;
     }
@@ -297,23 +318,34 @@ function updateScore() {
 
 // Draw game over screen
 function drawGameOver() {
+    gameRunning = false;
+    
+    // Update high score
+    if (score > highScore) {
+        highScore = score;
+        localStorage.setItem('firetruckHighScore', highScore);
+        highScoreElement.textContent = highScore;
+    }
+    
     ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
     ctx.fillStyle = '#FFFFFF';
-    ctx.font = '48px Arial';
+    ctx.font = 'bold 36px Arial';
     ctx.textAlign = 'center';
-    ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2 - 50);
+    ctx.fillText('Mission Complete!', canvas.width / 2, canvas.height / 2 - 40);
     
-    ctx.font = '24px Arial';
-    ctx.fillText('Final Score: ' + score, canvas.width / 2, canvas.height / 2);
+    ctx.font = 'bold 20px Arial';
+    ctx.fillText(`Score: ${score}`, canvas.width / 2, canvas.height / 2 + 10);
+    ctx.fillText(`High Score: ${highScore}`, canvas.width / 2, canvas.height / 2 + 40);
     
-    ctx.font = '20px Arial';
-    ctx.fillText('Press R to restart', canvas.width / 2, canvas.height / 2 + 50);
+    startButton.textContent = 'Start New Mission';
 }
 
-// Reset game
-function resetGame() {
+// Start game function
+function startGame() {
+    // Reset game state
+    gameRunning = true;
     score = 0;
     gameSpeed = 2;
     roadOffset = 0;
@@ -322,11 +354,40 @@ function resetGame() {
     obstacles.length = 0;
     fireTruck.x = canvas.width / 2 - 30;
     fireTruck.y = canvas.height - 150;
-    document.getElementById('score').textContent = score;
+    
+    // Reset movement
+    fireTruck.moving.left = false;
+    fireTruck.moving.right = false;
+    fireTruck.moving.up = false;
+    fireTruck.moving.down = false;
+    
+    scoreElement.textContent = score;
+    startButton.textContent = 'Mission in Progress...';
+    
+    // Focus canvas for keyboard input
+    canvas.focus();
 }
 
 // Game loop
 function gameLoop() {
+    if (!gameRunning) {
+        // Draw static initial state
+        ctx.fillStyle = '#228B22';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        drawRoad();
+        drawFireTruck();
+        
+        ctx.fillStyle = '#333';
+        ctx.font = 'bold 24px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('Ready for Emergency Response!', canvas.width / 2, canvas.height / 2 - 50);
+        ctx.font = '18px Arial';
+        ctx.fillText('Press Start to Begin Mission', canvas.width / 2, canvas.height / 2 + 50);
+        
+        requestAnimationFrame(gameLoop);
+        return;
+    }
+    
     // Clear canvas
     ctx.fillStyle = '#228B22';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -346,12 +407,17 @@ function gameLoop() {
         // Update game state
         updateFireTruck();
         updateObstacles();
-        checkCollision();
+        
+        if (checkCollision()) {
+            drawGameOver();
+            return;
+        }
         
         // Update score every 60 frames (approximately 1 second)
         frameCount++;
         if (frameCount % 60 === 0) {
-            updateScore();
+            score += 1;
+            scoreElement.textContent = score;
             // Increase difficulty
             if (score % 10 === 0) {
                 gameSpeed = Math.min(gameSpeed + 0.5, 8);
@@ -369,5 +435,14 @@ function gameLoop() {
     requestAnimationFrame(gameLoop);
 }
 
-// Start the game
+// Event listeners
+startButton.addEventListener('click', () => {
+    startGame();
+    document.body.focus();
+});
+
+// Make canvas focusable
+canvas.tabIndex = 1;
+
+// Start the game loop
 gameLoop();

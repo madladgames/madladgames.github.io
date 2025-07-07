@@ -47,6 +47,40 @@
             font-weight: bold !important;
             font-size: 1.25rem !important;
         }
+        
+        .controls {
+            background: transparent !important;
+            margin-top: 1rem !important;
+        }
+        
+        .key {
+            background: #EF4444 !important;
+            color: white !important;
+            padding: 0.25rem 0.5rem !important;
+            border-radius: 0.25rem !important;
+            font-weight: bold !important;
+        }
+        
+        #startButton {
+            background: linear-gradient(to right, #EF4444, #DC2626) !important;
+            color: white !important;
+            padding: 0.75rem 2rem !important;
+            border-radius: 0.5rem !important;
+            font-weight: bold !important;
+            border: none !important;
+            cursor: pointer !important;
+            transition: all 0.3s !important;
+        }
+        
+        #startButton:hover {
+            transform: scale(1.05) !important;
+            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4) !important;
+        }
+        
+        .score-display {
+            background: transparent !important;
+            margin-top: 1rem !important;
+        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-purple-600 via-pink-500 to-red-500 min-h-screen">
@@ -78,7 +112,7 @@
 
         <!-- Ad Space - Top -->
         <div class="mb-8">
-            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center max-w-4xl mx-auto">
+            <div class="rounded-lg p-4 text-center max-w-4xl mx-auto">
                 <!-- Google AdSense Ad Unit -->
                 <ins class="adsbygoogle"
                      style="display:block"
@@ -96,10 +130,17 @@
         <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-8 max-w-5xl mx-auto">
             <div class="game-container">
                 <canvas id="gameCanvas"></canvas>
-                <div class="game-info">
-                    <h1>Mad Fire Truck Game</h1>
-                    <p>Use WASD keys to drive the fire truck!</p>
-                    <p>Score: <span id="score">0</span></p>
+                <div class="controls text-center mt-6">
+                    <p class="text-lg mb-2">Use <span class="key">WASD</span> or <span class="key">ARROW KEYS</span> to drive!</p>
+                    <p class="text-gray-600 mb-4">Navigate through traffic and avoid obstacles</p>
+                    <button id="startButton" class="mb-4">Start Fire Truck</button>
+                    <p class="text-red-500 font-medium">🚒 Emergency! Drive carefully through the city!</p>
+                </div>
+                <div class="score-display text-center mt-6">
+                    <div class="flex justify-center gap-8">
+                        <p class="text-xl font-bold">Score: <span id="score" class="text-red-600">0</span></p>
+                        <p class="text-xl font-bold">High Score: <span id="highScore" class="text-green-600">0</span></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -110,30 +151,30 @@
             <ul class="space-y-2 text-gray-700">
                 <li class="flex items-start">
                     <span class="text-red-500 mr-2">•</span>
-                    Use W to move forward
+                    Click "Start Fire Truck" to begin your emergency mission
                 </li>
                 <li class="flex items-start">
                     <span class="text-red-500 mr-2">•</span>
-                    Use A to turn left
+                    Use W/↑ to move forward, S/↓ to move backward
                 </li>
                 <li class="flex items-start">
                     <span class="text-red-500 mr-2">•</span>
-                    Use S to move backward
+                    Use A/← to move left, D/→ to move right
                 </li>
                 <li class="flex items-start">
                     <span class="text-red-500 mr-2">•</span>
-                    Use D to turn right
+                    Avoid obstacles like traffic cones, potholes, and barricades
                 </li>
                 <li class="flex items-start">
                     <span class="text-red-500 mr-2">•</span>
-                    Drive carefully and complete your missions!
+                    Drive carefully and complete your emergency missions!
                 </li>
             </ul>
         </div>
 
         <!-- Ad Space - Bottom -->
         <div class="mt-8">
-            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center max-w-4xl mx-auto">
+            <div class="rounded-lg p-4 text-center max-w-4xl mx-auto">
                 <!-- Google AdSense Ad Unit -->
                 <ins class="adsbygoogle"
                      style="display:block"
