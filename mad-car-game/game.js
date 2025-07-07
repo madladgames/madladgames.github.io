@@ -19,7 +19,7 @@ const car = {
     height: 70,
     velocityY: 0,
     jumping: false,
-    color: '#FFD700',  // Yellow color for digger
+    color: '#C00',  // Red color for car
     wheelColor: '#333'
 };
 
@@ -70,81 +70,43 @@ function initBackground() {
 
 // Draw functions
 function drawCar() {
-    // Visual feedback removed - no green box when jumping
-    
-    // Digger main body (yellow)
+    // Car body
     ctx.fillStyle = car.color;
-    ctx.fillRect(car.x + 20, car.y + 20, 80, 50);
-    
-    // Digger cabin
-    ctx.fillStyle = car.color;
-    ctx.fillRect(car.x + 60, car.y, 40, 40);
-    
-    // Cabin window
-    ctx.fillStyle = '#87CEEB';
-    ctx.fillRect(car.x + 65, car.y + 5, 30, 20);
-    
-    // Cabin roof
-    ctx.fillStyle = '#FFA500';
-    ctx.fillRect(car.x + 60, car.y - 5, 40, 5);
-    
-    // Digger arm base
-    ctx.fillStyle = '#FFA500';
-    ctx.fillRect(car.x + 90, car.y + 15, 30, 15);
-    
-    // Digger arm
-    ctx.strokeStyle = '#FFA500';
-    ctx.lineWidth = 8;
+    ctx.fillRect(car.x + 10, car.y + 20, 100, 40);
+
+    // Car roof
+    ctx.fillStyle = '#B22222';
     ctx.beginPath();
-    ctx.moveTo(car.x + 105, car.y + 20);
-    ctx.lineTo(car.x + 130, car.y - 10);
-    ctx.lineTo(car.x + 140, car.y + 10);
-    ctx.stroke();
-    
-    // Digger bucket
-    ctx.fillStyle = '#FF8C00';
-    ctx.beginPath();
-    ctx.moveTo(car.x + 135, car.y + 5);
-    ctx.lineTo(car.x + 150, car.y + 5);
-    ctx.lineTo(car.x + 145, car.y + 20);
-    ctx.lineTo(car.x + 140, car.y + 20);
+    ctx.moveTo(car.x + 30, car.y + 20);
+    ctx.lineTo(car.x + 50, car.y);
+    ctx.lineTo(car.x + 90, car.y);
+    ctx.lineTo(car.x + 100, car.y + 20);
     ctx.closePath();
     ctx.fill();
-    
-    // Bucket teeth
-    ctx.fillStyle = '#666';
-    for (let i = 0; i < 3; i++) {
-        ctx.fillRect(car.x + 138 + (i * 4), car.y + 20, 3, 5);
-    }
-    
-    // Tracks (instead of wheels)
-    ctx.fillStyle = car.wheelColor;
-    ctx.fillRect(car.x + 10, car.y + car.height - 15, 90, 15);
-    
-    // Track details
-    ctx.strokeStyle = '#555';
-    ctx.lineWidth = 1;
-    for (let i = 0; i < 9; i++) {
-        ctx.beginPath();
-        ctx.moveTo(car.x + 15 + (i * 10), car.y + car.height - 15);
-        ctx.lineTo(car.x + 15 + (i * 10), car.y + car.height);
-        ctx.stroke();
-    }
-    
-    // Track wheels
-    ctx.fillStyle = '#444';
+
+    // Car window
+    ctx.fillStyle = '#87CEEB';
     ctx.beginPath();
-    ctx.arc(car.x + 25, car.y + car.height - 7, 6, 0, Math.PI * 2);
+    ctx.moveTo(car.x + 55, car.y + 5);
+    ctx.lineTo(car.x + 85, car.y + 5);
+    ctx.lineTo(car.x + 95, car.y + 20);
+    ctx.lineTo(car.x + 45, car.y + 20);
+    ctx.closePath();
     ctx.fill();
+
+    // Wheels
+    ctx.fillStyle = '#222';
     ctx.beginPath();
-    ctx.arc(car.x + 85, car.y + car.height - 7, 6, 0, Math.PI * 2);
+    ctx.arc(car.x + 30, car.y + car.height - 5, 15, 0, Math.PI * 2);
+    ctx.arc(car.x + 90, car.y + car.height - 5, 15, 0, Math.PI * 2);
     ctx.fill();
-    
-    // Warning stripes on body
-    ctx.fillStyle = '#000000';
-    ctx.fillRect(car.x + 25, car.y + 35, 5, 20);
-    ctx.fillRect(car.x + 35, car.y + 35, 5, 20);
-    ctx.fillRect(car.x + 45, car.y + 35, 5, 20);
+
+    // Wheel hubs
+    ctx.fillStyle = '#EEE';
+    ctx.beginPath();
+    ctx.arc(car.x + 30, car.y + car.height - 5, 6, 0, Math.PI * 2);
+    ctx.arc(car.x + 90, car.y + car.height - 5, 6, 0, Math.PI * 2);
+    ctx.fill();
 }
 
 function drawGround() {
