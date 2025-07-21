@@ -39,6 +39,13 @@ const games = [
         emoji: '🧽',
         color: 'text-cyan-600',
         order: 5
+    },
+    {
+        filename: 'mad-train-game.html',
+        title: 'Mad Train Game',
+        emoji: '🚂',
+        color: 'text-purple-600',
+        order: 6
     }
 ];
 
