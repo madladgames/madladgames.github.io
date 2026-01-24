@@ -1,0 +1,250 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    color: white;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.game-header {
+    position: relative;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    margin-bottom: 20px;
+    z-index: 100;
+}
+
+.game-header h1 {
+    font-size: 2.5em;
+    color: #ff4444;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.score-board {
+    display: flex;
+    gap: 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.game-area {
+    width: 600px;
+    height: 500px;
+    position: relative;
+    background: #333;
+    border: 3px solid #555;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.road {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #444 0%, #666 20%, #777 50%, #666 80%, #444 100%);
+    position: relative;
+}
+
+.road-line {
+    position: absolute;
+    width: 4px;
+    height: 40px;
+    background: #ffff00;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: roadMove 0.5s linear infinite;
+}
+
+.road-line:nth-child(1) { top: -40px; }
+.road-line:nth-child(2) { top: 80px; }
+.road-line:nth-child(3) { top: 200px; }
+.road-line:nth-child(4) { top: 320px; }
+
+@keyframes roadMove {
+    from { transform: translateX(-50%) translateY(0); }
+    to { transform: translateX(-50%) translateY(100px); }
+}
+
+.car {
+    position: absolute;
+    width: 40px;
+    height: 80px;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: left 0.1s ease;
+}
+
+.car-body {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #ff0000, #cc0000);
+    border-radius: 15px 15px 5px 5px;
+    position: relative;
+    box-shadow: 0 0 10px rgba(255,0,0,0.5);
+}
+
+.car-window {
+    position: absolute;
+    top: 10px;
+    left: 5px;
+    width: 30px;
+    height: 25px;
+    background: linear-gradient(180deg, #87ceeb, #4682b4);
+    border-radius: 8px 8px 0 0;
+}
+
+.car-wheel {
+    position: absolute;
+    width: 8px;
+    height: 12px;
+    background: #222;
+    border-radius: 2px;
+    animation: wheelSpin 0.1s linear infinite;
+}
+
+.wheel-front {
+    top: 15px;
+    left: -4px;
+}
+
+.wheel-back {
+    top: 55px;
+    left: -4px;
+}
+
+.car-wheel:after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: 0;
+    width: 8px;
+    height: 12px;
+    background: #222;
+    border-radius: 2px;
+}
+
+@keyframes wheelSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.obstacle {
+    position: absolute;
+    width: 35px;
+    height: 60px;
+    background: linear-gradient(180deg, #8B4513, #654321);
+    border-radius: 10px;
+    top: -60px;
+    animation: obstacleMove 3s linear infinite;
+    box-shadow: 0 0 8px rgba(139,69,19,0.7);
+}
+
+.obstacle:before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 25px;
+    height: 20px;
+    background: linear-gradient(180deg, #87ceeb, #4682b4);
+    border-radius: 5px;
+}
+
+@keyframes obstacleMove {
+    from { transform: translateY(0); }
+    to { transform: translateY(560px); }
+}
+
+.game-controls {
+    position: relative;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.instructions {
+    margin-bottom: 20px;
+    font-size: 0.9em;
+    line-height: 1.4;
+    color: #333;
+}
+
+.start-btn, .pause-btn, .restart-btn {
+    background: linear-gradient(45deg, #ff4444, #cc0000);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255,68,68,0.3);
+    transition: all 0.3s ease;
+}
+
+.start-btn:hover, .pause-btn:hover, .restart-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255,68,68,0.4);
+}
+
+.game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.9);
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    border: 2px solid #ff4444;
+    z-index: 200;
+}
+
+.game-over h2 {
+    color: #ff4444;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.game-over p {
+    font-size: 1.3em;
+    margin-bottom: 30px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .game-area {
+        width: 90vw;
+        height: 60vh;
+    }
+    
+    .game-header {
+        padding: 0 20px;
+    }
+    
+    .game-header h1 {
+        font-size: 1.8em;
+    }
+    
+    .score-board {
+        gap: 15px;
+        font-size: 1em;
+    }
+}

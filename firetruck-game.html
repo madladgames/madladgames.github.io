@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fire Fighter Game - Mad Lad Studios</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Drive the firetruck and save burning houses in Fire Fighter Game! Use WASD keys to move and spray water to extinguish fires in this heroic rescue adventure.">
+    <meta name="keywords" content="fire fighter game, firetruck game, firefighter game, rescue game, put out fires, children games, fun games for kids">
+    <meta name="author" content="Mad Lad Studios">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://madladstudios.com/firetruck-game.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://madladstudios.com/firetruck-game.html">
+    <meta property="og:title" content="Fire Fighter Game - Save Burning Houses | Mad Lad Studios">
+    <meta property="og:description" content="Drive the firetruck and save burning houses in Fire Fighter Game! Use WASD keys to move and spray water to extinguish fires in this heroic rescue adventure.">
+    <meta property="og:site_name" content="Mad Lad Studios">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://madladstudios.com/firetruck-game.html">
+    <meta property="twitter:title" content="Fire Fighter Game - Save Burning Houses | Mad Lad Studios">
+    <meta property="twitter:description" content="Drive the firetruck and save burning houses in Fire Fighter Game! Use WASD keys to move and spray water to extinguish fires in this heroic rescue adventure.">
+
+    
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#EF4444">
+    <meta name="msapplication-TileColor" content="#EF4444">
+    <meta name="application-name" content="Fire Fighter Game">
+    
+    <script defer data-domain="madladstudios.com" src="https://plausible.io/js/script.outbound-links.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR-PUBLISHER-ID"
+        crossorigin="anonymous"></script>
+
+    <!-- Load game styles -->
+    <link rel="stylesheet" href="firetruck-game/style.css">
+</head>
+
+<body class="bg-gradient-to-br from-purple-600 via-pink-500 to-red-500 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white/90 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html"
+                    class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+                    Mad Lad Studios
+                </a>
+                <div class="flex space-x-6">
+                    <a href="index.html#games" class="text-gray-700 hover:text-purple-600 font-medium transition">All
+                        Games</a>
+                    <a href="index.html#about"
+                        class="text-gray-700 hover:text-purple-600 font-medium transition">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Game Header -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 flex items-center justify-center gap-4">
+                <span class="text-6xl">🚒</span>
+                Fire Fighter Game
+                <span class="text-6xl">🔥</span>
+            </h1>
+            <p class="text-xl text-white/90">Save burning houses and be a hero!</p>
+        </div>
+
+        <!-- Ad Space - Top -->
+        <div class="mb-8">
+            <div class="rounded-lg p-4 text-center max-w-4xl mx-auto">
+                <!-- Google AdSense Ad Unit -->
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
+                    data-ad-slot="YOUR-AD-SLOT-ID-13" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+
+        <!-- Game Container -->
+        <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-8 max-w-5xl mx-auto">
+            <div class="game-container">
+                <div class="game-header">
+                    <h1>🚒 Fire Fighter</h1>
+                    <div class="game-stats">
+                        <div class="stat">
+                            <span class="stat-label">Score:</span>
+                            <span id="score">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Fires Put Out:</span>
+                            <span id="fires-extinguished">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Houses Saved:</span>
+                            <span id="houses-saved">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Time:</span>
+                            <span id="timer">0</span>s
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-area">
+                    <canvas id="gameCanvas" width="800" height="600"></canvas>
+                </div>
+                
+                <div class="game-controls">
+                    <div class="instructions">
+                        <h3>How to Play:</h3>
+                        <p>🎮 Use WASD or Arrow Keys to move the firetruck</p>
+                        <p>🔥 Drive near burning houses to put out fires</p>
+                        <p>💧 Hold SPACE to spray water and extinguish fires</p>
+                        <p>🏠 Save as many houses as possible!</p>
+                    </div>
+                    <div class="control-buttons">
+                        <button id="startBtn" class="game-btn">Start Game</button>
+                        <button id="pauseBtn" class="game-btn" disabled>Pause</button>
+                        <button id="resetBtn" class="game-btn">Reset</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="gameOverModal" class="modal hidden">
+                <div class="modal-content">
+                    <h2>Game Over!</h2>
+                    <p>Final Score: <span id="finalScore">0</span></p>
+                    <p>Houses Saved: <span id="finalHousesSaved">0</span></p>
+                    <p>Fires Extinguished: <span id="finalFiresExtinguished">0</span></p>
+                    <button id="playAgainBtn" class="game-btn">Play Again</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="mt-8 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-6 max-w-2xl mx-auto">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">How to Play</h2>
+            <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start">
+                    <span class="text-red-500 mr-2">•</span>
+                    Click "Start Game" to begin your firefighting mission
+                </li>
+                <li class="flex items-start">
+                    <span class="text-red-500 mr-2">•</span>
+                    Use WASD or Arrow Keys to drive the firetruck
+                </li>
+                <li class="flex items-start">
+                    <span class="text-red-500 mr-2">•</span>
+                    Hold SPACE to spray water and put out fires
+                </li>
+                <li class="flex items-start">
+                    <span class="text-red-500 mr-2">•</span>
+                    Drive near burning houses to extinguish them
+                </li>
+                <li class="flex items-start">
+                    <span class="text-red-500 mr-2">•</span>
+                    Save all the houses to win the game!
+                </li>
+            </ul>
+        </div>
+
+        <!-- Ad Space - Bottom -->
+        <div class="mt-8">
+            <div class="rounded-lg p-4 text-center max-w-4xl mx-auto">
+                <!-- Google AdSense Ad Unit -->
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
+                    data-ad-slot="YOUR-AD-SLOT-ID-14" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+
+        <!-- Other Games -->
+        <div class="mt-12 text-center">
+            <h3 class="text-2xl font-bold text-white mb-6">Try Our Other Games!</h3>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="red-car-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-red-500 hover:bg-white transition">
+                    🚗 Red Car Game
+                </a>
+                <a href="train-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-purple-600 hover:bg-white transition">
+                    🚂 Train Game
+                </a>
+                <a href="police-chase-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-blue-800 hover:bg-white transition">
+                    🚓 Police Chase Game
+                </a>
+                <a href="index.html#games" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-purple-600 hover:bg-white transition border-2 border-purple-600">
+                    🎮 See All Games
+                </a>
+            </div>
+        </div>
+        <!-- End of Other Games -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-2">© 2025 Mad Lad Studios. All rights reserved.</p>
+            <p class="text-gray-400">Games for kids, made by a kid (and AI).</p>
+        </div>
+    </footer>
+
+    <!-- Load the game script -->
+    <script src="firetruck-game/script.js"></script>
+</body>
+
+</html>

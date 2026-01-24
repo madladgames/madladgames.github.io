@@ -4,34 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mad Car Wash Game - Mad Lad Studios</title>
+    <title>Mad Car Game - Mad Lad Studios</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Drive your car through the car wash in Mad Car Wash Game! Collect soap bubbles and avoid spinning brushes in this fun, toddler-friendly adventure perfect for young kids.">
-    <meta name="keywords" content="car wash game, toddler games, kids car wash, soap bubbles game, children games, fun games for toddlers, mad car wash game, preschool games">
+    <meta name="description" content="Jump over obstacles and see how far you can go in Mad Car Game! An exciting car adventure game for kids with simple controls and fun gameplay.">
+    <meta name="keywords" content="car game, kids car game, jumping game, obstacle game, children games, fun games for kids, mad car game">
     <meta name="author" content="Mad Lad Studios">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://madladstudios.com/mad-carwash-game.html">
+    <link rel="canonical" href="https://madladstudios.com/mad-car-game.html">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://madladstudios.com/mad-carwash-game.html">
-    <meta property="og:title" content="Mad Car Wash Game - Toddler-Friendly Car Adventure | Mad Lad Studios">
-    <meta property="og:description" content="Drive your car through the car wash in Mad Car Wash Game! Collect soap bubbles and avoid spinning brushes in this fun, toddler-friendly adventure perfect for young kids.">
+    <meta property="og:url" content="https://madladstudios.com/mad-car-game.html">
+    <meta property="og:title" content="Mad Car Game - Jump Over Obstacles | Mad Lad Studios">
+    <meta property="og:description" content="Jump over obstacles and see how far you can go in Mad Car Game! An exciting car adventure game for kids with simple controls and fun gameplay.">
     <meta property="og:site_name" content="Mad Lad Studios">
     <meta property="og:locale" content="en_US">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://madladstudios.com/mad-carwash-game.html">
-    <meta property="twitter:title" content="Mad Car Wash Game - Toddler-Friendly Car Adventure | Mad Lad Studios">
-    <meta property="twitter:description" content="Drive your car through the car wash in Mad Car Wash Game! Collect soap bubbles and avoid spinning brushes in this fun, toddler-friendly adventure perfect for young kids.">
+    <meta property="twitter:url" content="https://madladstudios.com/mad-car-game.html">
+    <meta property="twitter:title" content="Mad Car Game - Jump Over Obstacles | Mad Lad Studios">
+    <meta property="twitter:description" content="Jump over obstacles and see how far you can go in Mad Car Game! An exciting car adventure game for kids with simple controls and fun gameplay.">
 
     
     <!-- Additional SEO -->
-    <meta name="theme-color" content="#06B6D4">
-    <meta name="msapplication-TileColor" content="#06B6D4">
-    <meta name="application-name" content="Mad Car Wash Game">
+    <meta name="theme-color" content="#3B82F6">
+    <meta name="msapplication-TileColor" content="#3B82F6">
+    <meta name="application-name" content="Mad Car Game">
     
     <script defer data-domain="madladstudios.com" src="https://plausible.io/js/script.outbound-links.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -48,7 +48,7 @@
         }
 
         #gameCanvas {
-            border: 3px solid #06B6D4;
+            border: 3px solid #3B82F6;
             border-radius: 0.5rem;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
@@ -59,7 +59,7 @@
         }
 
         .key {
-            background: #06B6D4 !important;
+            background: #3B82F6 !important;
             color: white !important;
             padding: 0.25rem 0.5rem !important;
             border-radius: 0.25rem !important;
@@ -67,7 +67,7 @@
         }
 
         #startButton {
-            background: linear-gradient(to right, #06B6D4, #0891B2) !important;
+            background: linear-gradient(to right, #3B82F6, #06B6D4) !important;
             color: white !important;
             padding: 0.75rem 2rem !important;
             border-radius: 0.5rem !important;
@@ -79,7 +79,7 @@
 
         #startButton:hover {
             transform: scale(1.05) !important;
-            box-shadow: 0 5px 15px rgba(6, 182, 212, 0.4) !important;
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4) !important;
         }
 
         .score-display {
@@ -113,10 +113,10 @@
         <div class="text-center mb-8">
             <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 flex items-center justify-center gap-4">
                 <span class="text-6xl">🚗</span>
-                Mad Car Wash Game
-                <span class="text-6xl">🧽</span>
+                Mad Car Game
+                <span class="text-6xl">🚗</span>
             </h1>
-            <p class="text-xl text-white/90">Drive your car through the car wash and collect soap bubbles!</p>
+            <p class="text-xl text-white/90">Jump over obstacles and see how far you can go!</p>
         </div>
 
         <!-- Ad Space - Top -->
@@ -124,7 +124,7 @@
             <div class="rounded-lg p-4 text-center max-w-4xl mx-auto">
                 <!-- Google AdSense Ad Unit -->
                 <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
-                    data-ad-slot="YOUR-AD-SLOT-ID-5" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    data-ad-slot="YOUR-AD-SLOT-ID-3" data-ad-format="auto" data-full-width-responsive="true"></ins>
                 <script>
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
@@ -136,15 +136,16 @@
             <div class="game-container">
                 <canvas id="gameCanvas" width="800" height="400" class="mx-auto block"></canvas>
                 <div class="controls text-center mt-6">
-                    <p class="text-lg mb-2">Use <span class="key">↑↓ ARROW KEYS</span> to move your car!</p>
-                    <p class="text-gray-600 mb-4">Collect soap bubbles and avoid obstacles</p>
-                    <button id="startButton" class="mb-4">Start Car Wash</button>
-                    <p class="text-cyan-500 font-medium">🧽 Drive through the car wash and get squeaky clean!</p>
+                    <p class="text-lg mb-2">Press <span class="key">SPACE</span> to Jump!</p>
+                    <p class="text-gray-600 mb-4">You can also click on the game area to jump</p>
+                    <button id="startButton" class="mb-4">Start Game</button>
+                    <p class="text-red-500 font-medium">⚠️ Click "Start Game" first, then use SPACE to jump!</p>
                 </div>
                 <div class="score-display text-center mt-6">
                     <div class="flex justify-center gap-8">
-                        <p class="text-xl font-bold">Bubbles: <span id="score" class="text-cyan-600">0</span></p>
-                        <p class="text-xl font-bold">Best: <span id="highScore" class="text-green-600">0</span></p>
+                        <p class="text-xl font-bold">Score: <span id="score" class="text-blue-600">0</span></p>
+                        <p class="text-xl font-bold">High Score: <span id="highScore" class="text-green-600">0</span>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -155,24 +156,20 @@
             <h2 class="text-2xl font-bold mb-4 text-gray-800">How to Play</h2>
             <ul class="space-y-2 text-gray-700">
                 <li class="flex items-start">
-                    <span class="text-cyan-500 mr-2">•</span>
-                    Click "Start Car Wash" to begin your adventure
+                    <span class="text-blue-500 mr-2">•</span>
+                    Click "Start Game" to begin your adventure
                 </li>
                 <li class="flex items-start">
-                    <span class="text-cyan-500 mr-2">•</span>
-                    Use arrow keys to move your car up and down
+                    <span class="text-blue-500 mr-2">•</span>
+                    Press SPACE or click to make your car jump
                 </li>
                 <li class="flex items-start">
-                    <span class="text-cyan-500 mr-2">•</span>
-                    Collect soap bubbles to get points
+                    <span class="text-blue-500 mr-2">•</span>
+                    Avoid obstacles to keep going
                 </li>
                 <li class="flex items-start">
-                    <span class="text-cyan-500 mr-2">•</span>
-                    Avoid the spinning brushes and obstacles
-                </li>
-                <li class="flex items-start">
-                    <span class="text-cyan-500 mr-2">•</span>
-                    Perfect for toddlers - simple and fun!
+                    <span class="text-blue-500 mr-2">•</span>
+                    The game gets faster as you progress!
                 </li>
             </ul>
         </div>
@@ -182,7 +179,7 @@
             <div class="rounded-lg p-4 text-center max-w-4xl mx-auto">
                 <!-- Google AdSense Ad Unit -->
                 <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
-                    data-ad-slot="YOUR-AD-SLOT-ID-6" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    data-ad-slot="YOUR-AD-SLOT-ID-4" data-ad-format="auto" data-full-width-responsive="true"></ins>
                 <script>
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
@@ -193,14 +190,14 @@
         <div class="mt-12 text-center">
             <h3 class="text-2xl font-bold text-white mb-6">Try Our Other Games!</h3>
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="mad-train-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-purple-600 hover:bg-white transition">
-                    🚂 Mad Train Game
+                <a href="firetruck-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-red-600 hover:bg-white transition">
+                    🔥 Fire Fighter Game
                 </a>
-                <a href="mad-firetruck-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-red-600 hover:bg-white transition">
-                    🚒 Mad Fire Truck Game
+                <a href="red-car-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-red-500 hover:bg-white transition">
+                    🚗 Red Car Game
                 </a>
-                <a href="mad-racetrack-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-green-600 hover:bg-white transition">
-                    🏁 Mad Racetrack Game
+                <a href="train-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-purple-600 hover:bg-white transition">
+                    🚂 Train Game
                 </a>
                 <a href="index.html#games" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-purple-600 hover:bg-white transition border-2 border-purple-600">
                     🎮 See All Games
@@ -218,8 +215,8 @@
         </div>
     </footer>
 
-    <!-- Load the game files -->
-    <script src="mad-carwash-game/game.js"></script>
+    <!-- Load the original game files -->
+    <script src="jumping-car-game/game.js"></script>
 </body>
 
 </html>

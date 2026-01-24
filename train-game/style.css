@@ -1,0 +1,294 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+.game-container {
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    max-width: 100%;
+    width: 100%;
+}
+
+.game-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.game-header h1 {
+    color: #4a5568;
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.game-stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.stat {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    min-width: 150px;
+    text-align: center;
+}
+
+.stat-label {
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.stat span:last-child {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.train-display {
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 2px solid #667eea;
+}
+
+.train-display h3 {
+    color: #4a5568;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+#train-display-container {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    min-height: 40px;
+    align-items: center;
+}
+
+.locomotive-icon {
+    font-size: 2em;
+}
+
+.train-car-icon {
+    font-size: 1.8em;
+    animation: addCar 0.3s ease-in-out;
+}
+
+@keyframes addCar {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.game-area {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#gameCanvas {
+    border: 3px solid #4a5568;
+    border-radius: 10px;
+    background: #87CEEB;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.game-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.instructions {
+    flex: 1;
+    background: rgba(102, 126, 234, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 5px solid #667eea;
+}
+
+.instructions h3 {
+    color: #4a5568;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.instructions p {
+    margin: 5px 0;
+    color: #4a5568;
+    font-size: 0.9em;
+}
+
+.control-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 120px;
+}
+
+.game-btn {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.game-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.game-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.game-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+#pauseBtn {
+    background: linear-gradient(45deg, #f093fb, #f5576c);
+}
+
+#resetBtn {
+    background: linear-gradient(45deg, #fa709a, #fee140);
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+    width: 90%;
+}
+
+.modal-content h2 {
+    color: #4a5568;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.modal-content.victory {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    border: 5px solid #667eea;
+}
+
+.modal-content.victory h2 {
+    color: #764ba2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    animation: victoryPulse 1s ease-in-out infinite;
+}
+
+.modal-content.victory p {
+    color: #4a5568;
+    font-weight: bold;
+}
+
+@keyframes victoryPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.modal-content p {
+    margin: 10px 0;
+    font-size: 1.1em;
+    color: #4a5568;
+}
+
+.modal-content span {
+    font-weight: bold;
+    color: #667eea;
+}
+
+#playAgainBtn {
+    margin-top: 20px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .game-container {
+        padding: 15px;
+    }
+    
+    .game-header h1 {
+        font-size: 2em;
+    }
+    
+    #gameCanvas {
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+    }
+    
+    .game-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .instructions {
+        order: 2;
+        margin-top: 15px;
+    }
+    
+    .control-buttons {
+        order: 1;
+        flex-direction: row;
+        justify-content: center;
+        min-width: auto;
+    }
+}

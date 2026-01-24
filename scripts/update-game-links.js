@@ -6,46 +6,67 @@ const path = require('path');
 // Define all games with their metadata
 const games = [
     {
-        filename: 'mad-car-game.html',
-        title: 'Mad Car Game',
-        emoji: '🚗',
-        color: 'text-blue-600',
+        filename: 'carwash-game.html',
+        title: 'Car Wash Game',
+        emoji: '🧽',
+        color: 'text-cyan-600',
         order: 1
     },
     {
-        filename: 'mad-crab-game.html',
-        title: 'Mad Crab Game',
+        filename: 'crab-game.html',
+        title: 'Crab Game',
         emoji: '🦀',
         color: 'text-orange-600',
         order: 2
     },
     {
-        filename: 'mad-racetrack-game.html',
-        title: 'Mad Racetrack Game',
+        filename: 'racetrack-game.html',
+        title: 'Racetrack Game',
         emoji: '🏁',
         color: 'text-green-600',
         order: 3
     },
     {
-        filename: 'mad-firetruck-game.html',
-        title: 'Mad Fire Truck Game',
+        filename: 'drive-firetruck-game.html',
+        title: 'Drive Fire Truck Game',
         emoji: '🚒',
         color: 'text-red-600',
         order: 4
     },
     {
-        filename: 'mad-carwash-game.html',
-        title: 'Mad Car Wash Game',
-        emoji: '🧽',
-        color: 'text-cyan-600',
+        filename: 'jumping-car-game.html',
+        title: 'Jumping Car Game',
+        emoji: '🚙',
+        color: 'text-blue-600',
         order: 5
     },
     {
-        filename: 'mad-train-game.html',
-        title: 'Mad Train Game',
+        filename: 'police-chase-game.html',
+        title: 'Police Chase Game',
+        emoji: '🚓',
+        color: 'text-blue-800',
+        order: 6
+    },
+    {
+        filename: 'train-game.html',
+        title: 'Train Game',
         emoji: '🚂',
         color: 'text-purple-600',
-        order: 6
+        order: 7
+    },
+    {
+        filename: 'red-car-game.html',
+        title: 'Red Car Game',
+        emoji: '🚗',
+        color: 'text-red-500',
+        order: 8
+    },
+    {
+        filename: 'firetruck-game.html',
+        title: 'Fire Fighter Game',
+        emoji: '🔥',
+        color: 'text-red-600',
+        order: 9
     }
 ];
 

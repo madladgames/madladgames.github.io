@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Collector Game - Mad Lad Studios</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Drive your train and collect train cars in Train Collector Game! Switch between tracks and build the longest train possible in this fun adventure for kids.">
+    <meta name="keywords" content="train game, train collector, kids train game, railroad game, children games, fun games for kids, train car game">
+    <meta name="author" content="Mad Lad Studios">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://madladstudios.com/train-game.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://madladstudios.com/train-game.html">
+    <meta property="og:title" content="Train Collector Game - Build Your Train | Mad Lad Studios">
+    <meta property="og:description" content="Drive your train and collect train cars in Train Collector Game! Switch between tracks and build the longest train possible in this fun adventure for kids.">
+    <meta property="og:site_name" content="Mad Lad Studios">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://madladstudios.com/train-game.html">
+    <meta property="twitter:title" content="Train Collector Game - Build Your Train | Mad Lad Studios">
+    <meta property="twitter:description" content="Drive your train and collect train cars in Train Collector Game! Switch between tracks and build the longest train possible in this fun adventure for kids.">
+
+    
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#8B5CF6">
+    <meta name="msapplication-TileColor" content="#8B5CF6">
+    <meta name="application-name" content="Train Collector Game">
+    
+    <script defer data-domain="madladstudios.com" src="https://plausible.io/js/script.outbound-links.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR-PUBLISHER-ID"
+        crossorigin="anonymous"></script>
+
+    <!-- Load game styles -->
+    <link rel="stylesheet" href="train-game/style.css">
+</head>
+
+<body class="bg-gradient-to-br from-purple-600 via-pink-500 to-red-500 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white/90 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html"
+                    class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+                    Mad Lad Studios
+                </a>
+                <div class="flex space-x-6">
+                    <a href="index.html#games" class="text-gray-700 hover:text-purple-600 font-medium transition">All
+                        Games</a>
+                    <a href="index.html#about"
+                        class="text-gray-700 hover:text-purple-600 font-medium transition">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Game Header -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 flex items-center justify-center gap-4">
+                <span class="text-6xl">🚂</span>
+                Train Collector Game
+                <span class="text-6xl">🚃</span>
+            </h1>
+            <p class="text-xl text-white/90">Collect train cars and build the longest train!</p>
+        </div>
+
+        <!-- Ad Space - Top -->
+        <div class="mb-8">
+            <div class="rounded-lg p-4 text-center max-w-4xl mx-auto">
+                <!-- Google AdSense Ad Unit -->
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
+                    data-ad-slot="YOUR-AD-SLOT-ID-9" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+
+        <!-- Game Container -->
+        <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-8 max-w-5xl mx-auto">
+            <div class="game-container">
+                <div class="game-header">
+                    <h1>🚂 Train Collector</h1>
+                    <div class="game-stats">
+                        <div class="stat">
+                            <span class="stat-label">Cars Collected:</span>
+                            <span id="cars-collected">0</span> / <span id="total-cars">10</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Time:</span>
+                            <span id="timer">0</span>s
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="train-display">
+                    <h3>Your Train:</h3>
+                    <div id="train-display-container">
+                        <div class="locomotive-icon">🚂</div>
+                    </div>
+                </div>
+                
+                <div class="game-area">
+                    <canvas id="gameCanvas" width="800" height="400"></canvas>
+                </div>
+                
+                <div class="game-controls">
+                    <div class="instructions">
+                        <h3>How to Play:</h3>
+                        <p>🎮 Use ↑ UP and ↓ DOWN arrow keys to switch tracks</p>
+                        <p>🚃 Collect all the train cars to complete your train</p>
+                        <p>⚠️ Avoid obstacles or you'll lose!</p>
+                    </div>
+                    <div class="control-buttons">
+                        <button id="startBtn" class="game-btn">Start Game</button>
+                        <button id="pauseBtn" class="game-btn" disabled>Pause</button>
+                        <button id="resetBtn" class="game-btn">Reset</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="gameOverModal" class="modal hidden">
+                <div class="modal-content">
+                    <h2>Game Over!</h2>
+                    <p>Cars Collected: <span id="finalCarsCollected">0</span></p>
+                    <p>Time: <span id="finalTime">0</span>s</p>
+                    <button id="playAgainBtn" class="game-btn">Play Again</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="mt-8 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-6 max-w-2xl mx-auto">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">How to Play</h2>
+            <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start">
+                    <span class="text-purple-500 mr-2">•</span>
+                    Click "Start Game" to begin your train adventure
+                </li>
+                <li class="flex items-start">
+                    <span class="text-purple-500 mr-2">•</span>
+                    Use UP and DOWN arrow keys to switch between tracks
+                </li>
+                <li class="flex items-start">
+                    <span class="text-purple-500 mr-2">•</span>
+                    Collect train cars to build your train
+                </li>
+                <li class="flex items-start">
+                    <span class="text-purple-500 mr-2">•</span>
+                    Avoid obstacles on the tracks
+                </li>
+                <li class="flex items-start">
+                    <span class="text-purple-500 mr-2">•</span>
+                    Collect all cars to win the game!
+                </li>
+            </ul>
+        </div>
+
+        <!-- Ad Space - Bottom -->
+        <div class="mt-8">
+            <div class="rounded-lg p-4 text-center max-w-4xl mx-auto">
+                <!-- Google AdSense Ad Unit -->
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
+                    data-ad-slot="YOUR-AD-SLOT-ID-10" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+
+        <!-- Other Games -->
+        <div class="mt-12 text-center">
+            <h3 class="text-2xl font-bold text-white mb-6">Try Our Other Games!</h3>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="firetruck-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-red-600 hover:bg-white transition">
+                    🔥 Fire Fighter Game
+                </a>
+                <a href="red-car-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-red-500 hover:bg-white transition">
+                    🚗 Red Car Game
+                </a>
+                <a href="police-chase-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-blue-800 hover:bg-white transition">
+                    🚓 Police Chase Game
+                </a>
+                <a href="index.html#games" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-purple-600 hover:bg-white transition border-2 border-purple-600">
+                    🎮 See All Games
+                </a>
+            </div>
+        </div>
+        <!-- End of Other Games -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-2">© 2025 Mad Lad Studios. All rights reserved.</p>
+            <p class="text-gray-400">Games for kids, made by a kid (and AI).</p>
+        </div>
+    </footer>
+
+    <!-- Load the game script -->
+    <script src="train-game/script.js"></script>
+</body>
+
+</html>

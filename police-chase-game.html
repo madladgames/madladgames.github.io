@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Police Chase Game - Mad Lad Studios</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Chase down criminals as a police officer in Police Chase Game! Use arrow keys to catch escaping criminals in this exciting pursuit adventure for kids.">
+    <meta name="keywords" content="police game, chase game, cop game, kids police game, pursuit game, children games, fun games for kids">
+    <meta name="author" content="Mad Lad Studios">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://madladstudios.com/police-chase-game.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://madladstudios.com/police-chase-game.html">
+    <meta property="og:title" content="Police Chase Game - Catch Criminals | Mad Lad Studios">
+    <meta property="og:description" content="Chase down criminals as a police officer in Police Chase Game! Use arrow keys to catch escaping criminals in this exciting pursuit adventure for kids.">
+    <meta property="og:site_name" content="Mad Lad Studios">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://madladstudios.com/police-chase-game.html">
+    <meta property="twitter:title" content="Police Chase Game - Catch Criminals | Mad Lad Studios">
+    <meta property="twitter:description" content="Chase down criminals as a police officer in Police Chase Game! Use arrow keys to catch escaping criminals in this exciting pursuit adventure for kids.">
+
+    
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#1e40af">
+    <meta name="msapplication-TileColor" content="#1e40af">
+    <meta name="application-name" content="Police Chase Game">
+    
+    <script defer data-domain="madladstudios.com" src="https://plausible.io/js/script.outbound-links.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR-PUBLISHER-ID"
+        crossorigin="anonymous"></script>
+
+    <style>
+        .game-info-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .game-info-stats div {
+            background: linear-gradient(45deg, #1e40af, #3b82f6);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            min-width: 150px;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #gameCanvas {
+            border: 4px solid #1e40af;
+            background: #2c3e50;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            display: block;
+            margin: 0 auto;
+        }
+
+        .game-over-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .game-over-modal.active {
+            display: flex;
+        }
+
+        .game-over-content {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-width: 400px;
+        }
+
+        .game-over-content h2 {
+            color: #dc2626;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .game-over-content p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            color: #1e40af;
+            font-weight: bold;
+        }
+
+        .game-over-content button {
+            background: linear-gradient(45deg, #10b981, #059669);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .game-over-content button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-purple-600 via-pink-500 to-red-500 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white/90 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html"
+                    class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+                    Mad Lad Studios
+                </a>
+                <div class="flex space-x-6">
+                    <a href="index.html#games" class="text-gray-700 hover:text-purple-600 font-medium transition">All
+                        Games</a>
+                    <a href="index.html#about"
+                        class="text-gray-700 hover:text-purple-600 font-medium transition">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Game Header -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 flex items-center justify-center gap-4">
+                <span class="text-6xl">🚓</span>
+                Police Chase Game
+                <span class="text-6xl">🚓</span>
+            </h1>
+            <p class="text-xl text-white/90">Catch the criminals before they escape!</p>
+        </div>
+
+        <!-- Ad Space - Top -->
+        <div class="mb-8">
+            <div class="rounded-lg p-4 text-center max-w-4xl mx-auto">
+                <!-- Google AdSense Ad Unit -->
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
+                    data-ad-slot="YOUR-AD-SLOT-ID-15" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+
+        <!-- Game Container -->
+        <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-8 max-w-5xl mx-auto">
+            <div class="game-info-stats">
+                <div>Score: <span id="score">0</span></div>
+                <div>Criminals Caught: <span id="caught">0</span></div>
+                <div>Escaped: <span id="escaped">0</span></div>
+            </div>
+            <canvas id="gameCanvas" width="800" height="600"></canvas>
+            <div class="text-center mt-6">
+                <p class="text-lg text-gray-700 font-medium">Use Arrow Keys to control the police car • Catch the criminals before they escape!</p>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="mt-8 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-6 max-w-2xl mx-auto">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">How to Play</h2>
+            <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start">
+                    <span class="text-blue-800 mr-2">•</span>
+                    Use Arrow Keys or WASD to move the police car
+                </li>
+                <li class="flex items-start">
+                    <span class="text-blue-800 mr-2">•</span>
+                    Chase down the red criminal cars
+                </li>
+                <li class="flex items-start">
+                    <span class="text-blue-800 mr-2">•</span>
+                    Catch criminals by driving into them
+                </li>
+                <li class="flex items-start">
+                    <span class="text-blue-800 mr-2">•</span>
+                    Don't let too many criminals escape!
+                </li>
+                <li class="flex items-start">
+                    <span class="text-blue-800 mr-2">•</span>
+                    Game over if 10 criminals escape
+                </li>
+            </ul>
+        </div>
+
+        <!-- Ad Space - Bottom -->
+        <div class="mt-8">
+            <div class="rounded-lg p-4 text-center max-w-4xl mx-auto">
+                <!-- Google AdSense Ad Unit -->
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
+                    data-ad-slot="YOUR-AD-SLOT-ID-16" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+
+        <!-- Other Games -->
+        <div class="mt-12 text-center">
+            <h3 class="text-2xl font-bold text-white mb-6">Try Our Other Games!</h3>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="firetruck-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-red-600 hover:bg-white transition">
+                    🔥 Fire Fighter Game
+                </a>
+                <a href="red-car-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-red-500 hover:bg-white transition">
+                    🚗 Red Car Game
+                </a>
+                <a href="train-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-purple-600 hover:bg-white transition">
+                    🚂 Train Game
+                </a>
+                <a href="index.html#games" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-purple-600 hover:bg-white transition border-2 border-purple-600">
+                    🎮 See All Games
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-2">© 2025 Mad Lad Studios. All rights reserved.</p>
+            <p class="text-gray-400">Games for kids, made by a kid (and AI).</p>
+        </div>
+    </footer>
+
+    <!-- Game Over Modal -->
+    <div class="game-over-modal" id="gameOverModal">
+        <div class="game-over-content">
+            <h2>Game Over!</h2>
+            <p>Final Score: <span id="finalScore">0</span></p>
+            <button onclick="location.reload()">Play Again</button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Game state
+        let score = 0;
+        let criminalsCaught = 0;
+        let criminalsEscaped = 0;
+        let gameActive = true;
+        let gameSpeed = 1;
+
+        // Police car
+        const police = {
+            x: canvas.width / 2 - 20,
+            y: canvas.height - 80,
+            width: 40,
+            height: 60,
+            speed: 5,
+            dx: 0,
+            dy: 0
+        };
+
+        // Criminals array
+        let criminals = [];
+        let criminalSpawnTimer = 0;
+        const criminalSpawnRate = 100; // frames between spawns
+
+        // Keyboard controls
+        const keys = {};
+        document.addEventListener('keydown', (e) => {
+            keys[e.key] = true;
+        });
+        document.addEventListener('keyup', (e) => {
+            keys[e.key] = false;
+        });
+
+        // Draw police car (black)
+        function drawPolice() {
+            // Car body
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(police.x, police.y, police.width, police.height);
+            
+            // Police lights
+            const time = Date.now();
+            ctx.fillStyle = time % 1000 < 500 ? '#ff0000' : '#0000ff';
+            ctx.fillRect(police.x + 5, police.y + 5, 12, 8);
+            ctx.fillStyle = time % 1000 < 500 ? '#0000ff' : '#ff0000';
+            ctx.fillRect(police.x + 23, police.y + 5, 12, 8);
+            
+            // Windows
+            ctx.fillStyle = '#87ceeb';
+            ctx.fillRect(police.x + 5, police.y + 15, 30, 20);
+            
+            // Wheels
+            ctx.fillStyle = '#333333';
+            ctx.fillRect(police.x - 3, police.y + 10, 8, 12);
+            ctx.fillRect(police.x + 35, police.y + 10, 8, 12);
+            ctx.fillRect(police.x - 3, police.y + 38, 8, 12);
+            ctx.fillRect(police.x + 35, police.y + 38, 8, 12);
+            
+            // Badge/Star
+            ctx.fillStyle = '#ffd700';
+            ctx.beginPath();
+            ctx.arc(police.x + police.width / 2, police.y + 40, 6, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // Draw criminal
+        function drawCriminal(criminal) {
+            // Car body (red for criminals)
+            ctx.fillStyle = criminal.color;
+            ctx.fillRect(criminal.x, criminal.y, criminal.width, criminal.height);
+            
+            // Windows
+            ctx.fillStyle = '#222222';
+            ctx.fillRect(criminal.x + 5, criminal.y + 15, 30, 20);
+            
+            // Wheels
+            ctx.fillStyle = '#444444';
+            ctx.fillRect(criminal.x - 3, criminal.y + 10, 8, 12);
+            ctx.fillRect(criminal.x + 35, criminal.y + 10, 8, 12);
+            ctx.fillRect(criminal.x - 3, criminal.y + 38, 8, 12);
+            ctx.fillRect(criminal.x + 35, criminal.y + 38, 8, 12);
+            
+            // Warning sign
+            ctx.fillStyle = '#ffff00';
+            ctx.font = 'bold 20px Arial';
+            ctx.fillText('!', criminal.x + 15, criminal.y + 10);
+        }
+
+        // Create criminal
+        function createCriminal() {
+            const colors = ['#ff0000', '#ff4500', '#dc143c', '#8b0000'];
+            return {
+                x: Math.random() * (canvas.width - 40),
+                y: -60,
+                width: 40,
+                height: 60,
+                speed: 2 + Math.random() * 2 * gameSpeed,
+                color: colors[Math.floor(Math.random() * colors.length)]
+            };
+        }
+
+        // Update police position
+        function updatePolice() {
+            police.dx = 0;
+            police.dy = 0;
+
+            if (keys['ArrowLeft'] || keys['a']) police.dx = -police.speed;
+            if (keys['ArrowRight'] || keys['d']) police.dx = police.speed;
+            if (keys['ArrowUp'] || keys['w']) police.dy = -police.speed;
+            if (keys['ArrowDown'] || keys['s']) police.dy = police.speed;
+
+            police.x += police.dx;
+            police.y += police.dy;
+
+            // Boundary checking
+            if (police.x < 0) police.x = 0;
+            if (police.x + police.width > canvas.width) police.x = canvas.width - police.width;
+            if (police.y < 0) police.y = 0;
+            if (police.y + police.height > canvas.height) police.y = canvas.height - police.height;
+        }
+
+        // Update criminals
+        function updateCriminals() {
+            // Spawn new criminals
+            criminalSpawnTimer++;
+            if (criminalSpawnTimer > criminalSpawnRate) {
+                criminals.push(createCriminal());
+                criminalSpawnTimer = 0;
+            }
+
+            // Move criminals
+            for (let i = criminals.length - 1; i >= 0; i--) {
+                criminals[i].y += criminals[i].speed;
+
+                // Check if criminal escaped
+                if (criminals[i].y > canvas.height) {
+                    criminals.splice(i, 1);
+                    criminalsEscaped++;
+                    
+                    // Game over if too many escaped
+                    if (criminalsEscaped >= 10) {
+                        endGame();
+                    }
+                    continue;
+                }
+
+                // Check collision with police
+                if (checkCollision(police, criminals[i])) {
+                    criminals.splice(i, 1);
+                    criminalsCaught++;
+                    score += 100;
+                    
+                    // Increase difficulty
+                    if (criminalsCaught % 5 === 0) {
+                        gameSpeed += 0.1;
+                    }
+                }
+            }
+        }
+
+        // Collision detection
+        function checkCollision(rect1, rect2) {
+            return rect1.x < rect2.x + rect2.width &&
+                   rect1.x + rect1.width > rect2.x &&
+                   rect1.y < rect2.y + rect2.height &&
+                   rect1.y + rect1.height > rect2.y;
+        }
+
+        // Update score display
+        function updateDisplay() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('caught').textContent = criminalsCaught;
+            document.getElementById('escaped').textContent = criminalsEscaped;
+        }
+
+        // End game
+        function endGame() {
+            gameActive = false;
+            document.getElementById('finalScore').textContent = score;
+            document.getElementById('gameOverModal').classList.add('active');
+        }
+
+        // Draw road
+        function drawRoad() {
+            const time = Date.now() * 0.05;
+            ctx.strokeStyle = '#ffff00';
+            ctx.lineWidth = 4;
+            ctx.setLineDash([20, 20]);
+            
+            // Center line
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2, (time % 40) - 40);
+            ctx.lineTo(canvas.width / 2, canvas.height);
+            ctx.stroke();
+            
+            ctx.setLineDash([]);
+        }
+
+        // Game loop
+        function gameLoop() {
+            if (!gameActive) return;
+
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw road
+            drawRoad();
+
+            // Update
+            updatePolice();
+            updateCriminals();
+
+            // Draw
+            drawPolice();
+            criminals.forEach(drawCriminal);
+
+            // Update display
+            updateDisplay();
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Start game
+        gameLoop();
+    </script>
+</body>
+
+</html>
