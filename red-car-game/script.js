@@ -168,7 +168,7 @@ class RedCarGame {
     }
     
     updateCarMovement() {
-        const moveSpeed = 2;
+        const moveSpeed = 0.8; // Reduced speed for better control
         
         if (this.keys.left && this.gameState.carPosition > 5) {
             this.gameState.carPosition -= moveSpeed;
@@ -176,11 +176,10 @@ class RedCarGame {
         if (this.keys.right && this.gameState.carPosition < 95) {
             this.gameState.carPosition += moveSpeed;
         }
-        if (this.keys.up && this.gameState.speed < 100) {
-            this.gameState.speed += 0.5;
-        }
-        if (this.keys.down && this.gameState.speed > 10) {
-            this.gameState.speed -= 1;
+        
+        // Gradually increase speed over time
+        if (this.gameState.speed < 80) {
+            this.gameState.speed += 0.02;
         }
         
         this.updateCarPosition();
@@ -194,7 +193,11 @@ class RedCarGame {
         if (!this.gameState.isRunning || this.gameState.isPaused) return;
         
         const obstacle = document.createElement('div');
-        obstacle.className = 'obstacle';
+        
+        // Random obstacle types
+        const obstacleTypes = ['obstacle-car-blue', 'obstacle-car-green', 'obstacle-car-yellow', 'obstacle-truck', 'obstacle-cone'];
+        const randomType = obstacleTypes[Math.floor(Math.random() * obstacleTypes.length)];
+        obstacle.className = `obstacle ${randomType}`;
         
         const randomPosition = Math.random() * 85 + 5; // 5% to 90% from left
         obstacle.style.left = randomPosition + '%';
@@ -229,22 +232,32 @@ class RedCarGame {
     
     checkCollisions() {
         const carRect = {
-            x: this.gameState.carPosition,
-            y: 85, // Car is at bottom 15% of game area
-            width: 7, // Approximate percentage width
-            height: 16 // Approximate percentage height
+            x: this.gameState.carPosition + 0.5, // Add small padding
+            y: 86, // Car is at bottom of game area
+            width: 5.5, // Tighter width for more accurate collision
+            height: 13 // Tighter height for more accurate collision
         };
         
         this.gameState.obstacles.forEach(obstacle => {
             const obstacleRect = {
-                x: obstacle.x,
+                x: obstacle.x + 0.5, // Add small padding
                 y: (obstacle.y / 500) * 100, // Convert to percentage
-                width: 6, // Approximate percentage width
-                height: 12 // Approximate percentage height
+                width: 4.5, // Tighter width for more accurate collision
+                height: 10 // Tighter height for more accurate collision
             };
             
             if (this.isColliding(carRect, obstacleRect)) {
-                this.endGame();
+                // Add collision visual effect
+                this.playerCar.classList.add('collision-effect');
+                obstacle.element.classList.add('collision-effect');
+                
+                // End game after brief delay to show effect
+                setTimeout(() => {
+                    this.endGame();
+                }, 200);
+                
+                // Prevent further collision checks
+                this.gameState.isRunning = false;
             }
         });
     }
@@ -264,18 +277,32 @@ class RedCarGame {
         this.scoreElement.textContent = this.gameState.score;
         this.speedElement.textContent = Math.floor(this.gameState.speed);
         
-        // Update road animation speed based on car speed
+        // Only update animations if game is running
+        if (this.gameState.isRunning && !this.gameState.isPaused) {
+            // Update road animation speed based on car speed
+            const roadLines = document.querySelectorAll('.road-line');
+            const animationDuration = Math.max(0.2, 1 - (this.gameState.speed / 100));
+            roadLines.forEach(line => {
+                line.style.animationDuration = animationDuration + 's';
+            });
+            
+            // Update wheel animation speed
+            const wheels = document.querySelectorAll('.car-wheel');
+            const wheelDuration = Math.max(0.05, 0.2 - (this.gameState.speed / 500));
+            wheels.forEach(wheel => {
+                wheel.style.animationDuration = wheelDuration + 's';
+            });
+        }
+        
+        // Control animation play state separately
         const roadLines = document.querySelectorAll('.road-line');
-        const animationDuration = Math.max(0.2, 1 - (this.gameState.speed / 100));
         roadLines.forEach(line => {
-            line.style.animationDuration = animationDuration + 's';
+            line.style.animationPlayState = (this.gameState.isRunning && !this.gameState.isPaused) ? 'running' : 'paused';
         });
         
-        // Update wheel animation speed
         const wheels = document.querySelectorAll('.car-wheel');
-        const wheelDuration = Math.max(0.05, 0.2 - (this.gameState.speed / 500));
         wheels.forEach(wheel => {
-            wheel.style.animationDuration = wheelDuration + 's';
+            wheel.style.animationPlayState = (this.gameState.isRunning && !this.gameState.isPaused) ? 'running' : 'paused';
         });
     }
     

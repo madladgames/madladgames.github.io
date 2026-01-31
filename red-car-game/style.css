@@ -42,6 +42,7 @@ body {
     gap: 30px;
     font-size: 1.2em;
     font-weight: bold;
+    color: #333;
 }
 
 .game-area {
@@ -95,20 +96,31 @@ body {
 .car-body {
     width: 100%;
     height: 100%;
-    background: linear-gradient(180deg, #ff0000, #cc0000);
-    border-radius: 15px 15px 5px 5px;
+    background: #ff0000;
+    border-radius: 8px;
     position: relative;
     box-shadow: 0 0 10px rgba(255,0,0,0.5);
+    border: 2px solid #cc0000;
 }
 
 .car-window {
     position: absolute;
-    top: 10px;
-    left: 5px;
-    width: 30px;
-    height: 25px;
-    background: linear-gradient(180deg, #87ceeb, #4682b4);
-    border-radius: 8px 8px 0 0;
+    top: 15px;
+    left: 8px;
+    width: 24px;
+    height: 50px;
+    background: rgba(50, 50, 150, 0.6);
+    border-radius: 3px;
+}
+
+.car-window::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #ff0000;
 }
 
 .car-wheel {
@@ -150,27 +162,122 @@ body {
     position: absolute;
     width: 35px;
     height: 60px;
-    background: linear-gradient(180deg, #8B4513, #654321);
-    border-radius: 10px;
     top: -60px;
     animation: obstacleMove 3s linear infinite;
-    box-shadow: 0 0 8px rgba(139,69,19,0.7);
 }
 
-.obstacle:before {
+/* Blue car obstacle */
+.obstacle-car-blue {
+    background: #1e40af;
+    border-radius: 8px;
+    border: 2px solid #1e3a8a;
+    box-shadow: 0 0 10px rgba(30, 64, 175, 0.7);
+}
+
+.obstacle-car-blue::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 6px;
+    width: 21px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+/* Green car obstacle */
+.obstacle-car-green {
+    background: #059669;
+    border-radius: 8px;
+    border: 2px solid #047857;
+    box-shadow: 0 0 10px rgba(5, 150, 105, 0.7);
+}
+
+.obstacle-car-green::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 6px;
+    width: 21px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+/* Yellow car obstacle */
+.obstacle-car-yellow {
+    background: #eab308;
+    border-radius: 8px;
+    border: 2px solid #ca8a04;
+    box-shadow: 0 0 10px rgba(234, 179, 8, 0.7);
+}
+
+.obstacle-car-yellow::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 6px;
+    width: 21px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+/* Truck obstacle */
+.obstacle-truck {
+    width: 40px;
+    height: 70px;
+    background: #374151;
+    border-radius: 6px;
+    border: 2px solid #1f2937;
+    box-shadow: 0 0 10px rgba(55, 65, 81, 0.7);
+}
+
+.obstacle-truck::before {
     content: '';
     position: absolute;
     top: 5px;
     left: 5px;
-    width: 25px;
+    width: 28px;
     height: 20px;
-    background: linear-gradient(180deg, #87ceeb, #4682b4);
-    border-radius: 5px;
+    background: #4b5563;
+    border-radius: 3px;
+}
+
+.obstacle-truck::after {
+    content: '';
+    position: absolute;
+    top: 30px;
+    left: 5px;
+    width: 28px;
+    height: 35px;
+    background: #6b7280;
+    border-radius: 3px;
+}
+
+/* Cone obstacle */
+.obstacle-cone {
+    width: 25px;
+    height: 40px;
+    background: linear-gradient(180deg, #ff6b00 0%, #ff6b00 70%, #333 70%, #333 100%);
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    border-radius: 0;
+    box-shadow: 0 0 8px rgba(255, 107, 0, 0.7);
 }
 
 @keyframes obstacleMove {
     from { transform: translateY(0); }
     to { transform: translateY(560px); }
+}
+
+/* Collision flash effect */
+@keyframes collisionFlash {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.1); filter: brightness(2); }
+}
+
+.collision-effect {
+    animation: collisionFlash 0.2s ease-out;
 }
 
 .game-controls {
