@@ -1,0 +1,218 @@
+.game-container {
+    width: 100%;
+    max-width: 100%;
+}
+
+.number-display {
+    font-family: 'Courier New', monospace;
+    font-size: 5em;
+    text-align: center;
+    padding: 40px;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+    color: white;
+    border-radius: 15px;
+    font-weight: bold;
+    min-height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.feedback-display {
+    font-size: 3em;
+    text-align: center;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.game-area {
+    position: relative;
+    background: linear-gradient(180deg, #87CEEB 0%, #B0E0E6 100%);
+    border: 4px solid #333;
+    border-radius: 10px;
+    height: 350px;
+    overflow: hidden;
+}
+
+.rally-car {
+    position: absolute;
+    left: 15%;
+    bottom: 180px;
+    width: 60px;
+    height: 90px;
+    z-index: 10;
+    transition: all 0.6s ease-out;
+}
+
+.car-body-rally {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: linear-gradient(180deg, #ff6b00 0%, #ff6b00 25%, #d85600 25%, #d85600 75%, #ff6b00 75%, #ff6b00 100%);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    border: 3px solid #aa4500;
+}
+
+.car-roof {
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    width: 32px;
+    height: 25px;
+    background: #ff8c00;
+    border-radius: 6px 6px 0 0;
+    border: 2px solid #aa4500;
+}
+
+.car-window-rally {
+    position: absolute;
+    top: 12px;
+    left: 15px;
+    width: 26px;
+    height: 15px;
+    background: rgba(50, 100, 150, 0.7);
+    border-radius: 4px 4px 0 0;
+}
+
+.car-spoiler {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+    height: 8px;
+    background: #333;
+    border-radius: 2px;
+}
+
+.ramp {
+    position: absolute;
+    bottom: 0;
+    left: 35%;
+    width: 200px;
+    height: 180px;
+    background: linear-gradient(135deg, #8B4513 0%, #654321 100%);
+    clip-path: polygon(0 100%, 100% 0, 100% 100%);
+    border: 3px solid #3e2723;
+}
+
+.gap {
+    position: absolute;
+    bottom: 0;
+    left: calc(35% + 200px);
+    width: 120px;
+    height: 100%;
+    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.landing-platform {
+    position: absolute;
+    bottom: 0;
+    left: calc(35% + 320px);
+    width: 200px;
+    height: 120px;
+    background: linear-gradient(135deg, #8B4513 0%, #654321 100%);
+    border: 3px solid #3e2723;
+    border-radius: 0 10px 0 0;
+}
+
+.score-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.score-item {
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    min-width: 140px;
+    text-align: center;
+}
+
+.score-label {
+    font-weight: bold;
+    font-size: 0.9em;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.score-value {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.start-btn {
+    background: linear-gradient(45deg, #10b981, #059669);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.3em;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    display: block;
+    margin: 30px auto 0;
+}
+
+.start-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.start-btn:active {
+    transform: translateY(0);
+}
+
+.start-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Jump animation */
+.jump-success {
+    animation: jumpSuccess 1s ease-in-out forwards;
+}
+
+@keyframes jumpSuccess {
+    0% { left: 15%; bottom: 180px; }
+    25% { left: 35%; bottom: 300px; }
+    50% { left: 55%; bottom: 350px; }
+    75% { left: 75%; bottom: 200px; }
+    100% { left: 85%; bottom: 120px; }
+}
+
+/* Crash animation */
+.crash {
+    animation: crashAnimation 0.8s ease-in-out forwards;
+}
+
+@keyframes crashAnimation {
+    0% { left: 15%; bottom: 180px; transform: rotate(0deg); }
+    50% { left: 45%; bottom: 100px; transform: rotate(45deg); }
+    100% { left: 50%; bottom: 0px; transform: rotate(90deg); opacity: 0.5; }
+}
+
+/* Shake animation for wrong answer */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+.shake {
+    animation: shake 0.3s ease-in-out;
+}

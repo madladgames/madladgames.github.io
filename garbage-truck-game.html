@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garbage Truck Game - Drive &amp; Collect Trash! | Mad Lad Studios</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Drive a garbage truck around the neighborhood and collect trash cans! Supports Bluetooth controllers, keyboard, and touch controls. A fun driving game for kids!">
+    <meta name="keywords" content="garbage truck game, kids truck game, toddler game, driving game, controller game, bluetooth controller, recycling game">
+    <meta name="author" content="Mad Lad Studios">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Garbage Truck Game - Drive & Collect Trash!">
+    <meta property="og:description" content="Drive a garbage truck around the neighborhood and collect trash cans! Supports Bluetooth controllers for a fun driving experience.">
+    <meta property="og:site_name" content="Mad Lad Studios">
+    
+    <meta name="theme-color" content="#4CAF50">
+    
+    <script defer data-domain="madladstudios.com" src="https://plausible.io/js/script.outbound-links.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        #gameCanvas {
+            border: 4px solid #4CAF50;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .controller-icon {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-green-900 via-green-800 to-green-700 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white/90 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html"
+                    class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-600">
+                    Mad Lad Studios
+                </a>
+                <div class="flex space-x-6">
+                    <a href="index.html#games" class="text-gray-700 hover:text-green-600 font-medium transition">All
+                        Games</a>
+                    <a href="index.html#about"
+                        class="text-gray-700 hover:text-green-600 font-medium transition">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Game Header -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 flex items-center justify-center gap-4">
+                <span class="text-6xl">🚛</span>
+                Garbage Truck Game
+                <span class="text-6xl">🗑️</span>
+            </h1>
+            <p class="text-xl text-white/90">Drive around the neighborhood and collect all the trash!</p>
+            <p id="controllerStatus" class="text-yellow-400 font-bold mt-2">🎮 No Controller - Use Keyboard</p>
+        </div>
+
+        <!-- Game Container -->
+        <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-6 max-w-4xl mx-auto">
+            <div class="flex justify-center">
+                <canvas id="gameCanvas"></canvas>
+            </div>
+        </div>
+
+        <!-- Controller Info -->
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <!-- Bluetooth Controller -->
+            <div class="bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-6">
+                <h2 class="text-2xl font-bold mb-4 text-gray-800 flex items-center gap-2">
+                    <span class="controller-icon text-3xl">🎮</span>
+                    Bluetooth Controller
+                </h2>
+                <ul class="space-y-2 text-gray-700">
+                    <li class="flex items-center gap-2">
+                        <span class="bg-green-500 text-white px-2 py-1 rounded text-sm font-bold">Left Stick</span>
+                        <span>Steer the truck</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="bg-blue-500 text-white px-2 py-1 rounded text-sm font-bold">RT/R2</span>
+                        <span>Accelerate (forward)</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="bg-red-500 text-white px-2 py-1 rounded text-sm font-bold">LT/L2</span>
+                        <span>Reverse</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="bg-yellow-500 text-white px-2 py-1 rounded text-sm font-bold">A/B</span>
+                        <span>Collect trash</span>
+                    </li>
+                </ul>
+                <p class="mt-4 text-sm text-gray-500">
+                    💡 Connect your controller via Bluetooth, then press any button to activate it!
+                </p>
+            </div>
+            
+            <!-- Keyboard Controls -->
+            <div class="bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-6">
+                <h2 class="text-2xl font-bold mb-4 text-gray-800 flex items-center gap-2">
+                    <span class="text-3xl">⌨️</span>
+                    Keyboard Controls
+                </h2>
+                <ul class="space-y-2 text-gray-700">
+                    <li class="flex items-center gap-2">
+                        <span class="bg-gray-700 text-white px-2 py-1 rounded text-sm font-bold">↑ / W</span>
+                        <span>Drive forward</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="bg-gray-700 text-white px-2 py-1 rounded text-sm font-bold">↓ / S</span>
+                        <span>Reverse</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="bg-gray-700 text-white px-2 py-1 rounded text-sm font-bold">← / A</span>
+                        <span>Turn left</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="bg-gray-700 text-white px-2 py-1 rounded text-sm font-bold">→ / D</span>
+                        <span>Turn right</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="bg-gray-700 text-white px-2 py-1 rounded text-sm font-bold">Space</span>
+                        <span>Collect trash</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- How to Play -->
+        <div class="mt-8 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-6 max-w-2xl mx-auto">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">🗑️ How to Play</h2>
+            <ul class="space-y-3 text-gray-700">
+                <li class="flex items-start">
+                    <span class="text-green-500 mr-2 text-xl">1️⃣</span>
+                    <span>Drive your garbage truck through the neighborhood streets</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-green-500 mr-2 text-xl">2️⃣</span>
+                    <span>Find the trash cans placed near houses</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-green-500 mr-2 text-xl">3️⃣</span>
+                    <span>Drive close to a trash can and press the action button to collect it</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-green-500 mr-2 text-xl">4️⃣</span>
+                    <span>Watch the truck's arm extend and grab the trash! ♻️</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-green-500 mr-2 text-xl">5️⃣</span>
+                    <span>Collect all 10 trash cans to complete your route! 🎉</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Other Games -->
+        <div class="mt-12 text-center">
+            <h3 class="text-2xl font-bold text-white mb-6">Try Our Other Games!</h3>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="delivery-truck-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-orange-600 hover:bg-white transition">
+                    🚚 Delivery Truck
+                </a>
+                <a href="drive-firetruck-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-red-600 hover:bg-white transition">
+                    🚒 Fire Truck Maze
+                </a>
+                <a href="carwash-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-blue-600 hover:bg-white transition">
+                    🧽 Car Wash Game
+                </a>
+                <a href="index.html#games" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-green-600 hover:bg-white transition border-2 border-green-600">
+                    🎮 See All Games
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-2">© 2025 Mad Lad Studios. All rights reserved.</p>
+            <p class="text-gray-400">Games for kids, made by a kid (and AI).</p>
+        </div>
+    </footer>
+
+    <!-- Load game script -->
+    <script src="garbage-truck-game/game.js"></script>
+</body>
+
+</html>

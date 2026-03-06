@@ -4,34 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mad Racetrack Game - Mad Lad Studios</title>
+    <title>Drag Race Game - Race and Stop Accurately! | Mad Lad Studios</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Race at high speeds and stay on track in Mad Racetrack Game! Use your steering skills to navigate curves and avoid obstacles in this exciting racing game for kids.">
-    <meta name="keywords" content="racing game, kids racing game, car racing, track racing, steering game, children games, fun games for kids, mad racetrack game">
+    <meta name="description" content="Race to the finish line and stop accurately in this exciting drag race game! Test your timing skills - accelerate with UP arrow, brake with DOWN arrow. Score points based on stopping accuracy!">
+    <meta name="keywords" content="drag race game, racing game, kids racing game, car racing, timing game, children games, fun games for kids, stop accuracy game">
     <meta name="author" content="Mad Lad Studios">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://madladstudios.com/mad-racetrack-game.html">
+    <link rel="canonical" href="https://madladstudios.com/racetrack-game.html">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://madladstudios.com/mad-racetrack-game.html">
-    <meta property="og:title" content="Mad Racetrack Game - High Speed Racing | Mad Lad Studios">
-    <meta property="og:description" content="Race at high speeds and stay on track in Mad Racetrack Game! Use your steering skills to navigate curves and avoid obstacles in this exciting racing game for kids.">
+    <meta property="og:url" content="https://madladstudios.com/racetrack-game.html">
+    <meta property="og:title" content="Drag Race Game - Race and Stop Accurately! | Mad Lad Studios">
+    <meta property="og:description" content="Race to the finish line and stop accurately! Test your timing skills in this exciting drag race game.">
     <meta property="og:site_name" content="Mad Lad Studios">
     <meta property="og:locale" content="en_US">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://madladstudios.com/mad-racetrack-game.html">
-    <meta property="twitter:title" content="Mad Racetrack Game - High Speed Racing | Mad Lad Studios">
-    <meta property="twitter:description" content="Race at high speeds and stay on track in Mad Racetrack Game! Use your steering skills to navigate curves and avoid obstacles in this exciting racing game for kids.">
+    <meta property="twitter:url" content="https://madladstudios.com/racetrack-game.html">
+    <meta property="twitter:title" content="Drag Race Game - Race and Stop Accurately! | Mad Lad Studios">
+    <meta property="twitter:description" content="Race to the finish line and stop accurately! Test your timing skills in this exciting drag race game.">
 
-    
     <!-- Additional SEO -->
-    <meta name="theme-color" content="#10B981">
-    <meta name="msapplication-TileColor" content="#10B981">
-    <meta name="application-name" content="Mad Racetrack Game">
+    <meta name="theme-color" content="#E53935">
+    <meta name="msapplication-TileColor" content="#E53935">
+    <meta name="application-name" content="Drag Race Game">
     
     <script defer data-domain="madladstudios.com" src="https://plausible.io/js/script.outbound-links.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -41,71 +40,58 @@
         crossorigin="anonymous"></script>
 
     <style>
-        /* Game-specific styles to override the original CSS */
-        body {
-            margin: 0 !important;
-            padding: 0 !important;
-            overflow-x: hidden !important;
-        }
-
         .game-container {
             background: transparent !important;
             padding: 0 !important;
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: center !important;
-            justify-content: center !important;
-            min-height: auto !important;
-        }
-
-        .game-info {
-            background: transparent !important;
-            padding: 0 !important;
-            margin-bottom: 1rem !important;
-            text-align: center !important;
-        }
-
-        .game-info h1 {
-            display: none !important;
-        }
-
-        .game-info p {
-            background: linear-gradient(to right, #10B981, #059669) !important;
-            color: white !important;
-            padding: 0.5rem 1.5rem !important;
-            border-radius: 9999px !important;
-            font-weight: bold !important;
-            display: inline-block !important;
-            margin: 0.25rem !important;
-            min-width: 160px !important;
-            text-align: center !important;
-            font-family: 'Courier New', monospace !important;
         }
 
         #gameCanvas {
-            border: 3px solid #10B981;
-            border-radius: 0.5rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border: 4px solid #E53935;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
             max-width: 100%;
             height: auto;
+        }
+
+        .control-key {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(145deg, #f0f0f0, #d0d0d0);
+            border: 2px solid #999;
+            border-radius: 8px;
+            font-size: 24px;
+            box-shadow: 0 4px 0 #888, 0 6px 10px rgba(0,0,0,0.2);
+            margin: 0 5px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
         }
     </style>
 </head>
 
-<body class="bg-gradient-to-br from-purple-600 via-pink-500 to-red-500 min-h-screen">
+<body class="bg-gradient-to-br from-red-600 via-orange-500 to-yellow-500 min-h-screen">
     <!-- Navigation -->
     <nav class="bg-white/90 backdrop-blur-sm shadow-lg sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
                 <a href="index.html"
-                    class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+                    class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-600">
                     Mad Lad Studios
                 </a>
                 <div class="flex space-x-6">
-                    <a href="index.html#games" class="text-gray-700 hover:text-purple-600 font-medium transition">All
+                    <a href="index.html#games" class="text-gray-700 hover:text-red-600 font-medium transition">All
                         Games</a>
                     <a href="index.html#about"
-                        class="text-gray-700 hover:text-purple-600 font-medium transition">About</a>
+                        class="text-gray-700 hover:text-red-600 font-medium transition">About</a>
                 </div>
             </div>
         </div>
@@ -115,17 +101,22 @@
     <div class="container mx-auto px-4 py-8">
         <div class="text-center mb-8">
             <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 flex items-center justify-center gap-4">
-                <span class="text-6xl">🏁</span>
-                Mad Racetrack Game
+                <span class="text-6xl">🏎️</span>
+                Drag Race Game
                 <span class="text-6xl">🏁</span>
             </h1>
-            <p class="text-xl text-white/90">Race at high speeds and stay on track!</p>
+            <p class="text-xl text-white/90">Race to the finish line and stop accurately!</p>
+        </div>
+
+        <!-- Learning Objective -->
+        <div class="mb-6 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-4 max-w-2xl mx-auto">
+            <h2 class="text-xl font-bold text-red-700 text-center mb-2">🎯 Challenge: Timing & Control</h2>
+            <p class="text-gray-600 text-center">Learn to control speed and stop at the right moment!</p>
         </div>
 
         <!-- Ad Space - Top -->
         <div class="mb-8">
             <div class="rounded-lg p-4 text-center max-w-4xl mx-auto">
-                <!-- Google AdSense Ad Unit -->
                 <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
                     data-ad-slot="YOUR-AD-SLOT-ID-7" data-ad-format="auto" data-full-width-responsive="true"></ins>
                 <script>
@@ -135,51 +126,89 @@
         </div>
 
         <!-- Game Container -->
-        <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-8 max-w-5xl mx-auto">
+        <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-6 max-w-5xl mx-auto">
             <div class="game-container">
-                <div class="game-info">
-                    <h1>Mad Racetrack</h1>
-                    <p>Use ← → arrow keys to steer</p>
-                    <p>Speed: <span id="speed">0</span> mph</p>
-                    <p>Distance: <span id="distance">0</span> miles</p>
-                </div>
-                <canvas id="gameCanvas"></canvas>
+                <canvas id="gameCanvas" class="mx-auto block"></canvas>
             </div>
-
-            <!-- Game Controls Info -->
-            <div class="text-center mt-6">
-                <p class="text-lg font-bold text-gray-700 mb-2">🏎️ Ready to Race? 🏎️</p>
-                <p class="text-gray-600">The game will start automatically when the page loads!</p>
+            
+            <!-- Hidden display elements for compatibility -->
+            <div class="hidden">
+                <span id="speed">0</span>
+                <span id="distance">0</span>
             </div>
         </div>
 
-        <!-- Instructions -->
+        <!-- Controls Guide -->
+        <div class="mt-8 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-6 max-w-4xl mx-auto">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800 text-center">🎮 Controls</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Accelerate -->
+                <div class="bg-green-50 rounded-xl p-5 border-4 border-green-400 text-center">
+                    <div class="control-key mx-auto mb-3">⬆️</div>
+                    <h3 class="text-xl font-bold text-green-700">UP ARROW</h3>
+                    <p class="text-green-600 mt-2">Hold to accelerate!</p>
+                    <p class="text-sm text-gray-500 mt-1">Go faster and faster!</p>
+                </div>
+                
+                <!-- Brake -->
+                <div class="bg-red-50 rounded-xl p-5 border-4 border-red-400 text-center">
+                    <div class="control-key mx-auto mb-3">⬇️</div>
+                    <h3 class="text-xl font-bold text-red-700">DOWN ARROW</h3>
+                    <p class="text-red-600 mt-2">Hold to brake!</p>
+                    <p class="text-sm text-gray-500 mt-1">Slow down to stop!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- How to Play -->
         <div class="mt-8 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-6 max-w-2xl mx-auto">
-            <h2 class="text-2xl font-bold mb-4 text-gray-800">How to Play</h2>
-            <ul class="space-y-2 text-gray-700">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">📖 How to Play</h2>
+            <ul class="space-y-3 text-gray-700">
                 <li class="flex items-start">
-                    <span class="text-green-500 mr-2">•</span>
-                    Use the LEFT and RIGHT arrow keys to steer your car
+                    <span class="text-red-500 mr-3 text-xl">1️⃣</span>
+                    <span>Press <strong>SPACE</strong> to start the countdown</span>
                 </li>
                 <li class="flex items-start">
-                    <span class="text-green-500 mr-2">•</span>
-                    Stay on the track - going off-road will slow you down!
+                    <span class="text-red-500 mr-3 text-xl">2️⃣</span>
+                    <span>When "GO!" appears, hold <strong>UP ARROW</strong> to accelerate</span>
                 </li>
                 <li class="flex items-start">
-                    <span class="text-green-500 mr-2">•</span>
-                    Navigate the curves carefully at high speeds
+                    <span class="text-red-500 mr-3 text-xl">3️⃣</span>
+                    <span>Watch for the <strong>FINISH LINE</strong> approaching</span>
                 </li>
                 <li class="flex items-start">
-                    <span class="text-green-500 mr-2">•</span>
-                    Challenge yourself to maintain top speed!
+                    <span class="text-red-500 mr-3 text-xl">4️⃣</span>
+                    <span>Press <strong>DOWN ARROW</strong> to brake before the finish</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-red-500 mr-3 text-xl">5️⃣</span>
+                    <span>Stop in the <strong class="text-green-600">GREEN ZONE</strong> for maximum points!</span>
                 </li>
             </ul>
+        </div>
+
+        <!-- Scoring -->
+        <div class="mt-8 bg-gradient-to-r from-yellow-100 to-orange-100 rounded-xl shadow-xl p-6 max-w-2xl mx-auto">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">🏆 Scoring</h2>
+            <div class="space-y-3 text-gray-700">
+                <p class="flex items-center">
+                    <span class="w-8 h-8 bg-green-500 rounded mr-3"></span>
+                    <strong>Perfect Stop (Green Zone):</strong>&nbsp;Up to 1000 points!
+                </p>
+                <p class="flex items-center">
+                    <span class="w-8 h-8 bg-orange-500 rounded mr-3"></span>
+                    <strong>Overshot:</strong>&nbsp;Fewer points - slow down earlier!
+                </p>
+                <p class="flex items-center">
+                    <span class="w-8 h-8 bg-red-500 rounded mr-3"></span>
+                    <strong>Too Early:</strong>&nbsp;No points - you didn't reach the finish!
+                </p>
+            </div>
         </div>
 
         <!-- Ad Space - Bottom -->
         <div class="mt-8">
             <div class="rounded-lg p-4 text-center max-w-4xl mx-auto">
-                <!-- Google AdSense Ad Unit -->
                 <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
                     data-ad-slot="YOUR-AD-SLOT-ID-8" data-ad-format="auto" data-full-width-responsive="true"></ins>
                 <script>
@@ -192,32 +221,31 @@
         <div class="mt-12 text-center">
             <h3 class="text-2xl font-bold text-white mb-6">Try Our Other Games!</h3>
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="firetruck-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-red-600 hover:bg-white transition">
-                    🔥 Fire Fighter Game
+                <a href="carwash-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-green-600 hover:bg-white transition">
+                    🚗 Car Wash Game
                 </a>
-                <a href="red-car-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-red-500 hover:bg-white transition">
-                    🚗 Red Car Game
+                <a href="sorting-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-purple-600 hover:bg-white transition">
+                    🎯 Sorting Game
                 </a>
-                <a href="train-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-purple-600 hover:bg-white transition">
+                <a href="train-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-blue-600 hover:bg-white transition">
                     🚂 Train Game
                 </a>
-                <a href="index.html#games" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-purple-600 hover:bg-white transition border-2 border-purple-600">
+                <a href="index.html#games" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-red-600 hover:bg-white transition border-2 border-red-600">
                     🎮 See All Games
                 </a>
             </div>
         </div>
-        <!-- End of Other Games -->
     </div>
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-8 mt-16">
         <div class="container mx-auto px-4 text-center">
             <p class="mb-2">© 2025 Mad Lad Studios. All rights reserved.</p>
-            <p class="text-gray-400">Games for kids, made by a kid (and AI).</p>
+            <p class="text-gray-400">Racing games for kids, made with love.</p>
         </div>
     </footer>
 
-    <!-- Load the original game files -->
+    <!-- Load the game files -->
     <script src="racetrack-game/game.js"></script>
 </body>
 

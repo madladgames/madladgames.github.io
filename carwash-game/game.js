@@ -1,500 +1,686 @@
-// Game variables
+// Car Wash Sequence Game - Teaching Order of Operations for Toddlers
+// Correct order: 1. Water (rinse) → 2. Soap → 3. Scrubber → 4. Water (rinse off)
+
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
-const startButton = document.getElementById('startButton');
-const scoreElement = document.getElementById('score');
-const highScoreElement = document.getElementById('highScore');
 
 // Game state
-let gameRunning = false;
-let score = 0;
-let highScore = localStorage.getItem('carwashHighScore') || 0;
-highScoreElement.textContent = highScore;
+let currentTool = null;
+let currentStep = 0;
+let carParts = [];
+let particles = [];
+let message = '';
+let messageTimer = 0;
+let gameComplete = false;
+let celebrationParticles = [];
 
-// Car properties
-const car = {
-    x: 100,
-    y: 200,
-    width: 100,
-    height: 60,
-    velocityY: 0,
-    speed: 3,
-    color: '#FF6B6B',
-    targetY: 200
+// Washing progress for each car part
+const washProgress = {
+    hood: { water1: false, soap: false, scrub: false, water2: false },
+    roof: { water1: false, soap: false, scrub: false, water2: false },
+    frontDoor: { water1: false, soap: false, scrub: false, water2: false },
+    backDoor: { water1: false, soap: false, scrub: false, water2: false },
+    trunk: { water1: false, soap: false, scrub: false, water2: false }
 };
 
-// Game elements
-let bubbles = [];
-let brushes = [];
-let waterDrops = [];
-let gameTimer = 0;
-
-// Car wash tunnel elements
-let tunnelParts = [];
-
-// Input handling
-const keys = {
-    up: false,
-    down: false
+// Steps in order
+const steps = ['water1', 'soap', 'scrub', 'water2'];
+const stepNames = {
+    water1: '💧 Rinse with Water First!',
+    soap: '🧴 Apply Soap!',
+    scrub: '🧽 Scrub the Car!',
+    water2: '💧 Rinse Off the Soap!'
 };
 
-// Initialize car wash tunnel
-function initTunnel() {
-    tunnelParts = [];
-    // Create tunnel segments
-    for (let i = 0; i < 10; i++) {
-        tunnelParts.push({
-            x: i * 100,
-            topY: 50,
-            bottomY: 350,
-            height: 300
+const stepInstructions = {
+    water1: 'Click WATER then click the car to rinse it!',
+    soap: 'Click SOAP then click the car to apply soap!',
+    scrub: 'Click SCRUBBER then click the car to scrub!',
+    water2: 'Click WATER again to rinse off the soap!'
+};
+
+// Tool colors
+const toolColors = {
+    water: '#4FC3F7',
+    soap: '#FFF59D',
+    scrubber: '#81C784'
+};
+
+// Car part definitions
+function initCarParts() {
+    carParts = [
+        { name: 'hood', x: 520, y: 200, width: 140, height: 80, label: 'Hood' },
+        { name: 'roof', x: 300, y: 140, width: 180, height: 70, label: 'Roof' },
+        { name: 'frontDoor', x: 340, y: 210, width: 100, height: 100, label: 'Front' },
+        { name: 'backDoor', x: 200, y: 210, width: 100, height: 100, label: 'Back' },
+        { name: 'trunk', x: 80, y: 200, width: 100, height: 80, label: 'Trunk' }
+    ];
+}
+
+// Draw the green car
+function drawCar() {
+    // Car body (green)
+    ctx.fillStyle = '#2E7D32';
+    
+    // Main body
+    ctx.beginPath();
+    ctx.moveTo(60, 280);
+    ctx.lineTo(80, 220);
+    ctx.lineTo(180, 200);
+    ctx.lineTo(200, 160);
+    ctx.lineTo(480, 160);
+    ctx.lineTo(520, 200);
+    ctx.lineTo(660, 200);
+    ctx.lineTo(680, 240);
+    ctx.lineTo(680, 300);
+    ctx.lineTo(60, 300);
+    ctx.closePath();
+    ctx.fill();
+    
+    // Darker shade for depth
+    ctx.fillStyle = '#1B5E20';
+    ctx.fillRect(60, 290, 620, 20);
+    
+    // Car roof
+    ctx.fillStyle = '#388E3C';
+    ctx.beginPath();
+    ctx.moveTo(200, 160);
+    ctx.lineTo(220, 120);
+    ctx.lineTo(440, 120);
+    ctx.lineTo(480, 160);
+    ctx.closePath();
+    ctx.fill();
+    
+    // Windows
+    ctx.fillStyle = '#81D4FA';
+    // Front window
+    ctx.beginPath();
+    ctx.moveTo(360, 130);
+    ctx.lineTo(430, 130);
+    ctx.lineTo(460, 165);
+    ctx.lineTo(360, 165);
+    ctx.closePath();
+    ctx.fill();
+    
+    // Back window
+    ctx.beginPath();
+    ctx.moveTo(240, 130);
+    ctx.lineTo(350, 130);
+    ctx.lineTo(350, 165);
+    ctx.lineTo(220, 165);
+    ctx.closePath();
+    ctx.fill();
+    
+    // Window shine
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(245, 135);
+    ctx.lineTo(265, 135);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(365, 135);
+    ctx.lineTo(385, 135);
+    ctx.stroke();
+    
+    // Headlights
+    ctx.fillStyle = '#FFF59D';
+    ctx.beginPath();
+    ctx.ellipse(660, 250, 15, 20, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#FFEB3B';
+    ctx.beginPath();
+    ctx.ellipse(660, 250, 10, 13, 0, 0, Math.PI * 2);
+    ctx.fill();
+    
+    // Taillights
+    ctx.fillStyle = '#EF5350';
+    ctx.beginPath();
+    ctx.ellipse(75, 250, 12, 18, 0, 0, Math.PI * 2);
+    ctx.fill();
+    
+    // Wheels
+    ctx.fillStyle = '#212121';
+    ctx.beginPath();
+    ctx.arc(180, 310, 45, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(560, 310, 45, 0, Math.PI * 2);
+    ctx.fill();
+    
+    // Wheel rims
+    ctx.fillStyle = '#9E9E9E';
+    ctx.beginPath();
+    ctx.arc(180, 310, 25, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(560, 310, 25, 0, Math.PI * 2);
+    ctx.fill();
+    
+    // Wheel center caps
+    ctx.fillStyle = '#616161';
+    ctx.beginPath();
+    ctx.arc(180, 310, 12, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(560, 310, 12, 0, Math.PI * 2);
+    ctx.fill();
+    
+    // Door handles
+    ctx.fillStyle = '#1B5E20';
+    ctx.fillRect(260, 240, 25, 8);
+    ctx.fillRect(400, 240, 25, 8);
+    
+    // Side mirror
+    ctx.fillStyle = '#2E7D32';
+    ctx.beginPath();
+    ctx.ellipse(490, 200, 15, 10, -0.3, 0, Math.PI * 2);
+    ctx.fill();
+}
+
+// Draw dirt/soap/water effects on car parts
+function drawWashEffects() {
+    carParts.forEach(part => {
+        const progress = washProgress[part.name];
+        
+        // Draw based on current state
+        if (!progress.water1) {
+            // Draw dirt
+            drawDirt(part);
+        } else if (progress.water1 && !progress.soap) {
+            // Wet car (lighter dirt)
+            drawWetDirt(part);
+        } else if (progress.soap && !progress.scrub) {
+            // Draw soap bubbles
+            drawSoapBubbles(part);
+        } else if (progress.scrub && !progress.water2) {
+            // Soapy and scrubbed (ready to rinse)
+            drawSoapyClean(part);
+        }
+        // If water2 is true, car part is clean (no overlay)
+    });
+}
+
+function drawDirt(part) {
+    ctx.fillStyle = 'rgba(139, 90, 43, 0.6)';
+    for (let i = 0; i < 8; i++) {
+        const x = part.x + Math.random() * part.width;
+        const y = part.y + Math.random() * part.height;
+        ctx.beginPath();
+        ctx.arc(x, y, Math.random() * 8 + 4, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+function drawWetDirt(part) {
+    ctx.fillStyle = 'rgba(139, 90, 43, 0.3)';
+    for (let i = 0; i < 5; i++) {
+        const x = part.x + Math.random() * part.width;
+        const y = part.y + Math.random() * part.height;
+        ctx.beginPath();
+        ctx.arc(x, y, Math.random() * 6 + 3, 0, Math.PI * 2);
+        ctx.fill();
+    }
+    // Water droplets
+    ctx.fillStyle = 'rgba(79, 195, 247, 0.5)';
+    for (let i = 0; i < 4; i++) {
+        const x = part.x + Math.random() * part.width;
+        const y = part.y + Math.random() * part.height;
+        ctx.beginPath();
+        ctx.arc(x, y, Math.random() * 4 + 2, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+function drawSoapBubbles(part) {
+    // Draw soap foam
+    for (let i = 0; i < 12; i++) {
+        const x = part.x + Math.random() * part.width;
+        const y = part.y + Math.random() * part.height;
+        const radius = Math.random() * 10 + 5;
+        
+        // Bubble gradient
+        const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
+        gradient.addColorStop(0, 'rgba(255, 255, 255, 0.9)');
+        gradient.addColorStop(0.5, 'rgba(255, 245, 157, 0.7)');
+        gradient.addColorStop(1, 'rgba(255, 255, 255, 0.3)');
+        
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+function drawSoapyClean(part) {
+    // Lighter soap residue
+    for (let i = 0; i < 6; i++) {
+        const x = part.x + Math.random() * part.width;
+        const y = part.y + Math.random() * part.height;
+        const radius = Math.random() * 8 + 4;
+        
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+// Draw clickable part highlights when hovering
+function drawPartHighlights(mouseX, mouseY) {
+    carParts.forEach(part => {
+        if (mouseX >= part.x && mouseX <= part.x + part.width &&
+            mouseY >= part.y && mouseY <= part.y + part.height) {
+            ctx.strokeStyle = currentTool ? toolColors[currentTool] : '#FFFFFF';
+            ctx.lineWidth = 4;
+            ctx.setLineDash([10, 5]);
+            ctx.strokeRect(part.x, part.y, part.width, part.height);
+            ctx.setLineDash([]);
+        }
+    });
+}
+
+// Draw particles (water/soap/scrub effects)
+function drawParticles() {
+    particles = particles.filter(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life -= 0.02;
+        p.vy += 0.1; // gravity
+        
+        if (p.life > 0) {
+            ctx.globalAlpha = p.life;
+            ctx.fillStyle = p.color;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.globalAlpha = 1;
+            return true;
+        }
+        return false;
+    });
+}
+
+// Create particles effect
+function createParticles(x, y, color, count = 15) {
+    for (let i = 0; i < count; i++) {
+        particles.push({
+            x: x + Math.random() * 50 - 25,
+            y: y + Math.random() * 50 - 25,
+            vx: (Math.random() - 0.5) * 6,
+            vy: (Math.random() - 0.5) * 6 - 2,
+            size: Math.random() * 8 + 4,
+            color: color,
+            life: 1
         });
     }
 }
 
-// Draw functions
-function drawCar() {
-    // Car body
-    ctx.fillStyle = car.color;
-    ctx.fillRect(car.x, car.y, car.width, car.height);
-    
-    // Car roof
-    ctx.fillStyle = '#E55555';
-    ctx.fillRect(car.x + 15, car.y - 15, 70, 20);
-    
-    // Car windows
-    ctx.fillStyle = '#87CEEB';
-    ctx.fillRect(car.x + 20, car.y - 12, 25, 15);
-    ctx.fillRect(car.x + 55, car.y - 12, 25, 15);
-    
-    // Car wheels
-    ctx.fillStyle = '#333';
-    ctx.beginPath();
-    ctx.arc(car.x + 20, car.y + car.height, 12, 0, Math.PI * 2);
-    ctx.arc(car.x + 80, car.y + car.height, 12, 0, Math.PI * 2);
-    ctx.fill();
-    
-    // Wheel centers
-    ctx.fillStyle = '#666';
-    ctx.beginPath();
-    ctx.arc(car.x + 20, car.y + car.height, 6, 0, Math.PI * 2);
-    ctx.arc(car.x + 80, car.y + car.height, 6, 0, Math.PI * 2);
-    ctx.fill();
-    
-    // Car details (headlights)
-    ctx.fillStyle = '#FFFF99';
-    ctx.fillRect(car.x + car.width - 5, car.y + 15, 8, 10);
-    ctx.fillRect(car.x + car.width - 5, car.y + 35, 8, 10);
-}
-
-function drawTunnel() {
-    // Draw car wash tunnel
-    ctx.fillStyle = '#4A5568';
-    ctx.fillRect(0, 0, canvas.width, 50); // Top
-    ctx.fillRect(0, 350, canvas.width, 50); // Bottom
-    
-    // Tunnel entrance/exit markers
-    ctx.fillStyle = '#2D3748';
-    for (let i = 0; i < canvas.width; i += 40) {
-        ctx.fillRect(i, 0, 20, 50);
-        ctx.fillRect(i, 350, 20, 50);
-    }
-    
-    // Floor
-    ctx.fillStyle = '#E2E8F0';
-    ctx.fillRect(0, 320, canvas.width, 30);
-    
-    // Floor drain lines
-    ctx.strokeStyle = '#A0AEC0';
-    ctx.lineWidth = 2;
-    for (let i = 0; i < canvas.width; i += 60) {
-        ctx.beginPath();
-        ctx.moveTo(i, 325);
-        ctx.lineTo(i + 40, 325);
-        ctx.stroke();
-    }
-}
-
-function drawBubble(bubble) {
-    // Soap bubble with rainbow effect
-    const gradient = ctx.createRadialGradient(
-        bubble.x, bubble.y, 0,
-        bubble.x, bubble.y, bubble.radius
-    );
-    gradient.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
-    gradient.addColorStop(0.7, bubble.color);
-    gradient.addColorStop(1, 'rgba(255, 255, 255, 0.3)');
-    
-    ctx.fillStyle = gradient;
-    ctx.beginPath();
-    ctx.arc(bubble.x, bubble.y, bubble.radius, 0, Math.PI * 2);
-    ctx.fill();
-    
-    // Bubble highlight
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-    ctx.beginPath();
-    ctx.arc(bubble.x - bubble.radius * 0.3, bubble.y - bubble.radius * 0.3, bubble.radius * 0.3, 0, Math.PI * 2);
-    ctx.fill();
-}
-
-function drawBrush(brush) {
-    // Rotating car wash brush
-    ctx.save();
-    ctx.translate(brush.x, brush.y);
-    ctx.rotate(brush.rotation);
-    
-    // Brush base
-    ctx.fillStyle = '#8B4513';
-    ctx.fillRect(-15, -brush.height/2, 30, brush.height);
-    
-    // Brush bristles
-    ctx.strokeStyle = brush.color;
-    ctx.lineWidth = 3;
-    for (let i = 0; i < 20; i++) {
-        const angle = (i / 20) * Math.PI * 2;
-        const x1 = Math.cos(angle) * 15;
-        const y1 = Math.sin(angle) * 15;
-        const x2 = Math.cos(angle) * 25;
-        const y2 = Math.sin(angle) * 25;
-        
-        ctx.beginPath();
-        ctx.moveTo(x1, y1);
-        ctx.lineTo(x2, y2);
-        ctx.stroke();
-    }
-    
-    ctx.restore();
-}
-
-function drawWaterDrop(drop) {
-    // Water drop
-    ctx.fillStyle = 'rgba(100, 200, 255, 0.7)';
-    ctx.beginPath();
-    ctx.arc(drop.x, drop.y, drop.size, 0, Math.PI * 2);
-    ctx.fill();
-    
-    // Drop highlight
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-    ctx.beginPath();
-    ctx.arc(drop.x - drop.size * 0.3, drop.y - drop.size * 0.3, drop.size * 0.4, 0, Math.PI * 2);
-    ctx.fill();
-}
-
-// Game mechanics
-function updateCar() {
-    // Handle input for toddler-friendly controls
-    if (keys.up && car.y > 60) {
-        car.targetY = Math.max(60, car.targetY - car.speed);
-    }
-    if (keys.down && car.y < 280) {
-        car.targetY = Math.min(280, car.targetY + car.speed);
-    }
-    
-    // Smooth movement
-    car.y += (car.targetY - car.y) * 0.1;
-}
-
-function createBubble() {
-    const colors = [
-        'rgba(255, 182, 193, 0.6)', // Light pink
-        'rgba(173, 216, 230, 0.6)', // Light blue
-        'rgba(144, 238, 144, 0.6)', // Light green
-        'rgba(255, 255, 224, 0.6)', // Light yellow
-        'rgba(221, 160, 221, 0.6)'  // Plum
+// Draw tool buttons
+function drawTools() {
+    const toolY = canvas.height - 100;
+    const tools = [
+        { name: 'water', x: 150, emoji: '💧', label: 'WATER' },
+        { name: 'soap', x: 370, emoji: '🧴', label: 'SOAP' },
+        { name: 'scrubber', x: 590, emoji: '🧽', label: 'SCRUBBER' }
     ];
     
-    bubbles.push({
-        x: canvas.width + 20,
-        y: Math.random() * 200 + 100,
-        radius: Math.random() * 15 + 10,
-        speed: Math.random() * 2 + 1,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        collected: false
+    tools.forEach(tool => {
+        // Button background
+        const isSelected = currentTool === tool.name;
+        ctx.fillStyle = isSelected ? toolColors[tool.name] : '#E0E0E0';
+        ctx.strokeStyle = isSelected ? '#333' : '#999';
+        ctx.lineWidth = isSelected ? 4 : 2;
+        
+        // Rounded rectangle
+        const btnWidth = 140;
+        const btnHeight = 70;
+        const radius = 15;
+        
+        ctx.beginPath();
+        ctx.roundRect(tool.x - btnWidth/2, toolY - btnHeight/2, btnWidth, btnHeight, radius);
+        ctx.fill();
+        ctx.stroke();
+        
+        // Emoji and text
+        ctx.font = 'bold 32px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#333';
+        ctx.fillText(tool.emoji, tool.x, toolY - 5);
+        
+        ctx.font = 'bold 16px Arial';
+        ctx.fillText(tool.label, tool.x, toolY + 25);
+        
+        // Selection glow
+        if (isSelected) {
+            ctx.shadowColor = toolColors[tool.name];
+            ctx.shadowBlur = 15;
+            ctx.strokeStyle = toolColors[tool.name];
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.roundRect(tool.x - btnWidth/2 - 3, toolY - btnHeight/2 - 3, btnWidth + 6, btnHeight + 6, radius);
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+        }
     });
 }
 
-function createBrush() {
-    const colors = ['#FF69B4', '#00CED1', '#32CD32', '#FFD700'];
+// Draw current step instruction
+function drawInstructions() {
+    const step = steps[currentStep];
     
-    brushes.push({
-        x: canvas.width + 30,
-        y: Math.random() * 200 + 100,
-        height: 80,
-        speed: 2,
-        rotation: 0,
-        rotationSpeed: 0.2,
-        color: colors[Math.floor(Math.random() * colors.length)]
+    // Step indicator boxes at top
+    const boxWidth = 150;
+    const boxHeight = 50;
+    const startX = 95;
+    const boxY = 30;
+    
+    steps.forEach((s, i) => {
+        const x = startX + i * (boxWidth + 20);
+        const isActive = i === currentStep;
+        const isComplete = i < currentStep;
+        
+        // Box background
+        if (isComplete) {
+            ctx.fillStyle = '#81C784';
+        } else if (isActive) {
+            ctx.fillStyle = '#FFF59D';
+        } else {
+            ctx.fillStyle = '#E0E0E0';
+        }
+        
+        ctx.strokeStyle = isActive ? '#333' : '#999';
+        ctx.lineWidth = isActive ? 3 : 1;
+        
+        ctx.beginPath();
+        ctx.roundRect(x, boxY, boxWidth, boxHeight, 10);
+        ctx.fill();
+        ctx.stroke();
+        
+        // Step number
+        ctx.font = 'bold 16px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#333';
+        
+        const stepLabels = ['1. RINSE', '2. SOAP', '3. SCRUB', '4. RINSE'];
+        ctx.fillText(stepLabels[i], x + boxWidth/2, boxY + 20);
+        
+        // Checkmark for completed
+        if (isComplete) {
+            ctx.fillStyle = '#1B5E20';
+            ctx.font = 'bold 20px Arial';
+            ctx.fillText('✓', x + boxWidth/2, boxY + 42);
+        } else {
+            const emojis = ['💧', '🧴', '🧽', '💧'];
+            ctx.font = '18px Arial';
+            ctx.fillText(emojis[i], x + boxWidth/2, boxY + 42);
+        }
     });
+    
+    // Current instruction
+    if (!gameComplete) {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+        ctx.beginPath();
+        ctx.roundRect(200, 95, 400, 35, 10);
+        ctx.fill();
+        
+        ctx.font = 'bold 18px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#FFF';
+        ctx.fillText(stepInstructions[step], 400, 118);
+    }
 }
 
-function createWaterDrop() {
-    waterDrops.push({
-        x: Math.random() * canvas.width,
-        y: 50,
-        size: Math.random() * 4 + 2,
-        speed: Math.random() * 3 + 2
-    });
+// Draw message feedback
+function drawMessage() {
+    if (messageTimer > 0) {
+        messageTimer--;
+        
+        ctx.fillStyle = message.includes('Great') || message.includes('Perfect') || message.includes('Excellent') 
+            ? 'rgba(76, 175, 80, 0.9)' 
+            : 'rgba(244, 67, 54, 0.9)';
+        
+        ctx.beginPath();
+        ctx.roundRect(250, 180, 300, 50, 15);
+        ctx.fill();
+        
+        ctx.font = 'bold 22px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#FFF';
+        ctx.fillText(message, 400, 212);
+    }
 }
 
-function updateBubbles() {
-    bubbles = bubbles.filter(bubble => {
-        bubble.x -= bubble.speed;
+// Draw celebration when complete
+function drawCelebration() {
+    if (gameComplete) {
+        // Add celebration particles
+        if (Math.random() < 0.3) {
+            celebrationParticles.push({
+                x: Math.random() * canvas.width,
+                y: canvas.height + 20,
+                vx: (Math.random() - 0.5) * 3,
+                vy: -Math.random() * 8 - 4,
+                size: Math.random() * 12 + 6,
+                color: ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD'][Math.floor(Math.random() * 6)],
+                life: 1
+            });
+        }
         
-        // Check collision with car
-        const dx = bubble.x - (car.x + car.width/2);
-        const dy = bubble.y - (car.y + car.height/2);
-        const distance = Math.sqrt(dx*dx + dy*dy);
-        
-        if (distance < bubble.radius + 30 && !bubble.collected) {
-            bubble.collected = true;
-            score += 10;
-            scoreElement.textContent = score;
+        // Update and draw celebration particles
+        celebrationParticles = celebrationParticles.filter(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.1;
+            p.life -= 0.008;
             
-            // Create pop effect
-            for (let i = 0; i < 5; i++) {
-                createWaterDrop();
+            if (p.life > 0) {
+                ctx.globalAlpha = p.life;
+                ctx.fillStyle = p.color;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.globalAlpha = 1;
+                return true;
             }
-            
-            return false; // Remove bubble
-        }
-        
-        return bubble.x > -50;
-    });
-}
-
-function updateBrushes() {
-    brushes = brushes.filter(brush => {
-        brush.x -= brush.speed;
-        brush.rotation += brush.rotationSpeed;
-        
-        // Check collision with car (game over)
-        if (brush.x < car.x + car.width &&
-            brush.x + 50 > car.x &&
-            brush.y - 40 < car.y + car.height &&
-            brush.y + 40 > car.y) {
-            gameOver();
             return false;
-        }
+        });
         
-        return brush.x > -60;
-    });
+        // Success message
+        ctx.fillStyle = 'rgba(76, 175, 80, 0.95)';
+        ctx.beginPath();
+        ctx.roundRect(150, 160, 500, 120, 20);
+        ctx.fill();
+        
+        ctx.font = 'bold 36px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#FFF';
+        ctx.fillText('🎉 CAR IS CLEAN! 🎉', 400, 210);
+        
+        ctx.font = 'bold 20px Arial';
+        ctx.fillText('Great job! You learned the right order!', 400, 250);
+        
+        // Play again button
+        ctx.fillStyle = '#FFF';
+        ctx.beginPath();
+        ctx.roundRect(300, 290, 200, 50, 15);
+        ctx.fill();
+        
+        ctx.fillStyle = '#4CAF50';
+        ctx.font = 'bold 20px Arial';
+        ctx.fillText('🔄 WASH AGAIN', 400, 322);
+    }
 }
 
-function updateWaterDrops() {
-    waterDrops = waterDrops.filter(drop => {
-        drop.y += drop.speed;
-        return drop.y < canvas.height;
-    });
-}
-
-function gameOver() {
-    gameRunning = false;
+// Check if all parts completed current step
+function checkStepComplete() {
+    const step = steps[currentStep];
+    const allComplete = Object.values(washProgress).every(part => part[step]);
     
-    // Update high score
-    if (score > highScore) {
-        highScore = score;
-        localStorage.setItem('carwashHighScore', highScore);
-        highScoreElement.textContent = highScore;
+    if (allComplete && currentStep < steps.length - 1) {
+        currentStep++;
+        const messages = ['Great! Now add soap! 🧴', 'Perfect! Now scrub! 🧽', 'Excellent! Rinse off the soap! 💧'];
+        message = messages[currentStep - 1];
+        messageTimer = 90;
+    } else if (allComplete && currentStep === steps.length - 1) {
+        gameComplete = true;
+        currentTool = null;
+    }
+}
+
+// Handle tool selection
+function selectTool(toolName) {
+    if (gameComplete) return;
+    currentTool = toolName;
+}
+
+// Handle car part click
+function washCarPart(partName) {
+    if (!currentTool || gameComplete) return;
+    
+    const step = steps[currentStep];
+    const progress = washProgress[partName];
+    
+    // Check if correct tool for current step
+    let isCorrect = false;
+    if (step === 'water1' && currentTool === 'water' && !progress.water1) {
+        progress.water1 = true;
+        isCorrect = true;
+    } else if (step === 'soap' && currentTool === 'soap' && !progress.soap) {
+        progress.soap = true;
+        isCorrect = true;
+    } else if (step === 'scrub' && currentTool === 'scrubber' && !progress.scrub) {
+        progress.scrub = true;
+        isCorrect = true;
+    } else if (step === 'water2' && currentTool === 'water' && !progress.water2) {
+        progress.water2 = true;
+        isCorrect = true;
     }
     
-    // Draw game over screen
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-    ctx.fillStyle = 'white';
-    ctx.font = 'bold 36px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText('Car Wash Complete!', canvas.width / 2, canvas.height / 2 - 40);
-    
-    ctx.font = 'bold 20px Arial';
-    ctx.fillText(`Bubbles Collected: ${score}`, canvas.width / 2, canvas.height / 2 + 10);
-    ctx.fillText(`Best Score: ${highScore}`, canvas.width / 2, canvas.height / 2 + 40);
-    
-    startButton.textContent = 'Wash Again';
+    // Visual feedback
+    const part = carParts.find(p => p.name === partName);
+    if (isCorrect && part) {
+        createParticles(part.x + part.width/2, part.y + part.height/2, toolColors[currentTool], 20);
+        checkStepComplete();
+    } else if (!isCorrect && part) {
+        message = 'Try: ' + stepNames[step];
+        messageTimer = 90;
+    }
 }
 
+// Reset game
+function resetGame() {
+    currentStep = 0;
+    currentTool = null;
+    gameComplete = false;
+    particles = [];
+    celebrationParticles = [];
+    message = '';
+    messageTimer = 0;
+    
+    Object.keys(washProgress).forEach(key => {
+        washProgress[key] = { water1: false, soap: false, scrub: false, water2: false };
+    });
+}
+
+// Mouse position tracking
+let mouseX = 0;
+let mouseY = 0;
+
+// Main game loop
 function gameLoop() {
-    if (!gameRunning) return;
-    
-    gameTimer++;
-    
     // Clear canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#87CEEB';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    // Draw background (car wash tunnel)
-    drawTunnel();
-    
-    // Create game elements periodically
-    if (gameTimer % 60 === 0) createBubble();
-    if (gameTimer % 180 === 0) createBrush();
-    if (gameTimer % 20 === 0) createWaterDrop();
-    
-    // Update game elements
-    updateCar();
-    updateBubbles();
-    updateBrushes();
-    updateWaterDrops();
-    
-    // Draw water drops (background)
-    waterDrops.forEach(drop => drawWaterDrop(drop));
-    
-    // Draw bubbles
-    bubbles.forEach(bubble => drawBubble(bubble));
-    
-    // Draw brushes
-    brushes.forEach(brush => drawBrush(brush));
+    // Draw ground
+    ctx.fillStyle = '#90A4AE';
+    ctx.fillRect(0, 340, canvas.width, 60);
     
     // Draw car
     drawCar();
     
-    // Draw car wash effects
-    if (gameTimer % 10 === 0) {
-        // Spray effect
-        ctx.fillStyle = 'rgba(100, 200, 255, 0.3)';
-        for (let i = 0; i < 5; i++) {
-            ctx.beginPath();
-            ctx.arc(
-                Math.random() * canvas.width,
-                Math.random() * 50 + 50,
-                Math.random() * 3 + 1,
-                0, Math.PI * 2
-            );
-            ctx.fill();
-        }
-    }
+    // Draw wash effects
+    drawWashEffects();
+    
+    // Draw part highlights
+    drawPartHighlights(mouseX, mouseY);
+    
+    // Draw particles
+    drawParticles();
+    
+    // Draw tools
+    drawTools();
+    
+    // Draw instructions
+    drawInstructions();
+    
+    // Draw message
+    drawMessage();
+    
+    // Draw celebration
+    drawCelebration();
     
     requestAnimationFrame(gameLoop);
 }
 
-function startGame() {
-    // Reset game state
-    gameRunning = true;
-    score = 0;
-    gameTimer = 0;
-    scoreElement.textContent = score;
-    bubbles = [];
-    brushes = [];
-    waterDrops = [];
-    car.y = 200;
-    car.targetY = 200;
-    
-    // Reset keys
-    keys.up = false;
-    keys.down = false;
-    
-    initTunnel();
-    
-    startButton.textContent = 'Washing...';
-    
-    // Focus canvas for keyboard input
-    canvas.focus();
-    
-    gameLoop();
-}
-
 // Event listeners
-startButton.addEventListener('click', () => {
-    startGame();
-    document.body.focus();
+canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    mouseX = (e.clientX - rect.left) * (canvas.width / rect.width);
+    mouseY = (e.clientY - rect.top) * (canvas.height / rect.height);
 });
 
-// Make canvas focusable
-canvas.tabIndex = 1;
-
-// Keyboard controls (toddler-friendly)
-document.addEventListener('keydown', (e) => {
-    if (!gameRunning) return;
+canvas.addEventListener('click', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const x = (e.clientX - rect.left) * (canvas.width / rect.width);
+    const y = (e.clientY - rect.top) * (canvas.height / rect.height);
     
-    switch(e.code) {
-        case 'ArrowUp':
-        case 'KeyW':
-            e.preventDefault();
-            keys.up = true;
-            break;
-        case 'ArrowDown':
-        case 'KeyS':
-            e.preventDefault();
-            keys.down = true;
-            break;
+    // Check play again button
+    if (gameComplete && x >= 300 && x <= 500 && y >= 290 && y <= 340) {
+        resetGame();
+        return;
     }
+    
+    // Check tool buttons
+    const toolY = canvas.height - 100;
+    const tools = [
+        { name: 'water', x: 150 },
+        { name: 'soap', x: 370 },
+        { name: 'scrubber', x: 590 }
+    ];
+    
+    tools.forEach(tool => {
+        if (x >= tool.x - 70 && x <= tool.x + 70 && y >= toolY - 35 && y <= toolY + 35) {
+            selectTool(tool.name);
+        }
+    });
+    
+    // Check car parts
+    carParts.forEach(part => {
+        if (x >= part.x && x <= part.x + part.width &&
+            y >= part.y && y <= part.y + part.height) {
+            washCarPart(part.name);
+        }
+    });
 });
 
-document.addEventListener('keyup', (e) => {
-    switch(e.code) {
-        case 'ArrowUp':
-        case 'KeyW':
-            e.preventDefault();
-            keys.up = false;
-            break;
-        case 'ArrowDown':
-        case 'KeyS':
-            e.preventDefault();
-            keys.down = false;
-            break;
-    }
-});
-
-// Touch controls for mobile (toddler-friendly)
+// Touch support for mobile
 canvas.addEventListener('touchstart', (e) => {
     e.preventDefault();
-    if (!gameRunning) return;
-    
+    const rect = canvas.getBoundingClientRect();
     const touch = e.touches[0];
-    const rect = canvas.getBoundingClientRect();
-    const touchY = touch.clientY - rect.top;
+    const x = (touch.clientX - rect.left) * (canvas.width / rect.width);
+    const y = (touch.clientY - rect.top) * (canvas.height / rect.height);
     
-    if (touchY < canvas.height / 2) {
-        keys.up = true;
-        keys.down = false;
-    } else {
-        keys.down = true;
-        keys.up = false;
-    }
+    // Simulate click
+    const clickEvent = new MouseEvent('click', {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+    });
+    canvas.dispatchEvent(clickEvent);
 });
 
-canvas.addEventListener('touchend', (e) => {
-    e.preventDefault();
-    keys.up = false;
-    keys.down = false;
-});
-
-// Mouse controls (toddler-friendly)
-canvas.addEventListener('mousedown', (e) => {
-    if (!gameRunning) return;
-    
-    const rect = canvas.getBoundingClientRect();
-    const mouseY = e.clientY - rect.top;
-    
-    if (mouseY < canvas.height / 2) {
-        keys.up = true;
-        keys.down = false;
-    } else {
-        keys.down = true;
-        keys.up = false;
-    }
-});
-
-canvas.addEventListener('mouseup', () => {
-    keys.up = false;
-    keys.down = false;
-});
-
-canvas.addEventListener('mouseleave', () => {
-    keys.up = false;
-    keys.down = false;
-});
-
-// Initial draw
-ctx.fillStyle = '#E0F6FF';
-ctx.fillRect(0, 0, canvas.width, canvas.height);
-drawTunnel();
-
-// Draw initial car
-drawCar();
-
-ctx.fillStyle = '#333';
-ctx.font = 'bold 24px Arial';
-ctx.textAlign = 'center';
-ctx.fillText('Ready for a Car Wash!', canvas.width / 2, canvas.height / 2 - 50);
-ctx.font = '18px Arial';
-ctx.fillText('Press Start to Begin', canvas.width / 2, canvas.height / 2 + 50);
+// Initialize and start game
+initCarParts();
+gameLoop();

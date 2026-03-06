@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mad Fire Truck Game - Mad Lad Studios</title>
+    <title>Fire Truck City Maze - Drive to the Station! | Mad Lad Studios</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Drive the fire truck and save the day in Mad Fire Truck Game! Navigate through the city with your emergency vehicle and help put out fires in this heroic adventure for kids.">
-    <meta name="keywords" content="fire truck game, emergency vehicle game, kids fire truck, firefighter game, rescue game, children games, fun games for kids, mad fire truck game">
+    <meta name="description" content="Drive the fire truck through the city maze to reach the fire station! A fun maze game for toddlers using arrow keys to navigate city streets.">
+    <meta name="keywords" content="fire truck game, maze game, kids fire truck, firefighter game, toddler game, children games, fun games for kids, city maze game">
     <meta name="author" content="Mad Lad Studios">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://madladstudios.com/mad-firetruck-game.html">
@@ -138,10 +138,10 @@
         <div class="text-center mb-8">
             <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 flex items-center justify-center gap-4">
                 <span class="text-6xl">🚒</span>
-                Mad Fire Truck Game
-                <span class="text-6xl">🚒</span>
+                Fire Truck City Maze
+                <span class="text-6xl">🏢</span>
             </h1>
-            <p class="text-xl text-white/90">Drive the fire truck and save the day!</p>
+            <p class="text-xl text-white/90">Drive through the city to reach the fire station!</p>
         </div>
 
         <!-- Ad Space - Top -->
@@ -161,17 +161,15 @@
             <div class="game-container">
                 <canvas id="gameCanvas"></canvas>
                 <div class="controls text-center mt-6">
-                    <p class="text-lg mb-2">Use <span class="key">WASD</span> or <span class="key">ARROW KEYS</span> to
-                        drive!</p>
-                    <p class="text-gray-600 mb-4">Navigate through traffic and avoid obstacles</p>
-                    <button id="startButton" class="mb-4">Start Fire Truck</button>
-                    <p class="text-red-500 font-medium">🚒 Emergency! Drive carefully through the city!</p>
+                    <p class="text-lg mb-2">Use <span class="key">ARROW KEYS</span> to navigate the city streets!</p>
+                    <p class="text-gray-600 mb-4">Find the path through buildings to reach the 🚒 Fire Station!</p>
+                    <button id="startButton" class="mb-4">Start Game</button>
+                    <p class="text-red-500 font-medium">🏢 Navigate the city maze! 🏢</p>
                 </div>
                 <div class="score-display text-center mt-6">
                     <div class="flex justify-center gap-8">
-                        <p class="text-xl font-bold">Score: <span id="score" class="text-red-600">0</span></p>
-                        <p class="text-xl font-bold">High Score: <span id="highScore" class="text-green-600">0</span>
-                        </p>
+                        <p class="text-xl font-bold">Moves: <span id="score" class="text-red-600">0</span></p>
+                        <p class="text-xl font-bold">Best: <span id="highScore" class="text-green-600">-</span></p>
                     </div>
                 </div>
             </div>
@@ -179,27 +177,27 @@
 
         <!-- Instructions -->
         <div class="mt-8 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-6 max-w-2xl mx-auto">
-            <h2 class="text-2xl font-bold mb-4 text-gray-800">How to Play</h2>
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">🎮 How to Play</h2>
             <ul class="space-y-2 text-gray-700">
                 <li class="flex items-start">
-                    <span class="text-red-500 mr-2">•</span>
-                    Click "Start Fire Truck" to begin your emergency mission
+                    <span class="text-red-500 mr-2">1️⃣</span>
+                    Click "Start Game" to begin!
                 </li>
                 <li class="flex items-start">
-                    <span class="text-red-500 mr-2">•</span>
-                    Use W/↑ to move forward, S/↓ to move backward
+                    <span class="text-red-500 mr-2">2️⃣</span>
+                    Use ⬆️ ⬇️ ⬅️ ➡️ ARROW KEYS to drive the fire truck
                 </li>
                 <li class="flex items-start">
-                    <span class="text-red-500 mr-2">•</span>
-                    Use A/← to move left, D/→ to move right
+                    <span class="text-red-500 mr-2">3️⃣</span>
+                    Drive on the gray roads - you can't drive through buildings!
                 </li>
                 <li class="flex items-start">
-                    <span class="text-red-500 mr-2">•</span>
-                    Avoid obstacles like traffic cones, potholes, and barricades
+                    <span class="text-red-500 mr-2">4️⃣</span>
+                    Find the path to reach the 🚒 Fire Station (red building with flashing light)
                 </li>
                 <li class="flex items-start">
-                    <span class="text-red-500 mr-2">•</span>
-                    Drive carefully and complete your emergency missions!
+                    <span class="text-red-500 mr-2">5️⃣</span>
+                    Complete 3 maze levels to win! Try to use fewer moves!
                 </li>
             </ul>
         </div>

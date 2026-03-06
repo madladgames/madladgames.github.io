@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Game - Learn Categorization | Mad Lad Studios</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="A fun sorting game for toddlers! Learn to categorize by dragging vehicles to the garage and animals to the grass. Educational game teaching categorization skills.">
+    <meta name="keywords" content="sorting game, toddler games, educational games, categorization, preschool games, learning games, vehicles, animals, kids games">
+    <meta name="author" content="Mad Lad Studios">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://madladstudios.com/sorting-game.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://madladstudios.com/sorting-game.html">
+    <meta property="og:title" content="Sorting Game - Learn Categorization | Mad Lad Studios">
+    <meta property="og:description" content="A fun sorting game for toddlers! Learn to categorize by dragging vehicles to the garage and animals to the grass.">
+    <meta property="og:site_name" content="Mad Lad Studios">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://madladstudios.com/sorting-game.html">
+    <meta property="twitter:title" content="Sorting Game - Learn Categorization | Mad Lad Studios">
+    <meta property="twitter:description" content="A fun sorting game for toddlers! Learn to categorize by dragging vehicles to the garage and animals to the grass.">
+
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#4CAF50">
+    <meta name="msapplication-TileColor" content="#4CAF50">
+    <meta name="application-name" content="Sorting Game">
+    
+    <script defer data-domain="madladstudios.com" src="https://plausible.io/js/script.outbound-links.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR-PUBLISHER-ID"
+        crossorigin="anonymous"></script>
+
+    <style>
+        .game-container {
+            background: transparent !important;
+            padding: 0 !important;
+        }
+
+        #gameCanvas {
+            border: 4px solid #4CAF50;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            max-width: 100%;
+            height: auto;
+            cursor: grab;
+            touch-action: none;
+        }
+
+        #gameCanvas:active {
+            cursor: grabbing;
+        }
+
+        .category-card {
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+
+        .bounce-animation {
+            animation: bounce 2s infinite;
+        }
+
+        .wiggle-animation {
+            animation: wiggle 1s infinite;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white/90 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html"
+                    class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                    Mad Lad Studios
+                </a>
+                <div class="flex space-x-6">
+                    <a href="index.html#games" class="text-gray-700 hover:text-purple-600 font-medium transition">All
+                        Games</a>
+                    <a href="index.html#about"
+                        class="text-gray-700 hover:text-purple-600 font-medium transition">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Game Header -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 flex items-center justify-center gap-4">
+                <span class="text-6xl bounce-animation">🚗</span>
+                Sorting Game
+                <span class="text-6xl bounce-animation" style="animation-delay: 0.5s">🐶</span>
+            </h1>
+            <p class="text-xl text-white/90">Sort items into the right categories!</p>
+        </div>
+
+        <!-- Learning Objective -->
+        <div class="mb-6 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-4 max-w-2xl mx-auto">
+            <h2 class="text-xl font-bold text-purple-700 text-center mb-2">🎓 Learning: Categorization</h2>
+            <p class="text-gray-600 text-center">This game teaches toddlers to recognize and sort items into groups!</p>
+        </div>
+
+        <!-- Ad Space - Top -->
+        <div class="mb-8">
+            <div class="rounded-lg p-4 text-center max-w-4xl mx-auto">
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
+                    data-ad-slot="YOUR-AD-SLOT-ID-5" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+
+        <!-- Game Container -->
+        <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-6 max-w-5xl mx-auto">
+            <div class="game-container">
+                <canvas id="gameCanvas" width="800" height="550" class="mx-auto block"></canvas>
+            </div>
+        </div>
+
+        <!-- Category Guide -->
+        <div class="mt-8 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-6 max-w-4xl mx-auto">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800 text-center">🎯 Where Do They Go?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Vehicles Category -->
+                <div class="category-card bg-blue-50 rounded-xl p-5 border-4 border-blue-400">
+                    <div class="text-center mb-4">
+                        <span class="text-5xl">🏠</span>
+                        <h3 class="text-2xl font-bold text-blue-700 mt-2">GARAGE</h3>
+                    </div>
+                    <p class="text-blue-600 text-center mb-3">Vehicles belong here!</p>
+                    <div class="flex flex-wrap justify-center gap-2 text-3xl">
+                        <span>🚗</span>
+                        <span>🚕</span>
+                        <span>🚌</span>
+                        <span>🏎️</span>
+                        <span>🚒</span>
+                        <span>🚂</span>
+                        <span>✈️</span>
+                        <span>🚲</span>
+                    </div>
+                </div>
+                
+                <!-- Animals Category -->
+                <div class="category-card bg-green-50 rounded-xl p-5 border-4 border-green-400">
+                    <div class="text-center mb-4">
+                        <span class="text-5xl">🌳</span>
+                        <h3 class="text-2xl font-bold text-green-700 mt-2">GRASS</h3>
+                    </div>
+                    <p class="text-green-600 text-center mb-3">Land animals belong here!</p>
+                    <div class="flex flex-wrap justify-center gap-2 text-3xl">
+                        <span>🐶</span>
+                        <span>🐱</span>
+                        <span>🐰</span>
+                        <span>🦊</span>
+                        <span>🐻</span>
+                        <span>🦁</span>
+                        <span>🐴</span>
+                        <span>🦌</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="mt-8 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-6 max-w-2xl mx-auto">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">📖 How to Play</h2>
+            <ul class="space-y-3 text-gray-700">
+                <li class="flex items-start">
+                    <span class="text-purple-500 mr-3 text-xl">1️⃣</span>
+                    <span>Look at the items at the top of the screen</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-purple-500 mr-3 text-xl">2️⃣</span>
+                    <span>Drag each item with your finger or mouse</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-purple-500 mr-3 text-xl">3️⃣</span>
+                    <span>Drop <strong>vehicles</strong> 🚗 into the <strong>Garage</strong> 🏠</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-purple-500 mr-3 text-xl">4️⃣</span>
+                    <span>Drop <strong>animals</strong> 🐶 into the <strong>Grass</strong> 🌳</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-purple-500 mr-3 text-xl">5️⃣</span>
+                    <span>Sort all items correctly to win! 🎉</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Why Sorting is Important -->
+        <div class="mt-8 bg-gradient-to-r from-blue-100 to-green-100 rounded-xl shadow-xl p-6 max-w-2xl mx-auto">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">🧠 Why Sorting is Important</h2>
+            <div class="space-y-3 text-gray-700">
+                <p><strong>🔍 Observation:</strong> Sorting helps kids notice similarities and differences between objects!</p>
+                <p><strong>🎯 Categorization:</strong> Learning to group things is a key cognitive skill!</p>
+                <p><strong>📚 Vocabulary:</strong> Kids learn words like "vehicles" and "animals"!</p>
+                <p><strong>🧩 Problem Solving:</strong> Deciding where each item goes builds thinking skills!</p>
+            </div>
+        </div>
+
+        <!-- Ad Space - Bottom -->
+        <div class="mt-8">
+            <div class="rounded-lg p-4 text-center max-w-4xl mx-auto">
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
+                    data-ad-slot="YOUR-AD-SLOT-ID-6" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+
+        <!-- Other Games -->
+        <div class="mt-12 text-center">
+            <h3 class="text-2xl font-bold text-white mb-6">Try Our Other Games!</h3>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="carwash-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-green-600 hover:bg-white transition">
+                    🚗 Car Wash Game
+                </a>
+                <a href="firetruck-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-red-600 hover:bg-white transition">
+                    🔥 Fire Fighter Game
+                </a>
+                <a href="train-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-purple-600 hover:bg-white transition">
+                    🚂 Train Game
+                </a>
+                <a href="index.html#games" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-blue-600 hover:bg-white transition border-2 border-blue-600">
+                    🎮 See All Games
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-2">© 2025 Mad Lad Studios. All rights reserved.</p>
+            <p class="text-gray-400">Educational games for kids, made with love.</p>
+        </div>
+    </footer>
+
+    <!-- Load the game files -->
+    <script src="sorting-game/game.js"></script>
+</body>
+
+</html>

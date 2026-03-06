@@ -1,206 +1,243 @@
-/* Car Wash Game Styles */
+/* Car Wash Sequence Game Styles */
 
-/* Game container styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #4ade80 0%, #22d3ee 50%, #3b82f6 100%);
+    min-height: 100vh;
+}
+
 .game-container {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* Canvas styling */
 #gameCanvas {
-    background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 100%);
-    border: 4px solid #06B6D4;
-    border-radius: 10px;
-    box-shadow: 
-        0 0 20px rgba(6, 182, 212, 0.3),
-        inset 0 0 20px rgba(255, 255, 255, 0.1);
-    display: block;
-    margin: 0 auto;
-}
-
-/* Button styling */
-#startButton {
-    background: linear-gradient(45deg, #06B6D4, #0891B2, #0E7490);
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 25px;
+    border: 4px solid #4CAF50;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    background: #87CEEB;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4);
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    max-width: 100%;
+    height: auto;
+    touch-action: none;
 }
 
-#startButton:hover {
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 6px 20px rgba(6, 182, 212, 0.6);
-    background: linear-gradient(45deg, #0891B2, #0E7490, #155E75);
+#gameCanvas:hover {
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
 }
 
-#startButton:active {
-    transform: translateY(0) scale(1.02);
-    box-shadow: 0 2px 10px rgba(6, 182, 212, 0.4);
+/* Tool button highlights */
+.tool-button {
+    transition: all 0.2s ease;
 }
 
-/* Controls styling */
-.controls {
-    text-align: center;
-    margin-top: 20px;
-    color: #2D3748;
+.tool-button:hover {
+    transform: scale(1.05);
 }
 
-.controls p {
-    margin: 10px 0;
-    font-size: 16px;
+.tool-button.selected {
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.6);
 }
 
-.key {
-    background: linear-gradient(45deg, #06B6D4, #0891B2);
-    color: white;
-    padding: 5px 12px;
-    border-radius: 8px;
-    font-weight: bold;
-    font-family: 'Courier New', monospace;
-    box-shadow: 0 2px 5px rgba(6, 182, 212, 0.3);
-    display: inline-block;
-    margin: 0 2px;
+/* Step indicators */
+.step-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
-/* Score display styling */
-.score-display {
-    text-align: center;
-    margin-top: 20px;
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.1);
+.step-box {
+    padding: 10px 20px;
     border-radius: 10px;
-    backdrop-filter: blur(10px);
-}
-
-.score-display p {
-    margin: 5px 0;
-    font-size: 20px;
     font-weight: bold;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
 
-#score {
-    color: #06B6D4;
-    text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+.step-box.active {
+    transform: scale(1.1);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
 }
 
-#highScore {
-    color: #10B981;
-    text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+.step-box.complete {
+    background: #81C784;
+    color: white;
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
+/* Responsive styles */
+@media (max-width: 850px) {
     #gameCanvas {
         width: 100%;
         height: auto;
-        max-width: 800px;
+    }
+}
+
+@media (max-width: 600px) {
+    .step-indicator {
+        flex-wrap: wrap;
     }
     
-    .controls p {
+    .step-box {
         font-size: 14px;
-    }
-    
-    #startButton {
-        padding: 12px 24px;
-        font-size: 16px;
-    }
-    
-    .score-display p {
-        font-size: 18px;
+        padding: 8px 15px;
     }
 }
 
-/* Animation for game elements */
-@keyframes bubble-float {
-    0% { transform: translateY(0) scale(1); opacity: 0.8; }
-    50% { transform: translateY(-10px) scale(1.1); opacity: 1; }
-    100% { transform: translateY(0) scale(1); opacity: 0.8; }
-}
-
-@keyframes water-splash {
-    0% { transform: scale(0) rotate(0deg); opacity: 1; }
-    50% { transform: scale(1.2) rotate(180deg); opacity: 0.7; }
-    100% { transform: scale(1.5) rotate(360deg); opacity: 0; }
-}
-
-/* Car wash theme colors */
-:root {
-    --car-wash-blue: #06B6D4;
-    --car-wash-light-blue: #67E8F9;
-    --car-wash-dark-blue: #0E7490;
-    --soap-bubble: rgba(255, 255, 255, 0.7);
-    --water-drop: rgba(100, 200, 255, 0.8);
-}
-
-/* Loading animation for when game starts */
-.loading {
-    animation: pulse 1.5s ease-in-out infinite;
-}
-
+/* Animations */
 @keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.7; }
-    100% { opacity: 1; }
-}
-
-/* Game instructions styling */
-.game-instructions {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 15px;
-    padding: 20px;
-    margin-top: 20px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.game-instructions h3 {
-    color: #06B6D4;
-    margin-bottom: 15px;
-    font-size: 24px;
-    text-align: center;
-}
-
-.game-instructions ul {
-    list-style: none;
-    padding: 0;
-}
-
-.game-instructions li {
-    margin: 10px 0;
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(6, 182, 212, 0.2);
-    color: #2D3748;
-}
-
-.game-instructions li:last-child {
-    border-bottom: none;
-}
-
-/* Special effects for toddler appeal */
-.sparkle {
-    position: relative;
-    overflow: hidden;
-}
-
-.sparkle::before {
-    content: '✨';
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    font-size: 12px;
-    animation: sparkle 2s ease-in-out infinite;
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
 }
 
 @keyframes sparkle {
-    0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
-    50% { opacity: 1; transform: scale(1) rotate(180deg); }
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.pulse {
+    animation: pulse 1s infinite;
+}
+
+.sparkle {
+    animation: sparkle 0.5s infinite;
+}
+
+.bounce {
+    animation: bounce 2s infinite;
+}
+
+/* Celebration effects */
+.celebration {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+/* Message popup styles */
+.message-popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px 40px;
+    border-radius: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    animation: fadeInOut 2s ease;
+}
+
+.message-popup.success {
+    background: rgba(76, 175, 80, 0.95);
+}
+
+.message-popup.error {
+    background: rgba(244, 67, 54, 0.95);
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    10% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    90% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+}
+
+/* Instruction box */
+.instruction-box {
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    text-align: center;
+}
+
+/* Car part hover effect */
+.car-part-hover {
+    outline: 3px dashed white;
+    outline-offset: 3px;
+    cursor: pointer;
+}
+
+/* Water effect */
+.water-effect {
+    background: linear-gradient(180deg, 
+        rgba(79, 195, 247, 0.3) 0%,
+        rgba(79, 195, 247, 0.1) 100%
+    );
+}
+
+/* Soap effect */
+.soap-effect {
+    background: radial-gradient(circle at 30% 30%,
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(255, 245, 157, 0.7) 50%,
+        rgba(255, 255, 255, 0.3) 100%
+    );
+}
+
+/* Scrub effect */
+.scrub-effect {
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(129, 199, 132, 0.3),
+        rgba(129, 199, 132, 0.3) 10px,
+        rgba(129, 199, 132, 0.5) 10px,
+        rgba(129, 199, 132, 0.5) 20px
+    );
+}
+
+/* Print styles */
+@media print {
+    body {
+        background: white;
+    }
+    
+    #gameCanvas {
+        border: 2px solid #333;
+        box-shadow: none;
+    }
 }
