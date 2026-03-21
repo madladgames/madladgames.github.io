@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Cleanup Game - Clear the Tracks! | Mad Lad Studios</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Drive a locomotive through a train track maze! Collect fallen tree branches and dump them at the garbage dump. A fun toddler-friendly train adventure!">
+    <meta name="keywords" content="train game, maze game, kids train game, locomotive game, cleanup game, toddler game, fun games for kids, railroad game">
+    <meta name="author" content="Mad Lad Studios">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://madladstudios.com/train-cleanup-game.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://madladstudios.com/train-cleanup-game.html">
+    <meta property="og:title" content="Train Cleanup Game - Clear the Tracks! | Mad Lad Studios">
+    <meta property="og:description" content="Drive a locomotive through a train track maze! Collect fallen tree branches and dump them. A toddler-friendly train adventure!">
+    <meta property="og:site_name" content="Mad Lad Studios">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://madladstudios.com/train-cleanup-game.html">
+    <meta property="twitter:title" content="Train Cleanup Game - Clear the Tracks! | Mad Lad Studios">
+    <meta property="twitter:description" content="Drive a locomotive through a train track maze! Collect fallen tree branches and dump them.">
+
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#5D4037">
+    <meta name="msapplication-TileColor" content="#5D4037">
+    <meta name="application-name" content="Train Cleanup Game">
+    
+    <script defer data-domain="madladstudios.com" src="https://plausible.io/js/script.outbound-links.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="train-cleanup-game/style.css">
+</head>
+
+<body class="bg-gradient-to-br from-green-700 via-green-600 to-emerald-700 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white/90 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html"
+                    class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-700 to-emerald-600">
+                    Mad Lad Studios
+                </a>
+                <div class="flex space-x-6">
+                    <a href="index.html#games" class="text-gray-700 hover:text-green-600 font-medium transition">All
+                        Games</a>
+                    <a href="index.html#about"
+                        class="text-gray-700 hover:text-green-600 font-medium transition">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Game Header -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 flex items-center justify-center gap-4">
+                <span class="text-6xl">🚂</span>
+                Train Cleanup
+                <span class="text-6xl">🌿</span>
+            </h1>
+            <p class="text-xl text-white/90">Drive the train through the maze and clean up fallen branches!</p>
+        </div>
+
+        <!-- Learning Objective -->
+        <div class="mb-6 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-4 max-w-2xl mx-auto">
+            <h2 class="text-xl font-bold text-green-700 text-center mb-2">🎯 Mission: Clean the Tracks!</h2>
+            <p class="text-gray-600 text-center">Collect all the fallen branches and dump them at the garbage dump!</p>
+        </div>
+
+        <!-- Game Container -->
+        <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-6 max-w-5xl mx-auto">
+            <div class="game-container">
+                <canvas id="gameCanvas" class="mx-auto block"></canvas>
+            </div>
+            
+            <!-- Touch Controls -->
+            <div class="touch-controls">
+                <button id="btnLeft" class="touch-btn btn-left">⬅️</button>
+                <button id="btnUp" class="touch-btn btn-up">⬆️</button>
+                <button id="btnRight" class="touch-btn btn-right">➡️</button>
+            </div>
+        </div>
+
+        <!-- Controls Guide -->
+        <div class="mt-8 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-6 max-w-4xl mx-auto">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800 text-center">🎮 Controls</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Left -->
+                <div class="bg-blue-50 rounded-xl p-5 border-4 border-blue-400 text-center">
+                    <div class="control-key mx-auto mb-3">⬅️</div>
+                    <h3 class="text-xl font-bold text-blue-700">LEFT ARROW</h3>
+                    <p class="text-blue-600 mt-2">Turn left at junctions</p>
+                </div>
+                
+                <!-- Up -->
+                <div class="bg-green-50 rounded-xl p-5 border-4 border-green-400 text-center">
+                    <div class="control-key mx-auto mb-3">⬆️</div>
+                    <h3 class="text-xl font-bold text-green-700">UP ARROW</h3>
+                    <p class="text-green-600 mt-2">Drive the train forward!</p>
+                    <p class="text-sm text-gray-500 mt-1">Hold to keep moving</p>
+                </div>
+                
+                <!-- Right -->
+                <div class="bg-blue-50 rounded-xl p-5 border-4 border-blue-400 text-center">
+                    <div class="control-key mx-auto mb-3">➡️</div>
+                    <h3 class="text-xl font-bold text-blue-700">RIGHT ARROW</h3>
+                    <p class="text-blue-600 mt-2">Turn right at junctions</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- How to Play -->
+        <div class="mt-8 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-6 max-w-2xl mx-auto">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">📖 How to Play</h2>
+            <ul class="space-y-3 text-gray-700">
+                <li class="flex items-start">
+                    <span class="text-green-500 mr-3 text-xl">1️⃣</span>
+                    <span>Press <strong>⬆️ UP</strong> to make the train go forward along the tracks</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-green-500 mr-3 text-xl">2️⃣</span>
+                    <span>At <strong>junctions</strong> (where tracks split), press <strong>⬅️ LEFT</strong> or <strong>➡️ RIGHT</strong> to choose which way to go</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-green-500 mr-3 text-xl">3️⃣</span>
+                    <span>Drive over the <strong>🌿 fallen branches</strong> to pick them up into the cargo car</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-green-500 mr-3 text-xl">4️⃣</span>
+                    <span>Collect <strong>all 5 branches</strong> scattered around the maze</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-green-500 mr-3 text-xl">5️⃣</span>
+                    <span>Drive to the <strong>🗑️ DUMP</strong> at the bottom-right to dump the branches! 🎉</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Tips -->
+        <div class="mt-8 bg-gradient-to-r from-amber-100 to-yellow-100 rounded-xl shadow-xl p-6 max-w-2xl mx-auto">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">💡 Tips</h2>
+            <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start">
+                    <span class="text-amber-500 mr-2">🌟</span>
+                    The train follows the tracks automatically on curves and straight sections
+                </li>
+                <li class="flex items-start">
+                    <span class="text-amber-500 mr-2">🌟</span>
+                    Yellow arrows show which way you'll go at junctions - change with LEFT/RIGHT
+                </li>
+                <li class="flex items-start">
+                    <span class="text-amber-500 mr-2">🌟</span>
+                    Branches glow yellow so they're easy to spot
+                </li>
+                <li class="flex items-start">
+                    <span class="text-amber-500 mr-2">🌟</span>
+                    The DUMP glows when all branches are collected!
+                </li>
+            </ul>
+        </div>
+
+        <!-- Other Games -->
+        <div class="mt-12 text-center">
+            <h3 class="text-2xl font-bold text-white mb-6">Try Our Other Games!</h3>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="train-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-purple-600 hover:bg-white transition">
+                    🚂 Train Collector
+                </a>
+                <a href="speed-drag-race-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-green-600 hover:bg-white transition">
+                    🏎️ Speed Drag Race
+                </a>
+                <a href="delivery-truck-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-blue-600 hover:bg-white transition">
+                    📦 Delivery Truck
+                </a>
+                <a href="index.html#games" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-green-700 hover:bg-white transition border-2 border-green-700">
+                    🎮 See All Games
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-2">© 2026 Mad Lad Studios. All rights reserved.</p>
+            <p class="text-gray-400">Train games for kids, made with love.</p>
+        </div>
+    </footer>
+
+    <!-- Load the game -->
+    <script src="train-cleanup-game/game.js"></script>
+</body>
+
+</html>

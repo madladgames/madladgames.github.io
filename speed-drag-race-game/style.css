@@ -1,0 +1,81 @@
+/* Speed Drag Race Game Styles */
+.game-container {
+    background: transparent !important;
+    padding: 0 !important;
+}
+
+#gameCanvas {
+    border: 4px solid #333;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    max-width: 100%;
+    height: auto;
+    cursor: pointer;
+}
+
+.car-select-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.car-select-btn {
+    padding: 15px 25px;
+    border: 4px solid transparent;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    min-width: 160px;
+    text-align: center;
+    color: white;
+}
+
+.car-select-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+.car-select-btn.selected {
+    border-color: #FFD700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    transform: scale(1.05);
+}
+
+.car-select-btn.convertible {
+    background: linear-gradient(135deg, #2E7D32, #43A047);
+}
+
+.car-select-btn.beetle {
+    background: linear-gradient(135deg, #1565C0, #1E88E5);
+}
+
+.car-select-btn.muscle {
+    background: linear-gradient(135deg, #C62828, #E53935);
+}
+
+.control-key {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(145deg, #f0f0f0, #d0d0d0);
+    border: 2px solid #999;
+    border-radius: 8px;
+    font-size: 24px;
+    box-shadow: 0 4px 0 #888, 0 6px 10px rgba(0,0,0,0.2);
+    margin: 0 5px;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.pulse-animation {
+    animation: pulse 2s infinite;
+}

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bell Music Game - Play the Scale! | Mad Lad Studios</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="A colorful bell music game for toddlers! Tap bells to hear musical notes and drag them into the right order to play a scale. Fun, educational, and toddler-friendly!">
+    <meta name="keywords" content="bell game, music game, toddler games, educational games, musical scale, preschool games, learning music, kids games, do re mi">
+    <meta name="author" content="Mad Lad Studios">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://madladstudios.com/bell-music-game.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://madladstudios.com/bell-music-game.html">
+    <meta property="og:title" content="Bell Music Game - Play the Scale! | Mad Lad Studios">
+    <meta property="og:description" content="A colorful bell music game for toddlers! Tap bells to hear musical notes and drag them into the right order.">
+    <meta property="og:site_name" content="Mad Lad Studios">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://madladstudios.com/bell-music-game.html">
+    <meta property="twitter:title" content="Bell Music Game - Play the Scale! | Mad Lad Studios">
+    <meta property="twitter:description" content="A colorful bell music game for toddlers! Tap bells to hear musical notes and drag them into the right order.">
+
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#8b5cf6">
+    <meta name="msapplication-TileColor" content="#8b5cf6">
+    <meta name="application-name" content="Bell Music Game">
+
+    <script defer data-domain="madladstudios.com" src="https://plausible.io/js/script.outbound-links.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR-PUBLISHER-ID"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="bell-music-game/style.css">
+</head>
+
+<body class="bg-gradient-to-br from-violet-500 via-fuchsia-500 to-amber-400 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white/90 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <a href="index.html"
+                    class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-fuchsia-600">
+                    Mad Lad Studios
+                </a>
+                <div class="flex space-x-4">
+                    <a href="index.html#games" class="text-gray-700 hover:text-purple-600 font-medium transition text-sm">All Games</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-purple-600 font-medium transition text-sm">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Game Header -->
+    <div class="container mx-auto px-4 pt-4 pb-2">
+        <div class="text-center mb-3">
+            <h1 class="text-3xl md:text-4xl font-bold text-white mb-1">
+                🔔 Bell Music Game 🎵
+            </h1>
+            <p class="text-lg text-white/90">Tap to hear · Drag to reorder · Low → High</p>
+        </div>
+
+        <!-- Game Area -->
+        <div class="game-wrapper">
+            <!-- Status bar -->
+            <div id="status-bar" class="status-bar">
+                🔔 Tap a bell to hear it! Drag to reorder — low to high!
+            </div>
+
+            <!-- Listen button -->
+            <div class="buttons-row">
+                <button id="btn-listen" class="game-btn">🎶 Listen to the Scale</button>
+            </div>
+
+            <!-- Bell playground (reorder bells in-place here) -->
+            <div id="bell-playground" class="bell-playground"></div>
+        </div>
+
+        <!-- Celebration overlay -->
+        <div id="celebration" class="celebration">
+            <div class="celebration-box">
+                <div class="stars">⭐🎉⭐</div>
+                <h2>Amazing Job!</h2>
+                <p>You played the whole scale! 🎶</p>
+                <button id="btn-play-scale" class="btn-play-scale">🔔 Hear It Again!</button>
+                <br>
+                <button id="btn-play-again" class="btn-play-again">🎵 Play Again!</button>
+            </div>
+        </div>
+
+        <!-- Ad Space - Top -->
+        <div class="my-4">
+            <div class="rounded-lg p-2 text-center max-w-4xl mx-auto">
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
+                    data-ad-slot="YOUR-AD-SLOT-ID-BELL-1" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+
+        <!-- Instructions + Scale Guide (compact) -->
+        <div class="bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-4 max-w-3xl mx-auto mb-4">
+            <h2 class="text-lg font-bold text-gray-800 text-center mb-3">📖 How to Play</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-gray-700 text-sm">
+                <div class="space-y-2">
+                    <p>1️⃣ <strong>Tap</strong> any bell to hear its sound!</p>
+                    <p>2️⃣ Press <strong>"Listen to the Scale"</strong> to hear the correct order</p>
+                    <p>3️⃣ <strong>Drag</strong> bells to reorder them — low to high!</p>
+                    <p>4️⃣ Bells that glow <strong class="text-green-600">green</strong> are in the right spot ✅</p>
+                </div>
+                <div>
+                    <p class="font-bold text-purple-700 mb-2 text-center">🎶 The Scale</p>
+                    <div class="grid grid-cols-8 gap-1 text-center">
+                        <div class="rounded-lg bg-red-100 border-2 border-red-400 p-1">
+                            <div class="font-bold text-red-700 text-xs">Do</div>
+                        </div>
+                        <div class="rounded-lg bg-orange-100 border-2 border-orange-400 p-1">
+                            <div class="font-bold text-orange-700 text-xs">Re</div>
+                        </div>
+                        <div class="rounded-lg bg-yellow-100 border-2 border-yellow-500 p-1">
+                            <div class="font-bold text-yellow-700 text-xs">Mi</div>
+                        </div>
+                        <div class="rounded-lg bg-green-100 border-2 border-green-400 p-1">
+                            <div class="font-bold text-green-700 text-xs">Fa</div>
+                        </div>
+                        <div class="rounded-lg bg-cyan-100 border-2 border-cyan-400 p-1">
+                            <div class="font-bold text-cyan-700 text-xs">Sol</div>
+                        </div>
+                        <div class="rounded-lg bg-blue-100 border-2 border-blue-400 p-1">
+                            <div class="font-bold text-blue-700 text-xs">La</div>
+                        </div>
+                        <div class="rounded-lg bg-violet-100 border-2 border-violet-400 p-1">
+                            <div class="font-bold text-violet-700 text-xs">Ti</div>
+                        </div>
+                        <div class="rounded-lg bg-pink-100 border-2 border-pink-400 p-1">
+                            <div class="font-bold text-pink-700 text-xs">Do!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ad Space - Bottom -->
+        <div class="mb-4">
+            <div class="rounded-lg p-2 text-center max-w-4xl mx-auto">
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
+                    data-ad-slot="YOUR-AD-SLOT-ID-BELL-2" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+
+        <!-- Other Games -->
+        <div class="text-center mb-6">
+            <h3 class="text-xl font-bold text-white mb-4">Try Our Other Games!</h3>
+            <div class="flex flex-wrap justify-center gap-3">
+                <a href="sorting-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-4 py-2 font-bold text-purple-600 hover:bg-white transition text-sm">
+                    🚗 Sorting Game
+                </a>
+                <a href="carwash-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-4 py-2 font-bold text-cyan-600 hover:bg-white transition text-sm">
+                    🧽 Car Wash
+                </a>
+                <a href="train-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-4 py-2 font-bold text-violet-600 hover:bg-white transition text-sm">
+                    🚂 Train Game
+                </a>
+                <a href="index.html#games" class="bg-white/90 backdrop-blur-sm rounded-lg px-4 py-2 font-bold text-blue-600 hover:bg-white transition text-sm border-2 border-blue-600">
+                    🎮 All Games
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-6">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-1 text-sm">© 2026 Mad Lad Studios. All rights reserved.</p>
+            <p class="text-gray-400 text-sm">Educational games for kids, made with love.</p>
+        </div>
+    </footer>
+
+    <!-- Load the game -->
+    <script src="bell-music-game/game.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,323 @@
+/* Bell Music Game Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+body {
+    overflow-x: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.game-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 6px;
+}
+
+/* Status / instruction bar */
+.status-bar {
+    text-align: center;
+    background: rgba(255,255,255,0.92);
+    border-radius: 14px;
+    padding: 10px 16px;
+    margin-bottom: 10px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #6d28d9;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+}
+
+/* The bell playground — single row reorder container */
+.bell-playground {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 10px;
+    min-height: 140px;
+    padding: 16px 8px;
+    background: rgba(255,255,255,0.18);
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+/* Individual bell */
+.bell {
+    width: 96px;
+    height: 130px;
+    cursor: grab;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.18s, filter 0.18s, opacity 0.15s;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: none;
+    z-index: 10;
+}
+
+.bell:hover {
+    transform: scale(1.08);
+}
+
+.bell.dragging {
+    cursor: grabbing;
+    transform: scale(1.12);
+    z-index: 9000;
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.35));
+}
+
+/* Placeholder left behind while dragging */
+.bell.drag-placeholder {
+    opacity: 0.25;
+    transform: scale(0.92);
+}
+
+/* Insert indicators — colored bars */
+.bell.insert-before {
+    border-left: 4px solid #fff;
+    padding-left: 2px;
+    margin-left: -2px;
+}
+.bell.insert-after {
+    border-right: 4px solid #fff;
+    padding-right: 2px;
+    margin-right: -2px;
+}
+
+.bell-handle {
+    width: 18px;
+    height: 24px;
+    border: 5px solid;
+    border-bottom: none;
+    border-radius: 12px 12px 0 0;
+    margin-bottom: -2px;
+}
+
+.bell-body {
+    width: 90px;
+    height: 80px;
+    border-radius: 12px 12px 45px 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 -10px 20px rgba(0,0,0,0.15), 0 6px 16px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.bell-body::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 14px;
+    width: 22px;
+    height: 22px;
+    background: rgba(255,255,255,0.35);
+    border-radius: 50%;
+}
+
+.bell-clapper {
+    position: absolute;
+    bottom: -8px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #555;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.bell-note {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    z-index: 2;
+}
+
+/* Correct bell glow */
+.bell.correct-pos {
+    filter: drop-shadow(0 0 12px rgba(34,197,94,0.6));
+}
+
+/* Bell ring animation */
+@keyframes bellRing {
+    0% { transform: rotate(0deg); }
+    15% { transform: rotate(14deg); }
+    30% { transform: rotate(-12deg); }
+    45% { transform: rotate(8deg); }
+    60% { transform: rotate(-6deg); }
+    75% { transform: rotate(3deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.bell.ringing {
+    animation: bellRing 0.5s ease-in-out;
+}
+
+/* Musical note particles */
+@keyframes noteFloat {
+    0% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+    100% { opacity: 0; transform: translateY(-100px) rotate(25deg) scale(1.5); }
+}
+
+.note-particle {
+    position: fixed;
+    font-size: 2rem;
+    pointer-events: none;
+    z-index: 9999;
+    animation: noteFloat 1.2s ease-out forwards;
+}
+
+/* Buttons row */
+.buttons-row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.game-btn {
+    background: rgba(255,255,255,0.9);
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 50px;
+    cursor: pointer;
+    color: #059669;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+    transition: transform 0.2s, background 0.2s;
+}
+
+.game-btn:hover {
+    transform: scale(1.06);
+    background: #fff;
+}
+
+/* Celebration overlay */
+.celebration {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 5000;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.celebration.active {
+    display: flex;
+}
+
+.celebration-box {
+    background: #fff;
+    border-radius: 30px;
+    padding: 32px 40px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    animation: celebPop 0.5s ease-out;
+}
+
+@keyframes celebPop {
+    0% { transform: scale(0.3); opacity: 0; }
+    70% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.celebration-box h2 {
+    font-size: 2.2rem;
+    color: #6d28d9;
+    margin-bottom: 8px;
+}
+
+.celebration-box .stars {
+    font-size: 3.5rem;
+    margin-bottom: 8px;
+}
+
+.celebration-box p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 16px;
+}
+
+.btn-play-again {
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    color: #fff;
+    border: none;
+    font-size: 1.3rem;
+    font-weight: 800;
+    padding: 12px 36px;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(139,92,246,0.4);
+    transition: transform 0.2s;
+}
+
+.btn-play-again:hover {
+    transform: scale(1.08);
+}
+
+.btn-play-scale {
+    background: linear-gradient(135deg, #06b6d4, #3b82f6);
+    color: #fff;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 10px 28px;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-top: 8px;
+    box-shadow: 0 4px 16px rgba(6,182,212,0.4);
+    transition: transform 0.2s;
+}
+
+.btn-play-scale:hover {
+    transform: scale(1.08);
+}
+
+/* Confetti */
+@keyframes confettiFall {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0.7; }
+}
+
+.confetti-piece {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    top: -20px;
+    z-index: 5001;
+    border-radius: 3px;
+    animation: confettiFall linear forwards;
+    pointer-events: none;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+    .bell { width: 72px; height: 105px; }
+    .bell-body { width: 68px; height: 62px; }
+    .bell-handle { width: 14px; height: 18px; border-width: 4px; }
+    .bell-clapper { width: 12px; height: 12px; bottom: -6px; }
+    .bell-note { font-size: 1.2rem; }
+    .bell-playground { gap: 6px; padding: 12px 4px; }
+    .status-bar { font-size: 1rem; padding: 8px 12px; }
+    .bell-body::after { width: 16px; height: 16px; top: 6px; left: 10px; }
+}
+
+@media (max-width: 420px) {
+    .bell { width: 60px; height: 90px; }
+    .bell-body { width: 56px; height: 52px; }
+    .bell-handle { width: 12px; height: 15px; border-width: 3px; }
+    .bell-clapper { width: 10px; height: 10px; bottom: -5px; }
+    .bell-note { font-size: 1rem; }
+    .celebration-box { padding: 20px 18px; }
+    .celebration-box h2 { font-size: 1.6rem; }
+}

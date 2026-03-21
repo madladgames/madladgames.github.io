@@ -6,8 +6,8 @@
     <title>Mad Lad Studios - Fun Games for Kids</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Fun and exciting games for kids made by a kid! Play Mad Car Game, Mad Crab Game, Mad Racetrack Game, and more. Safe, educational, and entertaining games designed for children.">
-    <meta name="keywords" content="kids games, children games, fun games, educational games, car games, racing games, crab games, fire truck games, safe games for kids">
+    <meta name="description" content="Fun and exciting games for kids made by a kid! Play racing games, truck games, train games, animal games, and educational games. Safe, fun, and free games designed for children.">
+    <meta name="keywords" content="kids games, children games, fun games, educational games, car games, racing games, truck games, train games, fire truck games, safe games for kids, toddler games">
     <meta name="author" content="Mad Lad Studios">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://madladstudios.com/">
@@ -16,7 +16,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://madladstudios.com/">
     <meta property="og:title" content="Mad Lad Studios - Fun Games for Kids">
-    <meta property="og:description" content="Fun and exciting games for kids made by a kid! Play Mad Car Game, Mad Crab Game, Mad Racetrack Game, and more. Safe, educational, and entertaining games designed for children.">
+    <meta property="og:description" content="Fun and exciting games for kids made by a kid! 20+ free games including racing, trucks, trains, animals, and learning games.">
     <meta property="og:site_name" content="Mad Lad Studios">
     <meta property="og:locale" content="en_US">
     
@@ -24,8 +24,7 @@
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://madladstudios.com/">
     <meta property="twitter:title" content="Mad Lad Studios - Fun Games for Kids">
-    <meta property="twitter:description" content="Fun and exciting games for kids made by a kid! Play Mad Car Game, Mad Crab Game, Mad Racetrack Game, and more. Safe, educational, and entertaining games designed for children.">
-
+    <meta property="twitter:description" content="Fun and exciting games for kids made by a kid! 20+ free games including racing, trucks, trains, animals, and learning games.">
     
     <!-- Additional SEO -->
     <meta name="theme-color" content="#9333ea">
@@ -40,268 +39,395 @@
          crossorigin="anonymous"></script>
     
     <style>
-        /* Custom animations */
         @keyframes float {
             0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+            50% { transform: translateY(-12px); }
             100% { transform: translateY(0px); }
         }
-        
-        .float-animation {
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        .game-card:hover {
-            transform: scale(1.05);
-            transition: transform 0.3s ease;
-        }
-        
-        .game-card {
-            transition: transform 0.3s ease;
-        }
+        .float-animation { animation: float 3s ease-in-out infinite; }
+
+        .game-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .game-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+
+        .filter-chip { transition: all 0.2s ease; }
+        .filter-chip:hover { transform: scale(1.05); }
+        .filter-chip.active { box-shadow: 0 0 0 3px rgba(255,255,255,0.6); }
+
+        .game-card.hidden-card { display: none; }
     </style>
 </head>
 <body class="bg-gradient-to-br from-purple-600 via-pink-500 to-red-500 min-h-screen">
     <!-- Navigation -->
     <nav class="bg-white/90 backdrop-blur-sm shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4">
+        <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
-                <a href="/" class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+                <a href="/" class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
                     Mad Lad Studios
                 </a>
-                <div class="flex space-x-6">
-                    <a href="#games" class="text-gray-700 hover:text-purple-600 font-medium transition">Games</a>
-                    <a href="#about" class="text-gray-700 hover:text-purple-600 font-medium transition">About</a>
+                <div class="flex space-x-4">
+                    <a href="#games" class="text-gray-700 hover:text-purple-600 font-medium transition text-sm">Games</a>
+                    <a href="#about" class="text-gray-700 hover:text-purple-600 font-medium transition text-sm">About</a>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="container mx-auto px-4 py-16 text-center">
-        <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 float-animation">
-            Welcome to Mad Lad Studios!
+    <section class="container mx-auto px-4 pt-8 pb-4 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-2 float-animation">
+            Mad Lad Studios 🎮
         </h1>
-        <p class="text-2xl md:text-3xl text-white/90 mb-8">
+        <p class="text-xl text-white/90 mb-4">
             Games for kids, made by a kid (and AI).
         </p>
-        <div class="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-full px-6 py-3">
-            <span class="text-yellow-300 text-2xl">🎮</span>
-            <span class="text-white font-medium">Play Fun Games Below!</span>
-            <span class="text-yellow-300 text-2xl">🎮</span>
-        </div>
     </section>
 
     <!-- Games Section -->
-    <section id="games" class="container mx-auto px-4 py-16">
-        <h2 class="text-4xl font-bold text-white text-center mb-12">Our Awesome Games</h2>
+    <section id="games" class="container mx-auto px-4 pb-8 max-w-4xl">
+        <h2 class="text-2xl font-bold text-white text-center mb-4">Our Games</h2>
         
-        <div class="grid md:grid-cols-3 gap-8">
-            <!-- Car Wash Game -->
-            <div class="game-card bg-white rounded-xl shadow-2xl overflow-hidden">
-                <div class="bg-gradient-to-r from-cyan-500 to-blue-500 p-6">
-                    <div class="text-6xl text-center mb-4">🧽</div>
-                    <h3 class="text-2xl font-bold text-white text-center">Car Wash Game</h3>
-                </div>
-                <div class="p-6">
-                    <p class="text-gray-700 mb-6">
-                        Drive your car through the car wash! Collect soap bubbles and avoid the spinning brushes in this toddler-friendly adventure!
-                    </p>
-                    <a href="carwash-game.html" class="block w-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-center py-3 rounded-lg font-bold hover:from-cyan-600 hover:to-blue-600 transition">
-                        Play Now!
-                    </a>
-                </div>
-            </div>
+        <!-- Filter Chips -->
+        <div class="flex flex-wrap justify-center gap-2 mb-6" id="filter-bar">
+            <button class="filter-chip active bg-white text-gray-800 font-bold px-4 py-2 rounded-full text-sm shadow-md" data-filter="all">
+                🎮 All (20)
+            </button>
+            <button class="filter-chip bg-rose-500 text-white font-bold px-4 py-2 rounded-full text-sm shadow-md" data-filter="racing">
+                🏁 Racing
+            </button>
+            <button class="filter-chip bg-blue-500 text-white font-bold px-4 py-2 rounded-full text-sm shadow-md" data-filter="trucks">
+                🚒 Trucks
+            </button>
+            <button class="filter-chip bg-violet-500 text-white font-bold px-4 py-2 rounded-full text-sm shadow-md" data-filter="trains">
+                🚂 Trains
+            </button>
+            <button class="filter-chip bg-emerald-500 text-white font-bold px-4 py-2 rounded-full text-sm shadow-md" data-filter="animals">
+                🐾 Animals
+            </button>
+            <button class="filter-chip bg-amber-500 text-white font-bold px-4 py-2 rounded-full text-sm shadow-md" data-filter="learning">
+                🎓 Learning
+            </button>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4" id="games-grid">
 
-            <!-- Crab Game -->
-            <div class="game-card bg-white rounded-xl shadow-2xl overflow-hidden">
-                <div class="bg-gradient-to-r from-orange-500 to-red-500 p-6">
-                    <div class="text-6xl text-center mb-4">🦀</div>
-                    <h3 class="text-2xl font-bold text-white text-center">Crab Game</h3>
+            <!-- 1. Racetrack (rose) -->
+            <a href="racetrack-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="racing">
+                <div class="px-3 pt-4 pb-2 text-center">
+                    <div class="text-4xl mb-2">🏁</div>
+                    <h3 class="text-sm font-bold text-gray-800 leading-tight">Racetrack Game</h3>
+                    <p class="text-gray-500 text-xs mt-1">Race around the track and set records!</p>
                 </div>
-                <div class="p-6">
-                    <p class="text-gray-700 mb-6">
-                        Help the crab collect pearls while avoiding dangerous sharks! How many levels can you complete?
-                    </p>
-                    <a href="crab-game.html" class="block w-full bg-gradient-to-r from-orange-500 to-red-500 text-white text-center py-3 rounded-lg font-bold hover:from-orange-600 hover:to-red-600 transition">
-                        Play Now!
-                    </a>
+                <div class="px-3 pb-3">
+                    <span class="block w-full bg-rose-500 text-white text-center py-1.5 rounded-lg font-bold text-sm">Play!</span>
                 </div>
-            </div>
+            </a>
 
-            <!-- Racetrack Game -->
-            <div class="game-card bg-white rounded-xl shadow-2xl overflow-hidden">
-                <div class="bg-gradient-to-r from-green-500 to-emerald-500 p-6">
-                    <div class="text-6xl text-center mb-4">🏁</div>
-                    <h3 class="text-2xl font-bold text-white text-center">Racetrack Game</h3>
+            <!-- 2. Drive Fire Truck (blue) -->
+            <a href="drive-firetruck-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="trucks">
+                <div class="px-3 pt-4 pb-2 text-center">
+                    <div class="text-4xl mb-2">🚒</div>
+                    <h3 class="text-sm font-bold text-gray-800 leading-tight">Drive Fire Truck</h3>
+                    <p class="text-gray-500 text-xs mt-1">Drive through the city and save the day!</p>
                 </div>
-                <div class="p-6">
-                    <p class="text-gray-700 mb-6">
-                        Race around the track at high speeds! Use your steering skills to stay on course and set records!
-                    </p>
-                    <a href="racetrack-game.html" class="block w-full bg-gradient-to-r from-green-500 to-emerald-500 text-white text-center py-3 rounded-lg font-bold hover:from-green-600 hover:to-emerald-600 transition">
-                        Play Now!
-                    </a>
+                <div class="px-3 pb-3">
+                    <span class="block w-full bg-blue-500 text-white text-center py-1.5 rounded-lg font-bold text-sm">Play!</span>
                 </div>
-            </div>
+            </a>
 
-            <!-- Drive Fire Truck Game -->
-            <div class="game-card bg-white rounded-xl shadow-2xl overflow-hidden">
-                <div class="bg-gradient-to-r from-red-500 to-pink-500 p-6">
-                    <div class="text-6xl text-center mb-4">🚒</div>
-                    <h3 class="text-2xl font-bold text-white text-center">Drive Fire Truck Game</h3>
+            <!-- 3. Train Game (violet) -->
+            <a href="train-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="trains">
+                <div class="px-3 pt-4 pb-2 text-center">
+                    <div class="text-4xl mb-2">🚂</div>
+                    <h3 class="text-sm font-bold text-gray-800 leading-tight">Train Game</h3>
+                    <p class="text-gray-500 text-xs mt-1">Collect cars and build the longest train!</p>
                 </div>
-                <div class="p-6">
-                    <p class="text-gray-700 mb-6">
-                        Drive the fire truck and save the day! Navigate through the city with your emergency vehicle!
-                    </p>
-                    <a href="drive-firetruck-game.html" class="block w-full bg-gradient-to-r from-red-500 to-pink-500 text-white text-center py-3 rounded-lg font-bold hover:from-red-600 hover:to-pink-600 transition">
-                        Play Now!
-                    </a>
+                <div class="px-3 pb-3">
+                    <span class="block w-full bg-violet-500 text-white text-center py-1.5 rounded-lg font-bold text-sm">Play!</span>
                 </div>
-            </div>
+            </a>
 
-            <!-- Jumping Car Game -->
-            <div class="game-card bg-white rounded-xl shadow-2xl overflow-hidden">
-                <div class="bg-gradient-to-r from-blue-500 to-cyan-500 p-6">
-                    <div class="text-6xl text-center mb-4">🚙</div>
-                    <h3 class="text-2xl font-bold text-white text-center">Jumping Car Game</h3>
+            <!-- 4. Crab Game (emerald) -->
+            <a href="crab-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="animals">
+                <div class="px-3 pt-4 pb-2 text-center">
+                    <div class="text-4xl mb-2">🦀</div>
+                    <h3 class="text-sm font-bold text-gray-800 leading-tight">Crab Game</h3>
+                    <p class="text-gray-500 text-xs mt-1">Collect pearls while dodging sharks!</p>
                 </div>
-                <div class="p-6">
-                    <p class="text-gray-700 mb-6">
-                        Jump over obstacles in this exciting car adventure! Test your reflexes and see how far you can go!
-                    </p>
-                    <a href="jumping-car-game.html" class="block w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-center py-3 rounded-lg font-bold hover:from-blue-600 hover:to-cyan-600 transition">
-                        Play Now!
-                    </a>
+                <div class="px-3 pb-3">
+                    <span class="block w-full bg-emerald-500 text-white text-center py-1.5 rounded-lg font-bold text-sm">Play!</span>
                 </div>
-            </div>
+            </a>
 
-            <!-- Police Chase Game -->
-            <div class="game-card bg-white rounded-xl shadow-2xl overflow-hidden">
-                <div class="bg-gradient-to-r from-blue-600 to-blue-800 p-6">
-                    <div class="text-6xl text-center mb-4">🚓</div>
-                    <h3 class="text-2xl font-bold text-white text-center">Police Chase Game</h3>
+            <!-- 5. Bell Music Game (amber) -->
+            <a href="bell-music-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="learning">
+                <div class="px-3 pt-4 pb-2 text-center">
+                    <div class="text-4xl mb-2">🔔</div>
+                    <h3 class="text-sm font-bold text-gray-800 leading-tight">Bell Music Game</h3>
+                    <p class="text-gray-500 text-xs mt-1">Tap bells and put them in scale order!</p>
                 </div>
-                <div class="p-6">
-                    <p class="text-gray-700 mb-6">
-                        Join the police chase! Catch the bad guys and keep the streets safe in this exciting pursuit game!
-                    </p>
-                    <a href="police-chase-game.html" class="block w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white text-center py-3 rounded-lg font-bold hover:from-blue-700 hover:to-blue-900 transition">
-                        Play Now!
-                    </a>
+                <div class="px-3 pb-3">
+                    <span class="block w-full bg-amber-500 text-white text-center py-1.5 rounded-lg font-bold text-sm">Play!</span>
                 </div>
-            </div>
+            </a>
 
-            <!-- Train Game -->
-            <div class="game-card bg-white rounded-xl shadow-2xl overflow-hidden">
-                <div class="bg-gradient-to-r from-purple-500 to-violet-500 p-6">
-                    <div class="text-6xl text-center mb-4">🚂</div>
-                    <h3 class="text-2xl font-bold text-white text-center">Train Game</h3>
+            <!-- 6. Speed Drag Race (rose) -->
+            <a href="speed-drag-race-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="racing">
+                <div class="px-3 pt-4 pb-2 text-center">
+                    <div class="text-4xl mb-2">🏎️</div>
+                    <h3 class="text-sm font-bold text-gray-800 leading-tight">Speed Drag Race</h3>
+                    <p class="text-gray-500 text-xs mt-1">Pick your car and blast down the strip!</p>
                 </div>
-                <div class="p-6">
-                    <p class="text-gray-700 mb-6">
-                        Drive your train on the tracks and collect train cars! Switch between tracks and build the longest train possible!
-                    </p>
-                    <a href="train-game.html" class="block w-full bg-gradient-to-r from-purple-500 to-violet-500 text-white text-center py-3 rounded-lg font-bold hover:from-purple-600 hover:to-violet-600 transition">
-                        Play Now!
-                    </a>
+                <div class="px-3 pb-3">
+                    <span class="block w-full bg-rose-500 text-white text-center py-1.5 rounded-lg font-bold text-sm">Play!</span>
                 </div>
-            </div>
+            </a>
 
-            <!-- Red Car Game -->
-            <div class="game-card bg-white rounded-xl shadow-2xl overflow-hidden">
-                <div class="bg-gradient-to-r from-red-400 to-red-600 p-6">
-                    <div class="text-6xl text-center mb-4">🚗</div>
-                    <h3 class="text-2xl font-bold text-white text-center">Red Car Game</h3>
+            <!-- 7. Delivery Truck (blue) -->
+            <a href="delivery-truck-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="trucks">
+                <div class="px-3 pt-4 pb-2 text-center">
+                    <div class="text-4xl mb-2">📦</div>
+                    <h3 class="text-sm font-bold text-gray-800 leading-tight">Delivery Truck</h3>
+                    <p class="text-gray-500 text-xs mt-1">Deliver packages around town!</p>
                 </div>
-                <div class="p-6">
-                    <p class="text-gray-700 mb-6">
-                        Race at high speeds and dodge obstacles! Control your red car and see how long you can survive!
-                    </p>
-                    <a href="red-car-game.html" class="block w-full bg-gradient-to-r from-red-400 to-red-600 text-white text-center py-3 rounded-lg font-bold hover:from-red-500 hover:to-red-700 transition">
-                        Play Now!
-                    </a>
+                <div class="px-3 pb-3">
+                    <span class="block w-full bg-blue-500 text-white text-center py-1.5 rounded-lg font-bold text-sm">Play!</span>
                 </div>
-            </div>
+            </a>
 
-            <!-- Fire Fighter Game -->
-            <div class="game-card bg-white rounded-xl shadow-2xl overflow-hidden">
-                <div class="bg-gradient-to-r from-red-500 to-orange-500 p-6">
-                    <div class="text-6xl text-center mb-4">🔥</div>
-                    <h3 class="text-2xl font-bold text-white text-center">Fire Fighter Game</h3>
+            <!-- 8. Beetle Maze (emerald) -->
+            <a href="beetle-maze-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="animals">
+                <div class="px-3 pt-4 pb-2 text-center">
+                    <div class="text-4xl mb-2">🪲</div>
+                    <h3 class="text-sm font-bold text-gray-800 leading-tight">Beetle Maze</h3>
+                    <p class="text-gray-500 text-xs mt-1">Guide the beetle through the maze!</p>
                 </div>
-                <div class="p-6">
-                    <p class="text-gray-700 mb-6">
-                        Save burning houses and be a hero! Drive the firetruck and spray water to extinguish fires!
-                    </p>
-                    <a href="firetruck-game.html" class="block w-full bg-gradient-to-r from-red-500 to-orange-500 text-white text-center py-3 rounded-lg font-bold hover:from-red-600 hover:to-orange-600 transition">
-                        Play Now!
-                    </a>
+                <div class="px-3 pb-3">
+                    <span class="block w-full bg-emerald-500 text-white text-center py-1.5 rounded-lg font-bold text-sm">Play!</span>
                 </div>
-            </div>
+            </a>
+
+            <!-- 9. Drag Race (rose) -->
+            <a href="drag-race-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="racing">
+                <div class="px-3 pt-4 pb-2 text-center">
+                    <div class="text-4xl mb-2">🚗</div>
+                    <h3 class="text-sm font-bold text-gray-800 leading-tight">Drag Race</h3>
+                    <p class="text-gray-500 text-xs mt-1">Hit the gas and race to the finish line!</p>
+                </div>
+                <div class="px-3 pb-3">
+                    <span class="block w-full bg-rose-500 text-white text-center py-1.5 rounded-lg font-bold text-sm">Play!</span>
+                </div>
+            </a>
+
+            <!-- 10. Fire Fighter (blue) -->
+            <a href="firetruck-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="trucks">
+                <div class="px-3 pt-4 pb-2 text-center">
+                    <div class="text-4xl mb-2">🔥</div>
+                    <h3 class="text-sm font-bold text-gray-800 leading-tight">Fire Fighter</h3>
+                    <p class="text-gray-500 text-xs mt-1">Spray water to put out fires!</p>
+                </div>
+                <div class="px-3 pb-3">
+                    <span class="block w-full bg-blue-500 text-white text-center py-1.5 rounded-lg font-bold text-sm">Play!</span>
+                </div>
+            </a>
+
+            <!-- 11. Train Cleanup (violet) -->
+            <a href="train-cleanup-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="trains">
+                <div class="px-3 pt-4 pb-2 text-center">
+                    <div class="text-4xl mb-2">🚃</div>
+                    <h3 class="text-sm font-bold text-gray-800 leading-tight">Train Cleanup</h3>
+                    <p class="text-gray-500 text-xs mt-1">Clear branches from the tracks!</p>
+                </div>
+                <div class="px-3 pb-3">
+                    <span class="block w-full bg-violet-500 text-white text-center py-1.5 rounded-lg font-bold text-sm">Play!</span>
+                </div>
+            </a>
+
+            <!-- 12. Sorting Game (amber) -->
+            <a href="sorting-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="learning">
+                <div class="px-3 pt-4 pb-2 text-center">
+                    <div class="text-4xl mb-2">🗂️</div>
+                    <h3 class="text-sm font-bold text-gray-800 leading-tight">Sorting Game</h3>
+                    <p class="text-gray-500 text-xs mt-1">Sort vehicles and animals into categories!</p>
+                </div>
+                <div class="px-3 pb-3">
+                    <span class="block w-full bg-amber-500 text-white text-center py-1.5 rounded-lg font-bold text-sm">Play!</span>
+                </div>
+            </a>
+
+            <!-- 13. Rally Jump (rose) -->
+            <a href="rally-jump-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="racing">
+                <div class="px-3 pt-4 pb-2 text-center">
+                    <div class="text-4xl mb-2">🚙</div>
+                    <h3 class="text-sm font-bold text-gray-800 leading-tight">Rally Jump</h3>
+                    <p class="text-gray-500 text-xs mt-1">Fly over ramps and land huge jumps!</p>
+                </div>
+                <div class="px-3 pb-3">
+                    <span class="block w-full bg-rose-500 text-white text-center py-1.5 rounded-lg font-bold text-sm">Play!</span>
+                </div>
+            </a>
+
+            <!-- 14. Police Chase (blue) -->
+            <a href="police-chase-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="trucks racing">
+                <div class="px-3 pt-4 pb-2 text-center">
+                    <div class="text-4xl mb-2">🚓</div>
+                    <h3 class="text-sm font-bold text-gray-800 leading-tight">Police Chase</h3>
+                    <p class="text-gray-500 text-xs mt-1">Chase bad guys and keep streets safe!</p>
+                </div>
+                <div class="px-3 pb-3">
+                    <span class="block w-full bg-blue-500 text-white text-center py-1.5 rounded-lg font-bold text-sm">Play!</span>
+                </div>
+            </a>
+
+            <!-- 15. Simple Drag Race (rose) -->
+            <a href="simple-drag-race-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="racing">
+                <div class="px-3 pt-4 pb-2 text-center">
+                    <div class="text-4xl mb-2">🏁</div>
+                    <h3 class="text-sm font-bold text-gray-800 leading-tight">Simple Drag Race</h3>
+                    <p class="text-gray-500 text-xs mt-1">Quick and easy — perfect for little racers!</p>
+                </div>
+                <div class="px-3 pb-3">
+                    <span class="block w-full bg-rose-500 text-white text-center py-1.5 rounded-lg font-bold text-sm">Play!</span>
+                </div>
+            </a>
+
+            <!-- 16. Garbage Truck (blue) -->
+            <a href="garbage-truck-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="trucks">
+                <div class="px-3 pt-4 pb-2 text-center">
+                    <div class="text-4xl mb-2">🗑️</div>
+                    <h3 class="text-sm font-bold text-gray-800 leading-tight">Garbage Truck</h3>
+                    <p class="text-gray-500 text-xs mt-1">Pick up trash and keep the neighborhood clean!</p>
+                </div>
+                <div class="px-3 pb-3">
+                    <span class="block w-full bg-blue-500 text-white text-center py-1.5 rounded-lg font-bold text-sm">Play!</span>
+                </div>
+            </a>
+
+            <!-- 17. Red Car (rose) -->
+            <a href="red-car-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="racing">
+                <div class="px-3 pt-4 pb-2 text-center">
+                    <div class="text-4xl mb-2">🚗</div>
+                    <h3 class="text-sm font-bold text-gray-800 leading-tight">Red Car Game</h3>
+                    <p class="text-gray-500 text-xs mt-1">Dodge obstacles at high speed!</p>
+                </div>
+                <div class="px-3 pb-3">
+                    <span class="block w-full bg-rose-500 text-white text-center py-1.5 rounded-lg font-bold text-sm">Play!</span>
+                </div>
+            </a>
+
+            <!-- 18. Car Wash (blue) -->
+            <a href="carwash-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="trucks">
+                <div class="px-3 pt-4 pb-2 text-center">
+                    <div class="text-4xl mb-2">🧽</div>
+                    <h3 class="text-sm font-bold text-gray-800 leading-tight">Car Wash</h3>
+                    <p class="text-gray-500 text-xs mt-1">Drive through the car wash and collect bubbles!</p>
+                </div>
+                <div class="px-3 pb-3">
+                    <span class="block w-full bg-blue-500 text-white text-center py-1.5 rounded-lg font-bold text-sm">Play!</span>
+                </div>
+            </a>
+
+            <!-- 19. Motorcycle (rose) -->
+            <a href="motorcycle-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="racing">
+                <div class="px-3 pt-4 pb-2 text-center">
+                    <div class="text-4xl mb-2">🏍️</div>
+                    <h3 class="text-sm font-bold text-gray-800 leading-tight">Motorcycle Game</h3>
+                    <p class="text-gray-500 text-xs mt-1">Ride and dodge traffic on the road!</p>
+                </div>
+                <div class="px-3 pb-3">
+                    <span class="block w-full bg-rose-500 text-white text-center py-1.5 rounded-lg font-bold text-sm">Play!</span>
+                </div>
+            </a>
+
+            <!-- 20. Jumping Car (rose) -->
+            <a href="jumping-car-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="racing">
+                <div class="px-3 pt-4 pb-2 text-center">
+                    <div class="text-4xl mb-2">🚙</div>
+                    <h3 class="text-sm font-bold text-gray-800 leading-tight">Jumping Car</h3>
+                    <p class="text-gray-500 text-xs mt-1">Jump over obstacles — test your reflexes!</p>
+                </div>
+                <div class="px-3 pb-3">
+                    <span class="block w-full bg-rose-500 text-white text-center py-1.5 rounded-lg font-bold text-sm">Play!</span>
+                </div>
+            </a>
+
         </div>
     </section>
 
     <!-- Ad Space -->
-    <section class="container mx-auto px-4 py-8">
-        <div class="rounded-lg p-4 text-center">
-            <!-- Google AdSense Ad Unit -->
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
-                 data-ad-slot="YOUR-AD-SLOT-ID-2"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+    <section class="container mx-auto px-4 py-4 max-w-4xl">
+        <div class="rounded-lg p-2 text-center">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
+                 data-ad-slot="YOUR-AD-SLOT-ID-2" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="container mx-auto px-4 py-16">
-        <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-8 md:p-12 max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+    <section id="about" class="container mx-auto px-4 py-8 max-w-4xl">
+        <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-6 md:p-8 max-w-3xl mx-auto">
+            <h2 class="text-2xl font-bold text-center mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
                 About Mad Lad Studios
             </h2>
-            <p class="text-gray-700 text-lg leading-relaxed mb-6">
+            <p class="text-gray-700 leading-relaxed mb-3">
                 Welcome to Mad Lad Studios! We create fun and exciting games that kids love to play. 
                 Our games are designed to be entertaining, challenging, and safe for players of all ages.
             </p>
-            <p class="text-gray-700 text-lg leading-relaxed">
-                Each game is crafted with care to provide hours of entertainment. Whether you're jumping 
-                over obstacles, collecting treasures, or racing at high speeds, there's always something 
-                fun to do at Mad Lad Studios!
+            <p class="text-gray-700 leading-relaxed">
+                Each game is crafted with care to provide hours of entertainment. Whether you're racing, 
+                driving trucks, riding trains, or learning music — there's always something fun to do!
             </p>
-            <div class="mt-8 text-center">
-                <span class="inline-block text-6xl">🎮</span>
+            <div class="mt-4 text-center">
+                <span class="inline-block text-4xl">🎮</span>
             </div>
         </div>
     </section>
 
     <!-- Ad Space -->
-    <section class="container mx-auto px-4 py-8">
-        <div class="rounded-lg p-4 text-center">
-            <!-- Google AdSense Ad Unit -->
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
-                 data-ad-slot="YOUR-AD-SLOT-ID"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+    <section class="container mx-auto px-4 py-4 max-w-4xl">
+        <div class="rounded-lg p-2 text-center">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
+                 data-ad-slot="YOUR-AD-SLOT-ID" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-8 mt-16">
+    <footer class="bg-gray-900 text-white py-6">
         <div class="container mx-auto px-4 text-center">
-            <p class="mb-2">© 2025 Mad Lad Studios. All rights reserved.</p>
-            <p class="text-gray-400">Games for kids, made by a kid (and AI).</p>
+            <p class="mb-1 text-sm">© 2026 Mad Lad Studios. All rights reserved.</p>
+            <p class="text-gray-400 text-sm">Games for kids, made by a kid (and AI).</p>
         </div>
     </footer>
+
+    <!-- Filter Script -->
+    <script>
+    (function() {
+        var chips = document.querySelectorAll('.filter-chip');
+        var cards = document.querySelectorAll('.game-card');
+        
+        chips.forEach(function(chip) {
+            chip.addEventListener('click', function() {
+                // Just toggle the active class — chips keep their own colors
+                chips.forEach(function(c) { c.classList.remove('active'); });
+                chip.classList.add('active');
+                
+                var filter = chip.getAttribute('data-filter');
+                
+                if (filter === 'all') {
+                    cards.forEach(function(card) { card.classList.remove('hidden-card'); });
+                } else {
+                    cards.forEach(function(card) {
+                        var cats = (card.getAttribute('data-categories') || '').split(' ');
+                        if (cats.indexOf(filter) >= 0) {
+                            card.classList.remove('hidden-card');
+                        } else {
+                            card.classList.add('hidden-card');
+                        }
+                    });
+                }
+            });
+        });
+    })();
+    </script>
 </body>
 </html>
