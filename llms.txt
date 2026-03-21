@@ -1,0 +1,63 @@
+# Mad Lad Studios
+
+> Free browser-based games for kids ages 2–6. No downloads, no ads tracking, no accounts required. All games run in-browser with HTML5/JavaScript.
+
+## About
+
+Mad Lad Studios creates safe, colorful, educational games for toddlers and preschoolers (ages 2–6). Games are designed to be played on tablets, phones, and computers with touch and mouse support. Every game is free to play at https://madladstudios.com.
+
+## Games by Category
+
+### 🏁 Racing Games (ages 3–6)
+- [Racetrack Game](https://madladstudios.com/racetrack-game.html): Steer a car around a track. Builds hand-eye coordination and spatial awareness.
+- [Speed Drag Race](https://madladstudios.com/speed-drag-race-game.html): Choose a car and race down a drag strip. Teaches cause-and-effect and decision making.
+- [Drag Race](https://madladstudios.com/drag-race-game.html): Tap to accelerate and race to the finish. Develops timing and motor skills.
+- [Simple Drag Race](https://madladstudios.com/simple-drag-race-game.html): Simplified racing for younger toddlers. Introduces basic game interaction.
+- [Rally Jump](https://madladstudios.com/rally-jump-game.html): Drive over ramps and land jumps. Builds anticipation and spatial reasoning.
+- [Red Car Game](https://madladstudios.com/red-car-game.html): Dodge obstacles at speed. Develops reaction time and focus.
+- [Motorcycle Game](https://madladstudios.com/motorcycle-game.html): Ride a motorcycle and avoid traffic. Builds attention and reflexes.
+- [Jumping Car](https://madladstudios.com/jumping-car-game.html): Jump over obstacles in a car. Teaches timing and rhythm.
+- [Police Chase](https://madladstudios.com/police-chase-game.html): Chase vehicles as a police car. Encourages role-play and spatial tracking.
+
+### 🚒 Truck & Vehicle Games (ages 2–5)
+- [Drive Fire Truck](https://madladstudios.com/drive-firetruck-game.html): Drive a fire truck through the city. Introduces community helpers and navigation.
+- [Fire Fighter](https://madladstudios.com/firetruck-game.html): Spray water to extinguish fires. Teaches cause-and-effect and problem solving.
+- [Delivery Truck](https://madladstudios.com/delivery-truck-game.html): Deliver packages around town. Builds route planning and sequencing skills.
+- [Garbage Truck](https://madladstudios.com/garbage-truck-game.html): Collect trash in a garbage truck. Teaches environmental awareness and sequencing.
+- [Car Wash](https://madladstudios.com/carwash-game.html): Drive through a car wash collecting bubbles. Develops tracking and anticipation.
+
+### 🚂 Train Games (ages 2–5)
+- [Train Game](https://madladstudios.com/train-game.html): Drive a train and collect cars. Teaches counting, sequencing, and track-switching.
+- [Train Cleanup](https://madladstudios.com/train-cleanup-game.html): Clear debris from tracks with a locomotive. Builds problem-solving and navigation skills.
+
+### 🐾 Animal Games (ages 2–5)
+- [Crab Game](https://madladstudios.com/crab-game.html): Guide a crab to collect pearls and avoid sharks. Develops directional control and risk assessment.
+- [Beetle Maze](https://madladstudios.com/beetle-maze-game.html): Navigate a beetle through a maze. Builds spatial reasoning, planning, and persistence.
+
+### 🎓 Learning Games (ages 2–4)
+- [Sorting Game](https://madladstudios.com/sorting-game.html): Drag vehicles and animals into correct categories. Teaches categorization, vocabulary, and cognitive grouping.
+- [Bell Music Game](https://madladstudios.com/bell-music-game.html): Tap colorful bells to hear notes, then drag to reorder them into a musical scale. Teaches pitch recognition, sequencing, auditory discrimination, and fine motor skills.
+
+## Cognitive & Developmental Benefits
+
+All games are designed with early childhood development in mind:
+
+- **Fine Motor Skills**: Tapping, dragging, and swiping develop hand-eye coordination
+- **Cause and Effect**: Every action produces a visible, rewarding response
+- **Sequencing & Ordering**: Many games involve putting things in order (trains, musical notes, routes)
+- **Categorization**: Sorting games teach grouping by shared attributes
+- **Spatial Reasoning**: Mazes, racetracks, and navigation build spatial awareness
+- **Auditory Development**: The bell music game trains pitch discrimination and musical patterns
+- **Attention & Focus**: Avoiding obstacles and tracking moving objects builds sustained attention
+- **Problem Solving**: Route planning, maze navigation, and fire-fighting require strategic thinking
+- **Vocabulary & Language**: Games expose children to words like vehicles, animals, instruments
+- **Role Play & Imagination**: Driving trucks, fighting fires, and police chases encourage imaginative play
+
+## Technical Details
+
+- All games are client-side HTML5/JavaScript — no server required
+- Touch-friendly for tablets and phones
+- No user accounts or personal data collection
+- Games use Canvas API or DOM-based rendering
+- Audio generated via Web Audio API (no external audio files needed)
+- Hosted on GitHub Pages at madladstudios.com
