@@ -89,6 +89,12 @@
         <!-- Game Container -->
         <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-8 max-w-5xl mx-auto">
             <div class="game-container">
+                <!-- Start Button -->
+                <div class="text-center mb-4">
+                    <button id="startBtn" class="start-btn">Start Game</button>
+                    <button id="pauseBtn" class="pause-btn" style="display: none;">Pause</button>
+                </div>
+
                 <div class="game-header">
                     <h1>Red Car Game</h1>
                     <div class="score-board">
@@ -121,8 +127,6 @@
                         Use ←/→ arrow keys or A/D to steer your car left and right<br>
                         Dodge obstacles and survive as long as you can!
                     </div>
-                    <button id="startBtn" class="start-btn">Start Game</button>
-                    <button id="pauseBtn" class="pause-btn" style="display: none;">Pause</button>
                 </div>
 
                 <div id="gameOver" class="game-over" style="display: none;">

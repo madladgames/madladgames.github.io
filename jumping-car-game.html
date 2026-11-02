@@ -134,13 +134,13 @@
         <!-- Game Container -->
         <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-8 max-w-5xl mx-auto">
             <div class="game-container">
-                <canvas id="gameCanvas" width="800" height="400" class="mx-auto block"></canvas>
-                <div class="controls text-center mt-6">
-                    <p class="text-lg mb-2">Press <span class="key">SPACE</span> to Jump!</p>
-                    <p class="text-gray-600 mb-4">You can also click on the game area to jump</p>
-                    <button id="startButton" class="mb-4">Start Game</button>
-                    <p class="text-red-500 font-medium">⚠️ Click "Start Game" first, then use SPACE to jump!</p>
+                <!-- Start Button -->
+                <div class="controls text-center mb-4">
+                    <button id="startButton" class="mb-2">Start Game</button>
+                    <p class="text-sm text-gray-600">Press <span class="key">SPACE</span> to Jump! You can also click on the game area.</p>
                 </div>
+
+                <canvas id="gameCanvas" width="800" height="400" class="mx-auto block"></canvas>
                 <div class="score-display text-center mt-6">
                     <div class="flex justify-center gap-8">
                         <p class="text-xl font-bold">Score: <span id="score" class="text-blue-600">0</span></p>

@@ -6,7 +6,12 @@ const ctx = canvas.getContext('2d');
 
 // Canvas dimensions
 canvas.width = 700;
-canvas.height = 700;
+canvas.height = 810; // 50 top UI + 700 grid + 60 bottom UI
+
+// UI layout
+const TOP_BAR_HEIGHT = 50;
+const BOTTOM_BAR_HEIGHT = 60;
+const GRID_OFFSET_Y = TOP_BAR_HEIGHT; // Grid starts below top bar
 
 // Game state
 let selectedTruck = null;
@@ -185,23 +190,29 @@ document.addEventListener('keydown', (e) => {
 // Handle mouse/touch input
 canvas.addEventListener('click', (e) => {
     const rect = canvas.getBoundingClientRect();
-    const x = (e.clientX - rect.left) * (canvas.width / rect.width);
-    const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+    const canvasX = (e.clientX - rect.left) * (canvas.width / rect.width);
+    const canvasY = (e.clientY - rect.top) * (canvas.height / rect.height);
+    
+    // Convert to grid-local coordinates (subtract top bar offset)
+    const x = canvasX;
+    const y = canvasY - GRID_OFFSET_Y;
     
     if (gameState === 'selecting' || gameState === 'driving') {
-        // Check if clicked on a truck
-        trucks.forEach(truck => {
-            if (!truck.delivered) {
-                const truckCenterX = truck.x + CELL_SIZE / 2;
-                const truckCenterY = truck.y + CELL_SIZE / 2;
-                const dist = Math.sqrt((x - truckCenterX) ** 2 + (y - truckCenterY) ** 2);
-                
-                if (dist < CELL_SIZE / 2) {
-                    selectedTruck = truck;
-                    gameState = 'driving';
+        // Check if clicked on a truck (only if click is in grid area)
+        if (y >= 0 && y < GRID_ROWS * CELL_SIZE) {
+            trucks.forEach(truck => {
+                if (!truck.delivered) {
+                    const truckCenterX = truck.x + CELL_SIZE / 2;
+                    const truckCenterY = truck.y + CELL_SIZE / 2;
+                    const dist = Math.sqrt((x - truckCenterX) ** 2 + (y - truckCenterY) ** 2);
+                    
+                    if (dist < CELL_SIZE / 2) {
+                        selectedTruck = truck;
+                        gameState = 'driving';
+                    }
                 }
-            }
-        });
+            });
+        }
         
         // If driving and clicked on adjacent cell, move there
         if (gameState === 'driving' && selectedTruck && !selectedTruck.moving) {
@@ -617,7 +628,10 @@ function gameLoop() {
     ctx.fillStyle = '#263238';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    // Draw game elements
+    // Draw grid elements offset below top bar
+    ctx.save();
+    ctx.translate(0, GRID_OFFSET_Y);
+    
     drawRoads();
     drawDeliveryLocations();
     
@@ -639,7 +653,9 @@ function gameLoop() {
         drawCelebration();
     }
     
-    // Draw UI
+    ctx.restore();
+    
+    // Draw UI (not offset - positioned absolutely)
     drawUI();
     
     // Complete screen

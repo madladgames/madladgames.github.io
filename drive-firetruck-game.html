@@ -159,13 +159,13 @@
         <!-- Game Container -->
         <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-8 max-w-5xl mx-auto">
             <div class="game-container">
-                <canvas id="gameCanvas"></canvas>
-                <div class="controls text-center mt-6">
-                    <p class="text-lg mb-2">Use <span class="key">ARROW KEYS</span> to navigate the city streets!</p>
-                    <p class="text-gray-600 mb-4">Find the path through buildings to reach the 🚒 Fire Station!</p>
-                    <button id="startButton" class="mb-4">Start Game</button>
-                    <p class="text-red-500 font-medium">🏢 Navigate the city maze! 🏢</p>
+                <!-- Start Button -->
+                <div class="controls text-center mb-4">
+                    <button id="startButton" class="mb-2">Start Game</button>
+                    <p class="text-sm text-gray-600">Use <span class="key">ARROW KEYS</span> to navigate the city streets to the 🚒 Fire Station!</p>
                 </div>
+
+                <canvas id="gameCanvas"></canvas>
                 <div class="score-display text-center mt-6">
                     <div class="flex justify-center gap-8">
                         <p class="text-xl font-bold">Moves: <span id="score" class="text-red-600">0</span></p>
