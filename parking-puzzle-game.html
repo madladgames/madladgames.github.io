@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Puzzle Game - Mad Lad Studios</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="A fun parking lot puzzle game for toddlers! Slide colorful cars to unblock the green car and help it escape. 12 levels of increasing difficulty with realistic top-down cars.">
+    <meta name="keywords" content="parking puzzle game, rush hour kids, toddler puzzle, sliding cars game, parking lot game, car puzzle for kids, educational game toddlers">
+    <meta name="author" content="Mad Lad Studios">
+    <meta name="robots" content="index, follow">
+
+    <script defer data-domain="madladstudios.com" src="https://plausible.io/js/script.outbound-links.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="parking-puzzle-game/style.css">
+</head>
+
+<body class="bg-gradient-to-br from-purple-600 via-pink-500 to-red-500 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white/90 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html"
+                    class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+                    Mad Lad Studios
+                </a>
+                <div class="flex space-x-6">
+                    <a href="index.html#games" class="text-gray-700 hover:text-purple-600 font-medium transition">All
+                        Games</a>
+                    <a href="index.html#about"
+                        class="text-gray-700 hover:text-purple-600 font-medium transition">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Game Header -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 flex items-center justify-center gap-4">
+                <span class="text-6xl">🅿️</span>
+                Parking Puzzle
+                <span class="text-6xl">🚗</span>
+            </h1>
+            <p class="text-xl text-white/90">Slide the cars and help the green car escape!</p>
+        </div>
+
+        <!-- Game Container -->
+        <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-6 md:p-8 max-w-xl mx-auto">
+            <div class="game-container">
+
+                <!-- ===== MENU SCREEN ===== -->
+                <div id="menuScreen" class="screen active">
+                    <div class="menu-title">🅿️ Pick a Level!</div>
+                    <div class="menu-sub">Slide the cars to free the green car 🟢</div>
+                    <div id="levelGrid" class="level-grid"></div>
+                </div>
+
+                <!-- ===== GAME SCREEN ===== -->
+                <div id="gameScreen" class="screen">
+                    <!-- Header -->
+                    <div class="game-header">
+                        <button id="backBtn" class="game-hdr-btn">⬅️ Back</button>
+                        <div class="level-info">
+                            <div id="levelLabel" class="lbl">Level 1</div>
+                            <div id="moveLabel" class="moves">Moves: 0</div>
+                        </div>
+                        <button id="hintBtn" class="game-hdr-btn">💡 Hint</button>
+                    </div>
+
+                    <!-- Canvas -->
+                    <div class="canvas-wrap">
+                        <canvas id="gameCanvas"></canvas>
+                    </div>
+
+                    <!-- Hint bar -->
+                    <div id="hintBar" class="hint-bar"></div>
+
+                    <!-- Footer buttons -->
+                    <div class="game-footer">
+                        <button id="resetBtn" class="footer-btn">🔄 Try Again</button>
+                    </div>
+                </div>
+
+                <!-- ===== WIN OVERLAY ===== -->
+                <div id="winOverlay" class="win-overlay">
+                    <div class="win-content">
+                        <div class="win-emoji">🎉🚗🎉</div>
+                        <div class="win-title">You Did It!</div>
+                        <div id="winMoves" class="win-moves"></div>
+                        <button id="nextLevelBtn" class="win-btn next">Next Level ➡️</button>
+                        <button id="menuBtn" class="win-btn menu">🏠 Menu</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="mt-8 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-6 max-w-2xl mx-auto">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">How to Play</h2>
+            <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start">
+                    <span class="text-green-500 mr-2">🟢</span>
+                    The green car needs to reach the EXIT on the right side
+                </li>
+                <li class="flex items-start">
+                    <span class="text-purple-500 mr-2">👆</span>
+                    Drag the colored cars to slide them out of the way
+                </li>
+                <li class="flex items-start">
+                    <span class="text-purple-500 mr-2">↔️</span>
+                    Cars can only move in the direction they face — left/right or up/down
+                </li>
+                <li class="flex items-start">
+                    <span class="text-purple-500 mr-2">🧩</span>
+                    Clear a path so the green car can drive to freedom!
+                </li>
+                <li class="flex items-start">
+                    <span class="text-purple-500 mr-2">💡</span>
+                    Stuck? Tap the Hint button for a tip!
+                </li>
+                <li class="flex items-start">
+                    <span class="text-purple-500 mr-2">⭐</span>
+                    12 levels from easy to tricky — can you solve them all?
+                </li>
+            </ul>
+        </div>
+
+        <!-- Other Games -->
+        <div class="mt-12 text-center">
+            <h3 class="text-2xl font-bold text-white mb-6">Try Our Other Games!</h3>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="racetrack-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-rose-500 hover:bg-white transition">
+                    🏁 Racetrack Game
+                </a>
+                <a href="beetle-maze-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-emerald-600 hover:bg-white transition">
+                    🪲 Beetle Maze
+                </a>
+                <a href="sorting-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-amber-600 hover:bg-white transition">
+                    🗂️ Sorting Game
+                </a>
+                <a href="index.html#games" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-purple-600 hover:bg-white transition border-2 border-purple-600">
+                    🎮 See All Games
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-2">© 2026 Mad Lad Studios. All rights reserved.</p>
+            <p class="text-gray-400">Games for kids, made by a kid (and AI).</p>
+        </div>
+    </footer>
+
+    <script src="parking-puzzle-game/game.js"></script>
+</body>
+
+</html>

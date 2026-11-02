@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Drive a retro car around a 3D island, spell AIRPLANE, then fly airplanes to airports and land seaplanes on water.">
+  <title>Airplane Island Adventure - Mad Lad Studios</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="airplane-island-adventure-game/style.css">
+</head>
+<body>
+  <nav><a href="index.html">Mad Lad Studios</a><a href="index.html#games">All games</a></nav>
+  <main>
+    <header><p class="eyebrow">3D driving &amp; flying adventure</p><h1>Airplane Island Adventure</h1><p>Find the letters, unlock the hangar, and become an island pilot.</p></header>
+    <section class="game-shell" aria-label="Airplane Island Adventure">
+      <div class="hud">
+        <div><span class="label">Mission</span><strong id="mission">Drive to the glowing A</strong></div>
+        <div class="word"><span class="label">Unlock the hangar</span><strong id="word">_ _ _ _ _ _ _ _</strong></div>
+        <div><span class="label">Island badge</span><strong id="badge">0 / 3</strong></div>
+      </div>
+      <div id="game-wrap"><canvas id="game" aria-label="3D island game. Use keyboard controls to move."></canvas><div id="toast" role="status">Use WASD or arrow keys to drive.</div><div id="start" class="panel"><span class="big-icon">🚗</span><h2>Ready for an island road trip?</h2><p>Drive your retro car through the glowing letter rings. Spell <b>AIRPLANE</b> to open the airplane hangar.</p><button id="start-btn">Start driving</button></div></div>
+      <div class="controls"><span id="controls-text">Drive: WASD / arrow keys</span><button id="reset-btn" type="button">Reset vehicle</button><button id="camera-btn" type="button">Camera: follow</button></div>
+      <div id="hangar" class="hangar" hidden><div><p class="eyebrow">Hangar unlocked</p><h2>Pick an airplane</h2><p id="plane-copy">Fly through airport beacons and land at each runway.</p></div><div class="plane-buttons"><button data-plane="biplane"><span>🛩️</span><b>Sunbeam Biplane</b><small>Easy &amp; steady</small></button><button data-plane="jet"><span>✈️</span><b>Comet Jet</b><small>Fast flyer</small></button><button data-plane="seaplane"><span>🛶</span><b>Harbor Seaplane</b><small>Can land on water</small></button></div></div>
+      <p class="how"><b>How to play:</b> collect letters in any order while driving. Once you have AIRPLANE, choose a plane. Fly through the blue airport beacons; slow down close to a runway to land. The seaplane can earn the final badge on the water landing circle.</p>
+    </section>
+  </main>
+  <footer>© 2026 Mad Lad Studios · Games for kids, made by a kid (and AI).</footer>
+  <script type="module" src="airplane-island-adventure-game/game.js"></script>
+</body>
+</html>

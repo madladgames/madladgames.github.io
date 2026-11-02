@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Butterfly Match Game - Shape & Color Matching | Mad Lad Studios</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Help colorful butterflies fly to the right flowers by matching shapes and colors! A fun educational game teaching pattern recognition, color matching, and shape identification for toddlers.">
+    <meta name="keywords" content="butterfly game, matching game, toddler games, educational games, shape matching, color matching, preschool games, learning games, kids games, pattern recognition">
+    <meta name="author" content="Mad Lad Studios">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://madladstudios.com/butterfly-match-game.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://madladstudios.com/butterfly-match-game.html">
+    <meta property="og:title" content="Butterfly Match Game - Shape & Color Matching | Mad Lad Studios">
+    <meta property="og:description" content="Help colorful butterflies fly to the right flowers by matching shapes and colors! Fun educational game for toddlers.">
+    <meta property="og:site_name" content="Mad Lad Studios">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://madladstudios.com/butterfly-match-game.html">
+    <meta property="twitter:title" content="Butterfly Match Game - Shape & Color Matching | Mad Lad Studios">
+    <meta property="twitter:description" content="Help colorful butterflies fly to the right flowers by matching shapes and colors! Fun educational game for toddlers.">
+
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#2ecc71">
+    <meta name="msapplication-TileColor" content="#2ecc71">
+    <meta name="application-name" content="Butterfly Match Game">
+    
+    <script defer data-domain="madladstudios.com" src="https://plausible.io/js/script.outbound-links.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR-PUBLISHER-ID"
+        crossorigin="anonymous"></script>
+
+    <style>
+        .game-container {
+            background: transparent !important;
+            padding: 0 !important;
+        }
+
+        #gameCanvas {
+            border: 4px solid #2ecc71;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            max-width: 100%;
+            height: auto;
+            cursor: grab;
+            touch-action: none;
+        }
+
+        #gameCanvas:active {
+            cursor: grabbing;
+        }
+
+        .category-card {
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        @keyframes flutter {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-8px) rotate(-3deg); }
+            50% { transform: translateY(-4px) rotate(0deg); }
+            75% { transform: translateY(-10px) rotate(3deg); }
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+
+        .flutter-animation {
+            animation: flutter 2.5s ease-in-out infinite;
+        }
+
+        .wiggle-animation {
+            animation: wiggle 1s infinite;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-green-400 via-cyan-400 to-blue-400 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white/90 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html"
+                    class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-blue-600">
+                    Mad Lad Studios
+                </a>
+                <div class="flex space-x-6">
+                    <a href="index.html#games" class="text-gray-700 hover:text-green-600 font-medium transition">All
+                        Games</a>
+                    <a href="index.html#about"
+                        class="text-gray-700 hover:text-green-600 font-medium transition">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Game Header -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 flex items-center justify-center gap-4">
+                <span class="text-6xl flutter-animation">🦋</span>
+                Butterfly Match
+                <span class="text-6xl flutter-animation" style="animation-delay: 0.5s">🌸</span>
+            </h1>
+            <p class="text-xl text-white/90">Help butterflies find their matching flowers!</p>
+        </div>
+
+        <!-- Learning Objective -->
+        <div class="mb-6 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-4 max-w-2xl mx-auto">
+            <h2 class="text-xl font-bold text-green-700 text-center mb-2">🎓 Learning: Shapes & Colors</h2>
+            <p class="text-gray-600 text-center">This game teaches toddlers to match by color and shape — building pattern recognition skills!</p>
+        </div>
+
+        <!-- Ad Space - Top -->
+        <div class="mb-8">
+            <div class="rounded-lg p-4 text-center max-w-4xl mx-auto">
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
+                    data-ad-slot="YOUR-AD-SLOT-ID-7" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+
+        <!-- Game Container -->
+        <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-6 max-w-5xl mx-auto">
+            <div class="game-container">
+                <canvas id="gameCanvas" width="800" height="550" class="mx-auto block"></canvas>
+            </div>
+        </div>
+
+        <!-- Color & Shape Guide -->
+        <div class="mt-8 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-6 max-w-4xl mx-auto">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800 text-center">🎯 Match the Butterfly to its Flower!</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Colors -->
+                <div class="category-card bg-green-50 rounded-xl p-5 border-4 border-green-400">
+                    <div class="text-center mb-4">
+                        <span class="text-5xl">🎨</span>
+                        <h3 class="text-2xl font-bold text-green-700 mt-2">COLORS</h3>
+                    </div>
+                    <p class="text-green-600 text-center mb-3">Match the butterfly's color to the flower!</p>
+                    <div class="flex flex-wrap justify-center gap-3 text-lg">
+                        <span class="bg-green-400 text-white px-3 py-1 rounded-full font-bold">🟢 Green</span>
+                        <span class="bg-pink-400 text-white px-3 py-1 rounded-full font-bold">🩷 Pink</span>
+                        <span class="bg-blue-400 text-white px-3 py-1 rounded-full font-bold">🔵 Blue</span>
+                        <span class="bg-orange-400 text-white px-3 py-1 rounded-full font-bold">🟠 Orange</span>
+                        <span class="bg-purple-400 text-white px-3 py-1 rounded-full font-bold">🟣 Purple</span>
+                    </div>
+                </div>
+                
+                <!-- Shapes -->
+                <div class="category-card bg-blue-50 rounded-xl p-5 border-4 border-blue-400">
+                    <div class="text-center mb-4">
+                        <span class="text-5xl">🔷</span>
+                        <h3 class="text-2xl font-bold text-blue-700 mt-2">SHAPES</h3>
+                    </div>
+                    <p class="text-blue-600 text-center mb-3">Match the shape on the butterfly's wings too!</p>
+                    <div class="flex flex-wrap justify-center gap-3 text-lg">
+                        <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full font-bold">⭕ Circle</span>
+                        <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full font-bold">⭐ Star</span>
+                        <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full font-bold">❤️ Heart</span>
+                        <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full font-bold">💎 Diamond</span>
+                        <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full font-bold">🔺 Triangle</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="mt-8 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-6 max-w-2xl mx-auto">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">📖 How to Play</h2>
+            <ul class="space-y-3 text-gray-700">
+                <li class="flex items-start">
+                    <span class="text-green-500 mr-3 text-xl">1️⃣</span>
+                    <span>Look at the <strong>butterflies</strong> 🦋 flying at the top</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-green-500 mr-3 text-xl">2️⃣</span>
+                    <span>Each butterfly has a <strong>color</strong> and a <strong>shape</strong> on its wings</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-green-500 mr-3 text-xl">3️⃣</span>
+                    <span>Find the <strong>flower</strong> 🌸 with the same color and shape</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-green-500 mr-3 text-xl">4️⃣</span>
+                    <span><strong>Drag</strong> the butterfly to its matching flower</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-green-500 mr-3 text-xl">5️⃣</span>
+                    <span>Match all butterflies to win and go to the next level! 🎉</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Why This Game is Great -->
+        <div class="mt-8 bg-gradient-to-r from-green-100 to-blue-100 rounded-xl shadow-xl p-6 max-w-2xl mx-auto">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">🧠 What Kids Learn</h2>
+            <div class="space-y-3 text-gray-700">
+                <p><strong>🎨 Color Recognition:</strong> Identifying and naming different colors!</p>
+                <p><strong>🔷 Shape Identification:</strong> Learning circles, stars, hearts, diamonds, and triangles!</p>
+                <p><strong>🧩 Pattern Matching:</strong> Finding items that share two attributes at once!</p>
+                <p><strong>🎯 Fine Motor Skills:</strong> Dragging and dropping builds coordination!</p>
+                <p><strong>🌱 Progressive Difficulty:</strong> Each level adds more butterflies to match!</p>
+            </div>
+        </div>
+
+        <!-- Ad Space - Bottom -->
+        <div class="mt-8">
+            <div class="rounded-lg p-4 text-center max-w-4xl mx-auto">
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
+                    data-ad-slot="YOUR-AD-SLOT-ID-8" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+
+        <!-- Other Games -->
+        <div class="mt-12 text-center">
+            <h3 class="text-2xl font-bold text-white mb-6">Try Our Other Games!</h3>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="sorting-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-purple-600 hover:bg-white transition">
+                    🗂️ Sorting Game
+                </a>
+                <a href="bell-music-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-amber-600 hover:bg-white transition">
+                    🔔 Bell Music Game
+                </a>
+                <a href="crab-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-emerald-600 hover:bg-white transition">
+                    🦀 Crab Game
+                </a>
+                <a href="index.html#games" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-blue-600 hover:bg-white transition border-2 border-blue-600">
+                    🎮 See All Games
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-2">© 2026 Mad Lad Studios. All rights reserved.</p>
+            <p class="text-gray-400">Educational games for kids, made with love.</p>
+        </div>
+    </footer>
+
+    <!-- Load the game files -->
+    <script src="butterfly-match-game/game.js"></script>
+</body>
+
+</html>

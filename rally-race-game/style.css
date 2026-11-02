@@ -1,0 +1,432 @@
+/* ===== Rally Race Game Styles ===== */
+
+.game-container {
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* ===== Phase Screens ===== */
+.phase-screen {
+    display: none;
+}
+.phase-screen.active {
+    display: block;
+}
+
+/* ===== GARAGE PHASE ===== */
+.garage-area {
+    text-align: center;
+}
+
+.garage-title {
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.garage-subtitle {
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.garage-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.garage-section {
+    background: linear-gradient(135deg, #f5f0e8, #e8e0d0);
+    border-radius: 16px;
+    padding: 20px;
+    border: 2px solid #d4c8b0;
+}
+
+.garage-section h3 {
+    font-size: 1.3em;
+    margin-bottom: 12px;
+    color: #5a4a30;
+}
+
+.option-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+.option-btn {
+    background: white;
+    border: 3px solid #ccc;
+    border-radius: 12px;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    min-width: 100px;
+    text-align: center;
+}
+
+.option-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.option-btn.selected {
+    border-color: #d97706;
+    background: #fef3c7;
+    box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.3);
+}
+
+.color-swatch {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-bottom: 4px;
+    border: 2px solid rgba(0,0,0,0.1);
+}
+
+/* Car Preview */
+.car-preview-area {
+    margin: 24px auto;
+    position: relative;
+    width: 200px;
+    height: 300px;
+}
+
+/* Spoiler info callout */
+.spoiler-callout {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: #78350f;
+    border-radius: 12px;
+    padding: 14px 20px;
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+/* Start Rally Button */
+.start-rally-btn {
+    background: linear-gradient(45deg, #d97706, #b45309);
+    color: white;
+    border: none;
+    padding: 18px 50px;
+    font-size: 1.5em;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(217, 119, 6, 0.4);
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.start-rally-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(217, 119, 6, 0.5);
+}
+
+.start-rally-btn:disabled {
+    background: #999;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ===== RACE PHASE ===== */
+.race-hud {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #292211, #3d3219);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+    border: 2px solid #5a4a30;
+}
+
+.hud-item {
+    color: white;
+    font-weight: bold;
+    font-size: 1em;
+    text-align: center;
+}
+
+.hud-item .hud-label {
+    font-size: 0.7em;
+    color: #c4a86c;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.hud-item .hud-value {
+    font-size: 1.4em;
+    display: block;
+}
+
+.hud-value.speed {
+    color: #4ade80;
+}
+
+.hud-value.time {
+    color: #60a5fa;
+}
+
+.hud-value.stage {
+    color: #fbbf24;
+}
+
+.hud-value.crash-count {
+    color: #f87171;
+}
+
+.hud-value.position {
+    color: #c084fc;
+}
+
+/* Race Track Canvas */
+.race-canvas-wrap {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 3px solid #5a4a30;
+    background: #2a1f0e;
+}
+
+#raceCanvas {
+    display: block;
+    width: 100%;
+    height: 500px;
+    background: #5a4a30;
+}
+
+/* Crash / Repair Overlay */
+.crash-overlay {
+    display: none;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 10;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+.crash-overlay.active {
+    display: flex;
+}
+
+.crash-text {
+    color: #ff4444;
+    font-size: 2.5em;
+    font-weight: bold;
+    text-shadow: 0 0 20px rgba(255, 68, 68, 0.8);
+    margin-bottom: 10px;
+    animation: crashPulse 0.5s ease-in-out infinite alternate;
+}
+
+.repair-text {
+    color: #fbbf24;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.repair-bar-bg {
+    width: 300px;
+    height: 30px;
+    background: #444;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 2px solid #666;
+}
+
+.repair-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #fbbf24, #f59e0b);
+    border-radius: 15px;
+    width: 0%;
+    transition: width 0.1s ease;
+}
+
+.repair-hint {
+    color: #aaa;
+    font-size: 1em;
+    margin-top: 12px;
+}
+
+/* Race Finish Overlay */
+.finish-overlay {
+    display: none;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 15;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+.finish-overlay.active {
+    display: flex;
+}
+
+.finish-title {
+    font-size: 3em;
+    font-weight: bold;
+    color: #fbbf24;
+    text-shadow: 0 0 30px rgba(251, 191, 36, 0.6);
+    margin-bottom: 10px;
+}
+
+.finish-stats {
+    color: white;
+    font-size: 1.2em;
+    text-align: center;
+    line-height: 2;
+}
+
+.finish-btn {
+    background: linear-gradient(45deg, #d97706, #b45309);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+
+.finish-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(217, 119, 6, 0.5);
+}
+
+/* Countdown overlay */
+.countdown-overlay {
+    display: none;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 20;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+.countdown-overlay.active {
+    display: flex;
+}
+
+.countdown-number {
+    font-size: 8em;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 40px rgba(255,255,255,0.5);
+    animation: countPop 0.8s ease-out;
+}
+
+.countdown-go {
+    font-size: 5em;
+    font-weight: bold;
+    color: #4ade80;
+    text-shadow: 0 0 40px rgba(74, 222, 128, 0.8);
+    animation: countPop 0.5s ease-out;
+}
+
+/* Animations */
+@keyframes crashPulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
+}
+
+@keyframes countPop {
+    from { transform: scale(2); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shakeScreen {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-8px) translateY(4px); }
+    40% { transform: translateX(8px) translateY(-4px); }
+    60% { transform: translateX(-6px) translateY(2px); }
+    80% { transform: translateX(6px) translateY(-2px); }
+}
+
+.screen-shake {
+    animation: shakeScreen 0.4s ease-in-out;
+}
+
+/* Mobile touch controls */
+.touch-controls {
+    display: none;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 12px;
+}
+
+.touch-btn {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.1);
+    color: white;
+    font-size: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.1s;
+}
+
+.touch-btn:active {
+    background: rgba(255,255,255,0.3);
+}
+
+.touch-btn.repair-touch {
+    width: 120px;
+    border-radius: 20px;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .touch-controls {
+        display: flex;
+    }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .garage-title { font-size: 1.5em; }
+    .option-btn { padding: 8px 14px; font-size: 0.9em; min-width: 80px; }
+    .race-hud { padding: 8px 12px; }
+    .hud-item .hud-value { font-size: 1.1em; }
+    #raceCanvas { height: 400px; }
+    .crash-text { font-size: 1.8em; }
+    .finish-title { font-size: 2em; }
+}

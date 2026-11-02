@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rally Race Game - Mad Lad Studios</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Race through gravel, dirt, mud, snow, and tarmac stages in this exciting rally racing game! Pick your rally car, choose your color, and blast through stages with a big spoiler. Dodge rocks, logs, and hay bales!">
+    <meta name="keywords" content="rally race game, rally racing, kids racing game, car racing game, dirt racing, gravel racing, rally car game, spoiler car game">
+    <meta name="author" content="Mad Lad Studios">
+    <meta name="robots" content="index, follow">
+    
+    <script defer data-domain="madladstudios.com" src="https://plausible.io/js/script.outbound-links.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="rally-race-game/style.css">
+</head>
+
+<body class="bg-gradient-to-br from-amber-700 via-orange-600 to-yellow-500 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white/90 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html"
+                    class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-700 to-orange-600">
+                    Mad Lad Studios
+                </a>
+                <div class="flex space-x-6">
+                    <a href="index.html#games" class="text-gray-700 hover:text-amber-700 font-medium transition">All
+                        Games</a>
+                    <a href="index.html#about"
+                        class="text-gray-700 hover:text-amber-700 font-medium transition">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Game Header -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 flex items-center justify-center gap-4">
+                <span class="text-6xl">🏎️</span>
+                Rally Race
+                <span class="text-6xl">🏔️</span>
+            </h1>
+            <p class="text-xl text-white/90">Pick your rally car and blast through the stages!</p>
+        </div>
+
+        <!-- Game Container -->
+        <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-6 md:p-8 max-w-4xl mx-auto">
+            <div class="game-container">
+
+                <!-- ===== GARAGE PHASE ===== -->
+                <div id="garagePhase" class="phase-screen">
+                    <div class="garage-area">
+                        <div class="garage-title">🔧 Rally Garage</div>
+                        <div class="garage-subtitle">Choose your rally car and color — then hit the stages!</div>
+
+                        <!-- Big Spoiler Callout -->
+                        <div class="spoiler-callout">
+                            🏎️ BIG SPOILER — Equipped on all rally cars for maximum downforce!
+                        </div>
+
+                        <!-- Car Preview -->
+                        <div class="car-preview-area">
+                            <canvas id="previewCanvas" width="200" height="300"></canvas>
+                        </div>
+
+                        <div class="garage-sections">
+                            <!-- Rally Class -->
+                            <div class="garage-section">
+                                <h3>🏎️ Rally Class</h3>
+                                <div class="option-grid">
+                                    <button class="option-btn" data-category="rallyClass" data-value="wrc">
+                                        🏆 WRC<br><small>Top-tier machine</small>
+                                    </button>
+                                    <button class="option-btn" data-category="rallyClass" data-value="rally2">
+                                        ⚡ Rally2<br><small>Balanced & fast</small>
+                                    </button>
+                                    <button class="option-btn" data-category="rallyClass" data-value="group_b">
+                                        🔥 Group B<br><small>Legendary beast</small>
+                                    </button>
+                                    <button class="option-btn" data-category="rallyClass" data-value="rally4">
+                                        💨 Rally4<br><small>Nimble & grippy</small>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Color -->
+                            <div class="garage-section">
+                                <h3>🎨 Livery Color</h3>
+                                <div class="option-grid">
+                                    <button class="option-btn" data-category="color" data-value="red">
+                                        <div class="color-swatch" style="background:#e11d48"></div><br>Red
+                                    </button>
+                                    <button class="option-btn" data-category="color" data-value="blue">
+                                        <div class="color-swatch" style="background:#2563eb"></div><br>Blue
+                                    </button>
+                                    <button class="option-btn" data-category="color" data-value="green">
+                                        <div class="color-swatch" style="background:#16a34a"></div><br>Green
+                                    </button>
+                                    <button class="option-btn" data-category="color" data-value="yellow">
+                                        <div class="color-swatch" style="background:#eab308"></div><br>Yellow
+                                    </button>
+                                    <button class="option-btn" data-category="color" data-value="orange">
+                                        <div class="color-swatch" style="background:#ea580c"></div><br>Orange
+                                    </button>
+                                    <button class="option-btn" data-category="color" data-value="cyan">
+                                        <div class="color-swatch" style="background:#06b6d4"></div><br>Cyan
+                                    </button>
+                                    <button class="option-btn" data-category="color" data-value="black">
+                                        <div class="color-swatch" style="background:#1e1e1e"></div><br>Black
+                                    </button>
+                                    <button class="option-btn" data-category="color" data-value="white">
+                                        <div class="color-swatch" style="background:#f0f0f0"></div><br>White
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button id="startRallyBtn" class="start-rally-btn" disabled>
+                            🏁 Start Rally!
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ===== RACE PHASE ===== -->
+                <div id="racePhase" class="phase-screen">
+                    <!-- HUD -->
+                    <div class="race-hud">
+                        <div class="hud-item">
+                            <span class="hud-label">Speed</span>
+                            <span id="hudSpeed" class="hud-value speed">0 mph</span>
+                        </div>
+                        <div class="hud-item">
+                            <span class="hud-label">Time</span>
+                            <span id="hudTime" class="hud-value time">0:00</span>
+                        </div>
+                        <div class="hud-item">
+                            <span class="hud-label">Stage</span>
+                            <span id="hudStage" class="hud-value stage">1/4</span>
+                        </div>
+                        <div class="hud-item">
+                            <span class="hud-label">Crashes</span>
+                            <span id="hudCrash" class="hud-value crash-count">0/3</span>
+                        </div>
+                        <div class="hud-item">
+                            <span class="hud-label">Position</span>
+                            <span id="hudPosition" class="hud-value position">1st</span>
+                        </div>
+                    </div>
+
+                    <!-- Race Canvas -->
+                    <div id="canvasWrap" class="race-canvas-wrap">
+                        <canvas id="raceCanvas"></canvas>
+
+                        <!-- Countdown Overlay -->
+                        <div id="countdownOverlay" class="countdown-overlay">
+                            <div id="countdownContent"></div>
+                        </div>
+
+                        <!-- Crash/Repair Overlay -->
+                        <div id="crashOverlay" class="crash-overlay">
+                            <div id="crashText" class="crash-text">💥 CAR WRECKED!</div>
+                            <div class="repair-text">🔧 Mash SPACE BAR to repair!</div>
+                            <div class="repair-bar-bg">
+                                <div id="repairBarFill" class="repair-bar-fill"></div>
+                            </div>
+                            <div class="repair-hint">Press Space repeatedly to fix your rally car</div>
+                        </div>
+
+                        <!-- Finish Overlay -->
+                        <div id="finishOverlay" class="finish-overlay">
+                            <div id="finishTitle" class="finish-title">🏆 RALLY COMPLETE!</div>
+                            <div id="finishStats" class="finish-stats"></div>
+                            <button id="playAgainBtn" class="finish-btn">🔧 Back to Garage & Race Again!</button>
+                        </div>
+                    </div>
+
+                    <!-- Touch Controls (mobile) -->
+                    <div class="touch-controls">
+                        <button id="touchLeft" class="touch-btn">⬅️</button>
+                        <button id="touchRepair" class="touch-btn repair-touch">🔧 FIX</button>
+                        <button id="touchRight" class="touch-btn">➡️</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="mt-8 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-6 max-w-2xl mx-auto">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">How to Play</h2>
+            <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start">
+                    <span class="text-amber-600 mr-2">🏎️</span>
+                    Pick your rally class and livery color in the garage
+                </li>
+                <li class="flex items-start">
+                    <span class="text-amber-600 mr-2">🏔️</span>
+                    Every car comes with a BIG SPOILER for maximum downforce!
+                </li>
+                <li class="flex items-start">
+                    <span class="text-amber-600 mr-2">🚀</span>
+                    Your car accelerates automatically — it goes REALLY fast!
+                </li>
+                <li class="flex items-start">
+                    <span class="text-amber-600 mr-2">⬅️➡️</span>
+                    Use arrow keys to steer left and right, down arrow to brake
+                </li>
+                <li class="flex items-start">
+                    <span class="text-amber-600 mr-2">🏔️</span>
+                    Race through different terrain stages — gravel, dirt, mud, snow, and tarmac!
+                </li>
+                <li class="flex items-start">
+                    <span class="text-amber-600 mr-2">⚠️</span>
+                    Dodge rocks, logs, hay bales, puddles, and other rally cars!
+                </li>
+                <li class="flex items-start">
+                    <span class="text-amber-600 mr-2">💥</span>
+                    3 crashes and your car is wrecked!
+                </li>
+                <li class="flex items-start">
+                    <span class="text-amber-600 mr-2">🔨</span>
+                    Mash the SPACE BAR to repair your car and keep racing
+                </li>
+                <li class="flex items-start">
+                    <span class="text-amber-600 mr-2">🏁</span>
+                    Complete all stages to finish the rally — can you get 1st place?
+                </li>
+            </ul>
+        </div>
+
+        <!-- Other Games -->
+        <div class="mt-12 text-center">
+            <h3 class="text-2xl font-bold text-white mb-6">Try Our Other Games!</h3>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="race-car-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-rose-500 hover:bg-white transition">
+                    🏎️ Race Car Builder
+                </a>
+                <a href="rally-jump-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-orange-500 hover:bg-white transition">
+                    🚙 Rally Jump
+                </a>
+                <a href="speed-drag-race-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-rose-500 hover:bg-white transition">
+                    🏁 Speed Drag Race
+                </a>
+                <a href="index.html#games" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-amber-700 hover:bg-white transition border-2 border-amber-700">
+                    🎮 See All Games
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-2">© 2026 Mad Lad Studios. All rights reserved.</p>
+            <p class="text-gray-400">Games for kids, made by a kid (and AI).</p>
+        </div>
+    </footer>
+
+    <script src="rally-race-game/game.js"></script>
+</body>
+
+</html>

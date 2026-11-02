@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spelling Vehicle Rally - Mad Lad Studios</title>
+    <meta name="description" content="Choose planes and trucks, then drive or fly through a spelling rally to collect letters in order.">
+    <meta name="keywords" content="vehicle spelling game, plane game, truck game, educational driving game, word game">
+    <meta name="author" content="Mad Lad Studios">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://madladstudios.com/plane-spelling-rally-game.html">
+    <script defer data-domain="madladstudios.com" src="https://plausible.io/js/script.outbound-links.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="plane-spelling-rally-game/style.css">
+</head>
+<body class="min-h-screen bg-gradient-to-br from-sky-700 via-blue-600 to-cyan-400">
+    <nav class="bg-white/90 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-700 to-blue-600">Mad Lad Studios</a>
+            <div class="flex space-x-6"><a href="index.html#games" class="text-gray-700 hover:text-sky-700 font-medium transition">All Games</a><a href="index.html#about" class="text-gray-700 hover:text-sky-700 font-medium transition">About</a></div>
+        </div>
+    </nav>
+    <main class="container mx-auto px-4 py-8">
+        <header class="text-center mb-7 text-white"><h1 class="text-4xl md:text-5xl font-bold mb-3">✈️🚚 Spelling Vehicle Rally</h1><p class="text-lg md:text-xl text-white/90">Choose a vehicle, then collect the letters in the right order!</p></header>
+        <section class="game-shell max-w-5xl mx-auto" aria-label="Spelling Vehicle Rally game">
+            <div id="levelScreen" class="level-screen">
+                <span class="heading-kicker">Choose a level</span><h2>Where will you spell today?</h2><p>Each level has its own vehicle garage, course, and word.</p>
+                <div class="level-picker">
+                    <button class="level-card selected" type="button" data-level="plane"><span class="level-icon">✈️</span><strong>Level 1: PLANE</strong><span>Choose a 747, Piper Warrior, or 787 and fly through the sky.</span></button>
+                    <button class="level-card" type="button" data-level="truck"><span class="level-icon">🚚</span><strong>Level 2: CAR</strong><span>Choose a garbage truck, tractor trailer, or retro Ford and drive the road rally.</span></button>
+                </div>
+                <button id="openGarageButton" class="primary-button" type="button">Open Plane Garage</button>
+            </div>
+
+            <div id="garage" class="hangar" hidden>
+                <button id="backToLevelsButton" class="back-button" type="button">← Choose a Different Level</button>
+                <div class="hangar-heading"><span id="garageKicker" class="heading-kicker">Choose your aircraft</span><h2 id="garageTitle">Which plane will fly the spelling rally?</h2><p id="garageText">Each aircraft uses a real aircraft photograph and handles a little differently.</p></div>
+                <div id="vehiclePicker" class="plane-picker" role="radiogroup" aria-label="Choose a vehicle"></div>
+                <button id="startLevelButton" class="primary-button" type="button">Start Level 1: Spell PLANE</button>
+            </div>
+
+            <div id="gameScreen" class="flight-screen" hidden>
+                <div class="game-hud" aria-live="polite"><div class="hud-block"><span class="hud-label">Level</span><strong id="levelName">1 · PLANE</strong></div><div class="hud-block word-block"><span class="hud-label">Spell this word</span><strong id="wordProgress">_ _ _ _ _</strong></div><div class="hud-block"><span class="hud-label">Next letter</span><strong id="nextLetter" class="next-letter">P</strong></div></div>
+                <div id="gameBoard" class="game-board" tabindex="0" aria-label="Vehicle rally course. Use arrow keys, WASD, or the on-screen controls to move."><canvas id="rallyCanvas" width="960" height="600"></canvas><div id="message" class="game-message" role="status">Find the first letter!</div><div id="winOverlay" class="win-overlay" hidden><div class="win-card"><div id="winEmoji" class="text-5xl mb-2">🎉✈️</div><h2 id="winTitle">You spelled PLANE!</h2><p id="winText">Fantastic flying, pilot!</p><button id="playAgainButton" class="primary-button" type="button">Play This Level Again</button><button id="chooseVehicleButton" class="secondary-button" type="button">Choose Another Vehicle</button><button id="chooseLevelButton" class="secondary-button" type="button">Choose a Level</button></div></div></div>
+                <div class="touch-controls" aria-label="Movement controls"><button type="button" data-control="up" aria-label="Move up">▲</button><div><button type="button" data-control="left" aria-label="Move left">◀</button><button type="button" data-control="down" aria-label="Move down">▼</button><button type="button" data-control="right" aria-label="Move right">▶</button></div></div>
+                <p id="controlHint" class="control-hint">Use <strong>arrow keys</strong> or <strong>WASD</strong> to fly. Avoid obstacles and collect letters in the correct order.</p>
+            </div>
+        </section>
+        <section class="mt-8 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-6 max-w-3xl mx-auto"><h2 class="text-2xl font-bold mb-4 text-gray-800">How to Play</h2><ul class="space-y-2 text-gray-700"><li>🗺️ Choose a level and then pick one of its vehicles.</li><li>🔤 Find the mixed-up letters in the order shown at the top of the course.</li><li>🔁 A wrong letter restarts the word and returns your vehicle to the start.</li><li>⚠️ Bumping an obstacle returns your vehicle to the start.</li></ul></section>
+    </main>
+    <footer class="bg-gray-900 text-white py-8 mt-16 text-center"><p class="mb-2">© 2026 Mad Lad Studios. All rights reserved.</p><p class="text-gray-400">Games for kids, made by a kid (and AI).</p></footer>
+    <script src="plane-spelling-rally-game/game.js"></script>
+</body>
+</html>

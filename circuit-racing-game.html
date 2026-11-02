@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Circuit Racing Game - Mad Lad Studios</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Race high-fidelity 3D cars around a circuit track! Choose from sports cars, muscle cars, F1 cars, supercars, and rally cars. Steer with arrow keys in this exciting Three.js racing game.">
+    <meta name="keywords" content="3D racing game, circuit racing, Three.js game, car racing, kids racing game, sports car game, F1 game, supercar game">
+    <meta name="author" content="Mad Lad Studios">
+    <meta name="robots" content="index, follow">
+    
+    <script defer data-domain="madladstudios.com" src="https://plausible.io/js/script.outbound-links.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <link rel="stylesheet" href="circuit-racing-game/style.css">
+</head>
+
+<body class="bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white/90 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html"
+                    class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-700 to-purple-600">
+                    Mad Lad Studios
+                </a>
+                <div class="flex space-x-6">
+                    <a href="index.html#games" class="text-gray-700 hover:text-indigo-700 font-medium transition">All
+                        Games</a>
+                    <a href="index.html#about"
+                        class="text-gray-700 hover:text-indigo-700 font-medium transition">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Game Header -->
+    <div class="container mx-auto px-4 py-6">
+        <div class="text-center mb-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-2 flex items-center justify-center gap-4">
+                <span class="text-6xl">🏎️</span>
+                3D Circuit Racing
+                <span class="text-6xl">🏁</span>
+            </h1>
+            <p class="text-xl text-white/90">Choose your car and race the circuit!</p>
+        </div>
+
+        <!-- Game Container -->
+        <div class="bg-black/80 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden max-w-5xl mx-auto" style="position:relative;">
+            
+            <!-- Car Selection Overlay -->
+            <div id="carSelectOverlay" class="car-select-overlay">
+                <div class="car-select-content">
+                    <h2 class="car-select-title">🏎️ Choose Your Car</h2>
+                    
+                    <div id="carPreviewContainer" class="car-preview-container">
+                        <!-- Three.js preview canvas renders here -->
+                    </div>
+
+                    <div class="car-info-panel">
+                        <h3 id="carName" class="car-name">Sports Car</h3>
+                        <p id="carDesc" class="car-desc">A sleek and fast sports car with excellent handling.</p>
+                        <div class="car-stats">
+                            <div class="stat-row">
+                                <span class="stat-label">Speed</span>
+                                <div class="stat-bar"><div id="statSpeed" class="stat-fill" style="width:80%"></div></div>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Handling</span>
+                                <div class="stat-bar"><div id="statHandling" class="stat-fill" style="width:85%"></div></div>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Acceleration</span>
+                                <div class="stat-bar"><div id="statAccel" class="stat-fill" style="width:75%"></div></div>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Braking</span>
+                                <div class="stat-bar"><div id="statBrake" class="stat-fill" style="width:70%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="car-nav">
+                        <button id="prevCarBtn" class="car-nav-btn">◀ Prev</button>
+                        <span id="carCounter" class="car-counter">1 / 5</span>
+                        <button id="nextCarBtn" class="car-nav-btn">Next ▶</button>
+                    </div>
+                    
+                    <button id="startRaceBtn" class="start-race-btn">🏁 Start Race!</button>
+                </div>
+            </div>
+
+            <!-- Race HUD -->
+            <div id="raceHUD" class="race-hud" style="display:none;">
+                <div class="hud-left">
+                    <div class="hud-speed-display">
+                        <span id="hudSpeed" class="hud-speed-value">0</span>
+                        <span class="hud-speed-unit">MPH</span>
+                    </div>
+                </div>
+                <div class="hud-center">
+                    <div class="hud-lap">
+                        <span class="hud-label">LAP</span>
+                        <span id="hudLap" class="hud-value">1 / 3</span>
+                    </div>
+                    <div class="hud-time">
+                        <span class="hud-label">TIME</span>
+                        <span id="hudTime" class="hud-value">0:00.0</span>
+                    </div>
+                </div>
+                <div class="hud-right">
+                    <div class="hud-best">
+                        <span class="hud-label">BEST LAP</span>
+                        <span id="hudBest" class="hud-value">--:--.--</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Countdown Overlay -->
+            <div id="countdownOverlay" class="countdown-overlay" style="display:none;">
+                <div id="countdownText" class="countdown-text">3</div>
+            </div>
+            
+            <!-- Race Complete Overlay -->
+            <div id="raceCompleteOverlay" class="race-complete-overlay" style="display:none;">
+                <div class="race-complete-content">
+                    <h2 class="race-complete-title">🏆 Race Complete!</h2>
+                    <div id="raceResults" class="race-results"></div>
+                    <div class="race-complete-buttons">
+                        <button id="restartBtn" class="restart-btn">🔄 Race Again</button>
+                        <button id="changeCarBtn" class="change-car-btn">🏎️ Change Car</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Three.js Canvas Container -->
+            <div id="gameCanvas" class="game-canvas-container">
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="mt-8 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-6 max-w-2xl mx-auto">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">How to Play</h2>
+            <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start">
+                    <span class="text-indigo-600 mr-2">🏎️</span>
+                    Choose your car from 5 high-fidelity 3D vehicles
+                </li>
+                <li class="flex items-start">
+                    <span class="text-indigo-600 mr-2">⬆️</span>
+                    <strong>Up Arrow</strong> — Accelerate forward
+                </li>
+                <li class="flex items-start">
+                    <span class="text-indigo-600 mr-2">⬇️</span>
+                    <strong>Down Arrow</strong> — Brake / Reverse
+                </li>
+                <li class="flex items-start">
+                    <span class="text-indigo-600 mr-2">⬅️➡️</span>
+                    <strong>Left / Right Arrows</strong> — Steer
+                </li>
+                <li class="flex items-start">
+                    <span class="text-indigo-600 mr-2">🛑</span>
+                    <strong>Press 9</strong> — Emergency stop (fully stops the car)
+                </li>
+                <li class="flex items-start">
+                    <span class="text-indigo-600 mr-2">🏁</span>
+                    Complete 3 laps around the circuit to finish the race!
+                </li>
+                <li class="flex items-start">
+                    <span class="text-indigo-600 mr-2">⚡</span>
+                    Stay on the road for maximum speed — grass slows you down!
+                </li>
+            </ul>
+        </div>
+
+        <!-- Other Games -->
+        <div class="mt-12 text-center">
+            <h3 class="text-2xl font-bold text-white mb-6">Try Our Other Games!</h3>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="rally-race-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-amber-600 hover:bg-white transition">
+                    🏔️ Rally Race
+                </a>
+                <a href="speed-drag-race-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-rose-500 hover:bg-white transition">
+                    🏁 Speed Drag Race
+                </a>
+                <a href="sports-extra-racing-game.html" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-blue-500 hover:bg-white transition">
+                    🛣️ Sports Extra Racing
+                </a>
+                <a href="index.html#games" class="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 font-bold text-indigo-700 hover:bg-white transition border-2 border-indigo-700">
+                    🎮 See All Games
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-2">© 2026 Mad Lad Studios. All rights reserved.</p>
+            <p class="text-gray-400">Games for kids, made by a kid (and AI).</p>
+        </div>
+    </footer>
+
+    <script src="circuit-racing-game/game.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="A free-flight 3D airshow sandbox over an airfield.">
+  <title>Tora! Tora! Tora! Airshow Flight — Mad Lad Studios</title>
+  <link rel="stylesheet" href="tora-airshow/style.css">
+</head>
+<body>
+  <nav><a href="index.html">Mad Lad Studios</a><span>Airshow Flight Sandbox</span><a href="index.html#games">All games</a></nav>
+  <main>
+    <header><p class="kicker">Historic aviation-inspired airshow sandbox</p><h1>Tora! Tora! Tora! <i>Airshow Flight</i></h1><p>Pick a plane, fly the show line, and watch the field come alive.</p></header>
+    <section class="game-shell">
+      <div class="topbar"><div><span>ACTIVE AIRCRAFT</span><b id="plane-name">B-52 STRATOFORTRESS</b></div><div><span>ORDNANCE</span><b id="bomb-count">12 / 12</b></div><div><span>ALTITUDE</span><b id="altitude">1,800 FT</b></div><div><span>SHOW TIME</span><b id="show-time">00:00</b></div></div>
+      <div id="stage"><canvas id="game"></canvas><div class="reticle">+</div><div id="message">Click <b>Take Flight</b> to start the show.</div><div id="intro" class="intro"><p class="kicker">No scores. No missions. Just flying.</p><h2>Welcome to the airshow</h2><p>Choose any aircraft at any time. The field has moving armor, controlled pyrotechnics, and other aircraft in the display circuit.</p><button id="launch" onclick="document.getElementById('intro').classList.add('is-hidden')">Take Flight</button></div></div>
+      <div class="below-game"><div class="instructions"><b>Steer</b> ← → &nbsp; <b>Go up / down</b> ↑ ↓ &nbsp; <b>Go faster</b> Shift &nbsp; <b>Show effect</b> G</div><div class="legend"><i></i> Aircraft display line <i class="tank-dot"></i> Ground armor</div></div>
+      <section class="hangar"><div><p class="kicker">Open hangar</p><h2>Choose your aircraft</h2><p>Switching aircraft resets your altitude near the show line. There is no win or lose condition.</p></div><div class="plane-grid" id="plane-grid"></div></section>
+    </section>
+  </main>
+  <footer>© 2026 Mad Lad Studios · An aviation display sandbox. Historical imagery is presented as airshow fiction.</footer>
+  <script type="module" src="tora-airshow/game.js"></script>
+</body>
+</html>
