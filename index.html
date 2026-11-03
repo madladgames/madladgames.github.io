@@ -16,7 +16,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://madladstudios.com/">
     <meta property="og:title" content="Mad Lad Studios - Fun Games for Kids">
-    <meta property="og:description" content="Fun and exciting games for kids made by a kid! 20+ free games including racing, trucks, trains, animals, and learning games.">
+    <meta property="og:description" content="Fun and exciting games for kids made by a kid! Free racing, flying, truck, train, animal, and learning games.">
     <meta property="og:site_name" content="Mad Lad Studios">
     <meta property="og:locale" content="en_US">
     
@@ -24,7 +24,7 @@
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://madladstudios.com/">
     <meta property="twitter:title" content="Mad Lad Studios - Fun Games for Kids">
-    <meta property="twitter:description" content="Fun and exciting games for kids made by a kid! 20+ free games including racing, trucks, trains, animals, and learning games.">
+    <meta property="twitter:description" content="Fun and exciting games for kids made by a kid! Free racing, flying, truck, train, animal, and learning games.">
     
     <!-- Additional SEO -->
     <meta name="theme-color" content="#9333ea">
@@ -48,7 +48,7 @@
       "@type": "WebSite",
       "name": "Mad Lad Studios",
       "url": "https://madladstudios.com",
-      "description": "Free browser-based educational games for kids ages 2-6. 20 games across racing, trucks, trains, animals, and learning categories.",
+      "description": "Free browser-based educational games for kids ages 2-6. Games across racing, flying, trucks, trains, animals, and learning categories.",
       "audience": {
         "@type": "EducationalAudience",
         "educationalRole": "student",
@@ -261,10 +261,10 @@
         },
         {
           "@type": "VideoGame",
-          "name": "Plane Spelling Rally",
+          "name": "Spelling Vehicle Rally",
           "url": "https://madladstudios.com/plane-spelling-rally-game.html",
           "genre": "Educational Flying",
-          "description": "Fly an airplane to mixed-up letters in the right order to spell words. Builds letter recognition, spelling, directional control, and persistence.",
+          "description": "Fly a plane or drive a truck to letters in the right order to spell words. Builds letter recognition, spelling, directional control, and persistence.",
           "educationalUse": "Letter recognition, spelling, directional control, persistence",
           "audience": { "@type": "EducationalAudience", "suggestedMinAge": 3, "suggestedMaxAge": 6 }
         },
@@ -285,7 +285,13 @@
           "description": "Slide colorful cars on a parking lot grid to unblock the green car and help it escape. A Rush Hour-style puzzle with 12 levels of increasing difficulty, designed for toddlers.",
           "educationalUse": "Spatial reasoning, problem solving, planning, logical thinking",
           "audience": { "@type": "EducationalAudience", "suggestedMinAge": 2, "suggestedMaxAge": 5 }
-        }
+        },
+        {"@type": "VideoGame", "name": "Race Car Builder", "url": "https://madladstudios.com/race-car-game.html", "genre": "Racing", "description": "Choose a body, paint, engine, tires, and spoiler, then race and repair your car."},
+        {"@type": "VideoGame", "name": "Tora! Tora! Tora! Airshow Flight", "url": "https://madladstudios.com/tora-airshow.html", "genre": "Flying", "description": "Choose an aircraft and fly a 3D airshow sandbox."},
+        {"@type": "VideoGame", "name": "Airplane Island Adventure", "url": "https://madladstudios.com/airplane-island-adventure-game.html", "genre": "Flying, Educational", "description": "Drive to collect letters, unlock the hangar, and fly to island airports."},
+        {"@type": "VideoGame", "name": "Ocean Airport", "url": "https://madladstudios.com/ocean-airport-game.html", "genre": "Flying", "description": "Guide an airplane to a safe runway landing and unlock more aircraft."},
+        {"@type": "VideoGame", "name": "3D Circuit Racing", "url": "https://madladstudios.com/circuit-racing-game.html", "genre": "Racing", "description": "Choose a 3D vehicle and drive three laps around a circuit."},
+        {"@type": "VideoGame", "name": "Rally Collect", "url": "https://madladstudios.com/rally-collect-game.html", "genre": "Racing", "description": "Collect RALLY letters, sounds, and photos while driving through courses."}
       ]
     }
     </script>
@@ -341,10 +347,13 @@
         <!-- Filter Chips -->
         <div class="flex flex-wrap justify-center gap-2 mb-6" id="filter-bar">
             <button class="filter-chip active bg-white text-gray-800 font-bold px-4 py-2 rounded-full text-sm shadow-md" data-filter="all">
-                🎮 All (26)
+                🎮 All (31)
             </button>
             <button class="filter-chip bg-rose-500 text-white font-bold px-4 py-2 rounded-full text-sm shadow-md" data-filter="racing">
                 🏁 Racing
+            </button>
+            <button class="filter-chip bg-sky-600 text-white font-bold px-4 py-2 rounded-full text-sm shadow-md" data-filter="flying">
+                ✈️ Flying
             </button>
             <button class="filter-chip bg-blue-500 text-white font-bold px-4 py-2 rounded-full text-sm shadow-md" data-filter="trucks">
                 🚒 Trucks
@@ -602,6 +611,18 @@
                 </div>
             </a>
 
+            <!-- Rally Collect -->
+            <a href="rally-collect-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="racing learning">
+                <div class="px-3 pt-4 pb-2 text-center">
+                    <div class="text-4xl mb-2">🏁</div>
+                    <h3 class="text-sm font-bold text-gray-800 leading-tight">Rally Collect</h3>
+                    <p class="text-gray-500 text-xs mt-1">Collect RALLY letters, sounds, and photos as you race!</p>
+                </div>
+                <div class="px-3 pb-3">
+                    <span class="block w-full bg-rose-500 text-white text-center py-1.5 rounded-lg font-bold text-sm">Play!</span>
+                </div>
+            </a>
+
             <!-- 21. Butterfly Match (amber/learning) -->
             <a href="butterfly-match-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="learning">
                 <div class="px-3 pt-4 pb-2 text-center">
@@ -638,12 +659,12 @@
                 </div>
             </a>
 
-            <!-- 24. Plane Spelling Rally (learning) -->
-            <a href="plane-spelling-rally-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="learning">
+            <!-- 24. Spelling Vehicle Rally (learning) -->
+            <a href="plane-spelling-rally-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="learning flying trucks">
                 <div class="px-3 pt-4 pb-2 text-center">
                     <div class="text-4xl mb-2">✈️</div>
-                    <h3 class="text-sm font-bold text-gray-800 leading-tight">Plane Spelling Rally</h3>
-                    <p class="text-gray-500 text-xs mt-1">Fly to letters in order to spell words!</p>
+                    <h3 class="text-sm font-bold text-gray-800 leading-tight">Spelling Vehicle Rally</h3>
+                    <p class="text-gray-500 text-xs mt-1">Fly or drive to letters in order to spell words!</p>
                 </div>
                 <div class="px-3 pb-3">
                     <span class="block w-full bg-amber-500 text-white text-center py-1.5 rounded-lg font-bold text-sm">Play!</span>
@@ -651,13 +672,18 @@
             </a>
 
             <!-- Tora Airshow Flight (3D flight) -->
-            <a href="tora-airshow.html" class="game-card group bg-gradient-to-br from-slate-700 to-cyan-900 rounded-xl p-4 shadow-lg hover:shadow-xl transition-all hover:scale-105 border border-cyan-400/30">
-                <div class="text-3xl mb-2">✈️</div>
-                <h3 class="text-sm font-bold text-white leading-tight">Tora! Tora! Tora! Airshow Flight</h3>
-                <p class="text-xs text-cyan-100 mt-1">Choose a plane and fly a 3D airshow.</p>
+            <a href="tora-airshow.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="flying">
+                <div class="px-3 pt-4 pb-2 text-center">
+                    <div class="text-4xl mb-2">✈️</div>
+                    <h3 class="text-sm font-bold text-gray-800 leading-tight">Tora! Tora! Tora! Airshow Flight</h3>
+                    <p class="text-gray-500 text-xs mt-1">Choose a plane and fly a 3D airshow.</p>
+                </div>
+                <div class="px-3 pb-3">
+                    <span class="block w-full bg-sky-600 text-white text-center py-1.5 rounded-lg font-bold text-sm">Play!</span>
+                </div>
             </a>
             <!-- Airplane Island Adventure (racing / learning) -->
-            <a href="airplane-island-adventure-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="racing learning">
+            <a href="airplane-island-adventure-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="racing flying learning">
                 <div class="px-3 pt-4 pb-2 text-center">
                     <div class="text-4xl mb-2">🚗✈️</div>
                     <h3 class="text-sm font-bold text-gray-800 leading-tight">Airplane Island Adventure</h3>
@@ -669,7 +695,7 @@
             </a>
 
             <!-- Ocean Airport (racing) -->
-            <a href="ocean-airport-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="racing">
+            <a href="ocean-airport-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="flying">
                 <div class="px-3 pt-4 pb-2 text-center">
                     <div class="text-4xl mb-2">🛬</div>
                     <h3 class="text-sm font-bold text-gray-800 leading-tight">Ocean Airport</h3>
@@ -704,7 +730,7 @@
                 </div>
             </a>
 
-            <!-- 26. 3D Circuit Racing (rose) -->
+            <!-- 3D Circuit Racing (rose) -->
             <a href="circuit-racing-game.html" class="game-card bg-white rounded-xl shadow-md overflow-hidden block" data-categories="racing">
                 <div class="px-3 pt-4 pb-2 text-center">
                     <div class="text-4xl mb-2">🏎️</div>
@@ -769,7 +795,9 @@
     <script>
     (function() {
         var chips = document.querySelectorAll('.filter-chip');
-        var cards = document.querySelectorAll('.game-card');
+        var cards = document.querySelectorAll('#games-grid .game-card');
+        var allChip = document.querySelector('[data-filter="all"]');
+        allChip.textContent = '🎮 All (' + cards.length + ')';
         
         chips.forEach(function(chip) {
             chip.addEventListener('click', function() {

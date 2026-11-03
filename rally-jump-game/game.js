@@ -42,18 +42,15 @@ class RallyJumpGame {
         // Generate random number from 0-9
         this.gameState.currentNumber = Math.floor(Math.random() * 10);
         this.numberDisplay.textContent = this.gameState.currentNumber;
-        this.feedbackDisplay.textContent = '';
+        this.feedbackDisplay.textContent = 'Type this number to jump across the valley.';
         
         // Reset car position and remove animation classes
         this.rallyCar.classList.remove('jump-success', 'crash', 'shake');
-        this.rallyCar.style.left = '15%';
-        this.rallyCar.style.bottom = '180px';
-        this.rallyCar.style.transform = 'rotate(0deg)';
-        this.rallyCar.style.opacity = '1';
     }
     
     handleKeyPress(e) {
-        if (!this.gameState.gameActive) return;
+        if (!this.gameState.gameActive || e.repeat) return;
+        if (e.target instanceof Element && (e.target.closest('input, textarea, select') || e.target.isContentEditable)) return;
         
         // Check if a number key was pressed (0-9)
         if (e.key >= '0' && e.key <= '9') {
@@ -78,8 +75,7 @@ class RallyJumpGame {
         this.playSuccessSound();
         
         // Show success feedback
-        this.feedbackDisplay.textContent = '🎉 Perfect Jump!';
-        this.numberDisplay.textContent = '✓ Correct!';
+        this.feedbackDisplay.textContent = 'Perfect jump! Ready for another?';
         
         // Animate car jumping
         this.rallyCar.classList.add('jump-success');
@@ -103,8 +99,7 @@ class RallyJumpGame {
         this.playCrashSound();
         
         // Show crash feedback
-        this.feedbackDisplay.textContent = '💥 Wrong Number!';
-        this.numberDisplay.textContent = '✗ Crashed!';
+        this.feedbackDisplay.textContent = 'Almost! Try the next number.';
         
         // Animate car crashing
         this.rallyCar.classList.add('crash');

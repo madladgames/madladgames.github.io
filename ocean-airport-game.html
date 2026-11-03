@@ -6,6 +6,7 @@
   <meta name="description" content="Fly ten unlockable airplanes and make a safe landing at Ocean Airport.">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <link rel="stylesheet" href="ocean-airport-game/style.css">
+    <script src="scripts/game-keyboard.js" defer></script>
 </head>
 <body>
   <main id="game">
@@ -13,10 +14,10 @@
     <header class="topbar"><a href="index.html" class="brand">✦ MAD LAD STUDIOS</a><div class="airport-name"><span>OCEAN</span> AIRPORT <small>FLIGHT OPERATIONS</small></div><button id="garageButton" class="garage">✈ HANGAR <b id="unlockedCount">1 / 10</b></button></header>
     <section class="hud" aria-live="polite"><div><small>AIRSPEED</small><strong><span id="speed">0</span> <em>KT</em></strong></div><div><small>ALTITUDE</small><strong><span id="altitude">0</span> <em>FT</em></strong></div><div><small>HEADING</small><strong id="heading">180°</strong></div><div class="gear-readout"><small>LANDING GEAR</small><strong id="gear">UP · PRESS G</strong></div><div class="landing"><small>LANDING STATUS</small><strong id="status">CLIMB TO ALTITUDE</strong></div></section>
     <div class="crosshair" aria-hidden="true"><i></i></div>
-    <section id="startPanel" class="panel welcome"><p class="eyebrow">WELCOME, PILOT</p><h1>Land at <em>Ocean Airport.</em></h1><p>Use the arrow keys to guide your plane through the sea approach. The flight computer handles the gentle glide down—just stay between the runway lights and press <b>G</b> to lower the landing gear.</p><button id="flyButton" class="primary">START FLIGHT <span>→</span></button><p class="keys">↑ FLY FORWARD &nbsp;·&nbsp; ↓ SLOW DOWN &nbsp;·&nbsp; ← → STEER &nbsp;·&nbsp; G LANDING GEAR</p></section>
+    <section id="startPanel" class="panel welcome"><p class="eyebrow">WELCOME, PILOT</p><h1>Land at <em>Ocean Airport.</em></h1><p>Use the arrow keys to guide your plane through the sea approach. The flight computer handles the gentle glide down—just stay between the runway lights and press <b>G</b> or tap <b>Gear</b> to lower the landing gear.</p><button id="flyButton" class="primary">START FLIGHT <span>→</span></button><p class="keys">↑ FLY FORWARD &nbsp;·&nbsp; ↓ SLOW DOWN &nbsp;·&nbsp; ← → STEER &nbsp;·&nbsp; G LANDING GEAR</p></section>
     <section id="resultPanel" class="panel result" hidden><p id="resultKicker" class="eyebrow">TOUCHDOWN CONFIRMED</p><h2 id="resultTitle">Silky landing!</h2><p id="resultText"></p><button id="againButton" class="primary">FLY AGAIN <span>↻</span></button><button id="hangarResultButton" class="text-button">VISIT HANGAR</button></section>
     <section id="hangar" class="hangar" hidden><div class="hangar-head"><div><p class="eyebrow">OCEAN AIRPORT FLEET</p><h2>Choose your airplane</h2></div><button id="closeHangar" aria-label="Close hangar">×</button></div><div id="planeGrid" class="plane-grid"></div><p class="hangar-note">Complete a safe landing to unlock the next aircraft.</p></section>
-    <div id="mobileControls" class="mobile-controls"><button data-key="left">◀</button><button data-key="up">▲</button><button data-key="down">▼</button><button data-key="right">▶</button></div>
+    <div id="mobileControls" class="mobile-controls"><button data-key="left">◀</button><button data-key="up">▲</button><button data-key="down">▼</button><button data-key="right">▶</button><button id="gearButton" type="button" aria-label="Landing gear" aria-pressed="false">Gear</button></div>
   </main>
   <script src="ocean-airport-game/game.js"></script>
 </body></html>

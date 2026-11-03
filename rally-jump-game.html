@@ -16,6 +16,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <link rel="stylesheet" href="rally-jump-game/style.css">
+    <script src="scripts/game-keyboard.js" defer></script>
 </head>
 
 <body class="bg-gradient-to-br from-purple-600 via-pink-500 to-red-500 min-h-screen">
@@ -38,7 +39,7 @@
     </nav>
 
     <!-- Game Header -->
-    <div class="container mx-auto px-4 py-8">
+    <div class="container mx-auto px-4 py-8 rally-page">
         <div class="text-center mb-8">
             <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 flex items-center justify-center gap-4">
                 <span class="text-6xl">🏎️</span>
@@ -49,54 +50,26 @@
         </div>
 
         <!-- Game Container -->
-        <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-8 max-w-5xl mx-auto">
-            <div class="game-container">
-                <!-- Start Button -->
-                <div class="text-center mb-4">
-                    <button id="startBtn" class="start-btn">Start Game</button>
+        <section class="rally-shell" aria-label="Rally Jump number game">
+            <div class="round-panel">
+                <div id="numberDisplay" class="number-display" aria-label="Number to match">?</div>
+                <div class="round-copy">
+                    <p class="round-label">MOUNTAIN RALLY</p>
+                    <h2>Match the number. Make the jump.</h2>
+                    <p id="feedbackDisplay" class="feedback-display" role="status">Press Start Game, then type the number you see.</p>
                 </div>
-
-                <!-- Number Display -->
-                <div id="numberDisplay" class="number-display">
-                    Press Start Game
-                </div>
-
-                <!-- Feedback Display -->
-                <div id="feedbackDisplay" class="feedback-display"></div>
-
-                <!-- Game Area -->
-                <div class="game-area">
-                    <div id="rallyCar" class="rally-car">
-                        <div class="car-body-rally">
-                            <div class="car-roof"></div>
-                            <div class="car-window-rally"></div>
-                            <div class="car-spoiler"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="ramp"></div>
-                    <div class="gap"></div>
-                    <div class="landing-platform"></div>
-                </div>
-
-                <!-- Score Display -->
-                <div class="score-container">
-                    <div class="score-item">
-                        <span class="score-label">Successful Jumps:</span>
-                        <span id="successScore" class="score-value">0</span>
-                    </div>
-                    <div class="score-item">
-                        <span class="score-label">Crashes:</span>
-                        <span id="crashScore" class="score-value">0</span>
-                    </div>
-                    <div class="score-item">
-                        <span class="score-label">Streak:</span>
-                        <span id="streakScore" class="score-value">0</span>
-                    </div>
-                </div>
-
+                <button id="startBtn" class="start-btn" type="button">Start Game</button>
             </div>
-        </div>
+            <div class="game-area" aria-label="A mountain rally course with a jump across a small valley">
+                <img class="course-art" src="rally-jump-game/assets/mountain-course.jpg" alt="Illustrated mountain course with a takeoff ramp and a grassy landing ledge" width="1792" height="896">
+                <img id="rallyCar" class="rally-car" src="rally-jump-game/assets/rally-car.png" alt="Orange rally car facing the landing ramp" width="1792" height="896">
+            </div>
+            <div class="score-container" aria-label="Your scores">
+                <div class="score-item"><span class="score-label">Successful jumps</span><span id="successScore" class="score-value">0</span></div>
+                <div class="score-item"><span class="score-label">Retries</span><span id="crashScore" class="score-value">0</span></div>
+                <div class="score-item"><span class="score-label">Current streak</span><span id="streakScore" class="score-value">0</span></div>
+            </div>
+        </section>
 
         <!-- Instructions -->
         <div class="mt-8 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-6 max-w-2xl mx-auto">

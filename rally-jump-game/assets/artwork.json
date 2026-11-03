@@ -1,0 +1,15 @@
+{
+  "generator": "OpenAI built-in ImageGen",
+  "assets": [
+    {
+      "file": "rally-car.png",
+      "prompt": "Transparent 2D side-scrolling children's rally game sprite. Polished orange and cream rally hatchback, strict side profile facing RIGHT, two chunky black rubber wheels on the same baseline, blue windows, modest rear spoiler, small rally stripes. Hand-painted storybook / premium toy illustration. Entire vehicle fits with small transparent padding. One car only; no ground, backdrop, text, number, driver, or external shadow. Wide horizontal composition.",
+      "processing": "Resized to 640 pixels wide; transparency preserved."
+    },
+    {
+      "file": "mountain-course.jpg",
+      "prompt": "Wide 2D side-view children's rally-jump background, ratio 2:1. Hand-painted storybook alpine course with golden morning sky, turquoise mountains, evergreens, and grassy hills. Ochre dirt approach from left at 80% height, rising to a takeoff lip at x40%, y65%; ravine x43%\u201361%; broad grassy landing ledge y72%, x64% to right edge. Layered earth cliff faces in bottom quarter, greenery in gap. Keep upper half clear for jumping car. Gouache texture. No vehicles, people, letters, labels, typography, UI, or border.",
+      "processing": "Converted to JPEG at quality 85."
+    }
+  ]
+}

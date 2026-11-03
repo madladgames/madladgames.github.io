@@ -133,7 +133,10 @@ document.querySelectorAll('.car-select-btn').forEach(btn => {
 const startRaceBtn = document.getElementById('startRaceBtn');
 if (startRaceBtn) {
     startRaceBtn.addEventListener('click', () => {
-        if (gameState === 'carSelect') startReady();
+        if (gameState === 'carSelect') {
+            startReady();
+            startCountdown();
+        }
         else if (gameState === 'ready') startCountdown();
         else if (gameState === 'finished') resetToCarSelect();
     });

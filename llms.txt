@@ -4,7 +4,7 @@
 
 ## About
 
-Mad Lad Studios creates safe, colorful, educational games for toddlers and preschoolers (ages 2–6). Games are designed to be played on tablets, phones, and computers with touch and mouse support. Every game is free to play at https://madladstudios.com.
+Mad Lad Studios creates safe, colorful, educational games for toddlers and preschoolers (ages 2–6). Control support varies by game; some games require a keyboard. Every game is free to play at https://madladstudios.com.
 
 ## Games by Category
 
@@ -38,6 +38,19 @@ Mad Lad Studios creates safe, colorful, educational games for toddlers and presc
 - [Sorting Game](https://madladstudios.com/sorting-game.html): Drag vehicles and animals into correct categories. Teaches categorization, vocabulary, and cognitive grouping.
 - [Bell Music Game](https://madladstudios.com/bell-music-game.html): Tap colorful bells to hear notes, then drag to reorder them into a musical scale. Teaches pitch recognition, sequencing, auditory discrimination, and fine motor skills.
 
+### More Racing, Flying & Learning Games
+- [Butterfly Match](https://madladstudios.com/butterfly-match-game.html): Match butterflies to flowers by color and shape.
+- [Rally Race](https://madladstudios.com/rally-race-game.html): Choose a rally car and race across terrain stages.
+- [Spelling Vehicle Rally](https://madladstudios.com/plane-spelling-rally-game.html): Choose a plane or truck and collect letters in order.
+- [Sports Extra Racing](https://madladstudios.com/sports-extra-racing-game.html): Race a sports car around a winding circuit.
+- [Parking Puzzle](https://madladstudios.com/parking-puzzle-game.html): Slide cars to clear an exit across twelve puzzles.
+- [Race Car Builder](https://madladstudios.com/race-car-game.html): Choose a body, paint, engine, tires, and spoiler, then race and repair your car.
+- [Tora! Tora! Tora! Airshow Flight](https://madladstudios.com/tora-airshow.html): Choose an aircraft and fly a 3D airshow sandbox.
+- [Airplane Island Adventure](https://madladstudios.com/airplane-island-adventure-game.html): Drive to collect letters, unlock the hangar, and fly to island airports.
+- [Ocean Airport](https://madladstudios.com/ocean-airport-game.html): Guide an airplane to a safe runway landing and unlock more aircraft.
+- [3D Circuit Racing](https://madladstudios.com/circuit-racing-game.html): Choose a 3D vehicle and drive three laps around a circuit.
+- [Rally Collect](https://madladstudios.com/rally-collect-game.html): Collect RALLY letters, sounds, and photos while driving through courses.
+
 ## Cognitive & Developmental Benefits
 
 All games are designed with early childhood development in mind:
@@ -56,7 +69,7 @@ All games are designed with early childhood development in mind:
 ## Technical Details
 
 - All games are client-side HTML5/JavaScript — no server required
-- Touch-friendly for tablets and phones
+- Touch support varies; Tora Airshow, Airplane Island Adventure, and 3D Circuit Racing currently require keyboard controls.
 - No user accounts or personal data collection
 - Games use Canvas API or DOM-based rendering
 - Audio generated via Web Audio API (no external audio files needed)
