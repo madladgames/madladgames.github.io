@@ -77,7 +77,7 @@ This will automatically update all existing game pages to include the new game i
 
 1. Mad Car Game (🚗)
 2. Mad Crab Game (🦀)
-3. Mad Racetrack Game (🏁)
+3. Mad Drag Race Game (🏁)
 4. Mad Fire Truck Game (🚒)
 5. Mad Car Wash Game (🧽)
 

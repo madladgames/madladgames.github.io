@@ -21,7 +21,7 @@ const games = [
     },
     {
         filename: 'racetrack-game.html',
-        title: 'Racetrack Game',
+        title: 'Drag Race Game',
         emoji: '🏁',
         color: 'text-green-600',
         order: 3
